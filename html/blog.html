@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="Stay up to date with the latest thinking, developments, and innovations from the ORVN team and the world of autonomous industrial technology.">
+
+  <title>Blog - Stackly Robotics &amp; Automation</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="../css/blog.css">
+</head>
+
+<body>
+
+  <!-- ===================== PAGE PRELOADER ===================== -->
+  <div class="page-preloader" id="pagePreloader">
+    <div class="preloader-content">
+      <div class="preloader-spinner"></div>
+      <img src="../logo.webp" alt="Stackly Robotics" class="preloader-logo">
+    </div>
+  </div>
+
+  <!-- ===================== HEADER NAVBAR ===================== -->
+  <header class="navbar">
+    <a href="../index.html" class="logo-container" aria-label="Stackly Robotics — home">
+      <img src="../logo.webp" alt="Stackly Logo">
+    </a>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false"
+      aria-controls="navLinks">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li class="mobile-register-item"><a href="login.html" class="btn-login-mobile">Login</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn-login">Login</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== BLOG HERO SECTION ===================== -->
+    <section class="blog-hero-section">
+      <div class="blog-hero-container">
+
+        <!-- Left Column: Copywriting & CTA -->
+        <div class="blog-hero-content" data-anim="left">
+          <h1 class="blog-hero-title">
+            <span class="title-line-1">IDEAS THAT PUSH</span>
+            <span class="title-line-2">INDUSTRIES FORWARD</span>
+          </h1>
+
+          <p class="blog-hero-description" data-anim="left" data-delay="0.1">
+            Stay up to date with the latest thinking, developments, and innovations from the ORVN team and the world of autonomous industrial technology.
+          </p>
+
+          <p class="blog-hero-tagline" data-anim="left" data-delay="0.15">
+            Every insight starts with a question worth asking.
+          </p>
+
+          <div class="blog-hero-actions" data-anim="left" data-delay="0.2">
+            <a href="contact.html" class="btn-quote">Request a quote</a>
+          </div>
+        </div>
+
+        <!-- Right Column: Full-width Visual Composition -->
+        <div class="blog-hero-visual" data-anim="right" data-delay="0.25">
+          <div class="yellow-polygon-bg"></div>
+          <div class="blog-hero-img-wrapper">
+            <img src="../assets/blog/hero.webp" alt="Robotics automation DH parameters laptop and robotic arm" class="blog-hero-img">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== LATEST ARTICLES SECTION ===================== -->
+    <section class="latest-articles-section">
+      <div class="articles-container">
+
+        <!-- Section Header with Interactive Filter Tabs -->
+        <div class="articles-header" data-anim="up">
+          <h2 class="articles-title">LATEST ARTICLES</h2>
+
+          <div class="articles-tabs" id="articlesTabs" aria-label="Filter articles by category">
+            <button class="tab-btn active" data-filter="all">ALL</button>
+            <button class="tab-btn" data-filter="reliability">Reliability</button>
+            <button class="tab-btn" data-filter="mobile-robots">Mobile robots</button>
+            <button class="tab-btn" data-filter="software">Software</button>
+            <button class="tab-btn" data-filter="roi-planning">ROI &amp; planning</button>
+          </div>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="articles-grid" id="articlesGrid">
+
+          <!-- Card 1: Mobile Robots (Narrow) -->
+          <article class="article-card card-narrow" data-category="mobile-robots" data-anim="up" data-delay="0.05">
+            <a href="../404.html" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+              <div class="card-img-wrapper">
+                <img src="../assets/blog/latest_1.webp" alt="Why your AMR fleet stalls at 40 units">
+              </div>
+              <div class="card-content">
+                <span class="card-category">MOBILE ROBOTS</span>
+                <h3 class="card-title">WHY YOUR AMR FLEET STALLS AT 40 UNITS</h3>
+                <p class="card-description">
+                  Traffic deadlocks, not battery life, cap most fleets. Here's how to spot the pattern early.
+                </p>
+                <span class="card-meta">Sep 18 · 5 min</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 2: ROI & Planning (Wide) -->
+          <article class="article-card card-wide" data-category="roi-planning" data-anim="up" data-delay="0.1">
+            <a href="../404.html" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+              <div class="card-img-wrapper">
+                <img src="../assets/blog/latest_2.webp" alt="Payback math your CFO will actually accept">
+              </div>
+              <div class="card-content">
+                <span class="card-category">ROI &amp; PLANNING</span>
+                <h3 class="card-title">PAYBACK MATH YOUR CFO WILL ACTUALLY ACCEPT</h3>
+                <p class="card-description">
+                  Skip the vendor calculator. A four-line model that survives a finance review.
+                </p>
+                <span class="card-meta">Sep 16 · 5 min</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 3: Reliability (Wide) -->
+          <article class="article-card card-wide" data-category="reliability" data-anim="up" data-delay="0.15">
+            <a href="../404.html" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+              <div class="card-img-wrapper">
+                <img src="../assets/blog/latest_3.webp" alt="What vibration data says before a gearbox fails">
+              </div>
+              <div class="card-content">
+                <span class="card-category">RELIABILITY</span>
+                <h3 class="card-title">WHAT VIBRATION DATA SAYS BEFORE A GEARBOX FAILS</h3>
+                <p class="card-description">
+                  Three signatures in motor-current trends that show up weeks ahead of a breakdown.
+                </p>
+                <span class="card-meta">Sep 18 · 5 min</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 4: ROI & Planning (Narrow) -->
+          <article class="article-card card-narrow" data-category="roi-planning" data-anim="up" data-delay="0.2">
+            <a href="../404.html" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+              <div class="card-img-wrapper">
+                <img src="../assets/blog/latest_4.webp" alt="Retrofit or replace? A decision tree">
+              </div>
+              <div class="card-content">
+                <span class="card-category">ROI &amp; PLANNING</span>
+                <h3 class="card-title">RETROFIT OR REPLACE? A DECISION TREE</h3>
+                <p class="card-description">
+                  When keeping a 12-year-old arm beats buying new, with the exact thresholds we use.
+                </p>
+                <span class="card-meta">Sep 18 · 5 min</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 5: Software (Wide) -->
+          <article class="article-card card-wide" data-category="software" data-anim="up" data-delay="0.25">
+            <a href="../404.html" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+              <div class="card-img-wrapper">
+                <img src="../assets/blog/latest_5.webp" alt="Alarm fatigue: cutting 400 alerts to 12">
+              </div>
+              <div class="card-content">
+                <span class="card-category">SOFTWARE</span>
+                <h3 class="card-title">ALARM FATIGUE: CUTTING 400 ALERTS TO 12</h3>
+                <p class="card-description">
+                  How one plant rebuilt its fault hierarchy so operators stopped ignoring the dashboard.
+                </p>
+                <span class="card-meta">Sep 12 · 5 min</span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Card 6: Software (Narrow) -->
+          <article class="article-card card-narrow" data-category="software" data-anim="up" data-delay="0.3">
+            <a href="../404.html" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+              <div class="card-img-wrapper">
+                <img src="../assets/blog/latest_6.webp" alt="Reading a robot program didn't write">
+              </div>
+              <div class="card-content">
+                <span class="card-category">SOFTWARE</span>
+                <h3 class="card-title">READING A ROBOT PROGRAM DIDN'T WRITE</h3>
+                <p class="card-description">
+                  A checklist for inheriting legacy arm code when the original integrator is long gone.
+                </p>
+                <span class="card-meta">Sep 16 · 5 min</span>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 3: BRACKET STORY ===================== -->
+    <section class="bracket-story-section">
+      <div class="bracket-story-container">
+
+        <!-- Left Content Column -->
+        <div class="bracket-story-content" data-anim="left">
+          <h2 class="bracket-story-title">
+            HOW A FORTY-CENT<br>
+            BRACKET COST $2.1 MILLION
+          </h2>
+
+          <p class="bracket-story-lead" data-anim="left" data-delay="0.1">
+            For eleven months, a stamping plant blamed its welding cell. The robot faulted nine times a shift, always at a different moment, and always cleared itself before a technician arrived. Three vendors visited. None found anything.
+          </p>
+
+          <p class="bracket-story-detail" data-anim="left" data-delay="0.15">
+            The answer came from the logs, not the cell. When we plotted every stop against the time since the last shift change, the faults clustered at a spot where spatter had built up on a proximity sensor mount. The sensor itself was fine. Its bracket flexed by a fraction of a millimeter as it warmed.
+          </p>
+
+          <div class="bracket-story-actions" data-anim="left" data-delay="0.2">
+            <a href="../404.html" class="btn-get-started">Get started</a>
+          </div>
+        </div>
+
+        <!-- Right Visual Diagram Column -->
+        <div class="bracket-story-visual" data-anim="right" data-delay="0.2">
+          <img src="../assets/blog/how.webp" alt="Robotic arm wireframe blueprint schematic diagram" class="bracket-story-img">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== FEATURED SPOTLIGHT CASE STUDY ===================== -->
+    <section class="featured-case-study-section">
+      <div class="case-study-container">
+
+        <!-- Visual Image -->
+        <div class="case-study-visual" data-anim="left">
+          <span class="case-study-badge">FEATURED CASE STUDY</span>
+          <img src="../assets/about/facility.webp" alt="Autonomous robotic manufacturing facility">
+        </div>
+
+        <!-- Content & Metrics -->
+        <div class="case-study-content" data-anim="right" data-delay="0.15">
+          <span class="case-study-subtitle">HIGH-SPEED PACKAGING</span>
+          <h2 class="case-study-title">
+            REDUCING CYCLE TIME BY 38% IN HIGH-SPEED LINES
+          </h2>
+
+          <p class="case-study-desc">
+            How replacing legacy fixed-automation with 3D vision-guided articulated work cells eliminated bottle necks and boosted throughput across 4 shifts.
+          </p>
+
+          <div class="case-study-metrics">
+            <div class="metric-item">
+              <span class="metric-value" data-target="38" data-suffix="%">0%</span>
+              <span class="metric-label">Cycle Time Saved</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value" data-target="99.9" data-suffix="%" data-decimals="1">0.0%</span>
+              <span class="metric-label">Cell Up-Time</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value" data-target="4.2" data-suffix=" Mo" data-decimals="1">0.0 Mo</span>
+              <span class="metric-label">Full Payback</span>
+            </div>
+          </div>
+
+          <a href="../404.html" class="btn-get-started">Read full case study</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== TECHNICAL GUIDES & TOPICS ===================== -->
+    <section class="tech-guides-section">
+      <div class="tech-guides-container">
+
+        <div class="tech-guides-header" data-anim="up">
+          <h2 class="tech-guides-title">TECHNICAL GUIDES &amp; TOPICS</h2>
+          <p class="tech-guides-sub">Deep technical breakdowns engineered for plant managers, system integrators, and robotics engineers.</p>
+        </div>
+
+        <div class="tech-guides-grid">
+
+          <!-- Guide 1 -->
+          <a href="../404.html" class="guide-card" data-anim="up" data-delay="0.05">
+            <div class="guide-icon">
+              <i class="fa-solid fa-gears"></i>
+            </div>
+            <span class="guide-tag">KINEMATICS</span>
+            <h3 class="guide-card-title">Inverse Kinematics for 6-DOF Robotic Arms</h3>
+            <p class="guide-card-desc">Solving singularity traps and joint boundary constraints in real-time trajectory planning.</p>
+            <span class="guide-link-text">Explore Guide <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Guide 2 -->
+          <a href="../404.html" class="guide-card" data-anim="up" data-delay="0.1">
+            <div class="guide-icon">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <span class="guide-tag">VISION SYSTEMS</span>
+            <h3 class="guide-card-title">3D Stereo Vision for Random Bin Picking</h3>
+            <p class="guide-card-desc">Point-cloud segmentation strategies for shiny metallic parts under varying illumination.</p>
+            <span class="guide-link-text">Explore Guide <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Guide 3 -->
+          <a href="../404.html" class="guide-card" data-anim="up" data-delay="0.15">
+            <div class="guide-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <span class="guide-tag">SAFETY &amp; COMPLIANCE</span>
+            <h3 class="guide-card-title">Navigating ISO 10218-1/2 Regulations</h3>
+            <p class="guide-card-desc">Designing speed and separation monitoring zones in collaborative industrial work cells.</p>
+            <span class="guide-link-text">Explore Guide <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+          <!-- Guide 4 -->
+          <a href="../404.html" class="guide-card" data-anim="up" data-delay="0.2">
+            <div class="guide-icon">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <span class="guide-tag">FIELDBUS COMM</span>
+            <h3 class="guide-card-title">EtherNet/IP vs PROFINET Performance</h3>
+            <p class="guide-card-desc">Determinism, jitter metrics, and cycle timing in multi-vendor PLC-robot architectures.</p>
+            <span class="guide-link-text">Explore Guide <i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== AUTOMATION PULSE NEWSLETTER ===================== -->
+    <section class="newsletter-section">
+      <div class="newsletter-container">
+        <div class="newsletter-box" data-anim="up">
+          <div class="newsletter-text-col">
+            <span class="newsletter-badge">WEEKLY DISPATCH</span>
+            <h2 class="newsletter-title">JOIN 12,000+ AUTOMATION ENGINEERS</h2>
+            <p class="newsletter-desc">
+              Get our bi-weekly technical teardowns of real-world cell failures, PLC optimization scripts, and ROI models directly in your inbox.
+            </p>
+          </div>
+
+          <div class="newsletter-form-wrapper">
+            <form class="newsletter-form" id="newsletterForm" novalidate onsubmit="return false;">
+              <div class="newsletter-input-wrapper">
+                <input type="email" placeholder="Enter your work email..." class="newsletter-input" id="newsletterInput">
+                <span class="newsletter-error" id="newsletterError">Please enter a valid work email address.</span>
+              </div>
+              <button type="submit" class="btn-subscribe">Subscribe</button>
+            </form>
+            <span class="newsletter-note">🔒 Zero spam. Unsubscribe anytime with 1-click.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BLOG CTA BANNER SECTION ===================== -->
+    <section class="blog-cta-banner">
+      <div class="cta-overlay"></div>
+      <div class="cta-container" data-anim="up">
+        <h2 class="cta-title">
+          TAILORED TECHNOLOGIES THAT EMPOWER<br>
+          GLOBAL INDUSTRIES FORWARD
+        </h2>
+
+        <p class="cta-description">
+          With decades of expertise and a commitment to sustainability, we partner with industries worldwide to create smarter, more efficient factories. Every solution is tailored to meet unique challenges and drive measurable results.
+        </p>
+
+        <div class="cta-actions">
+          <a href="contact.html" class="btn-cta-start">Get started</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== SITE FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <div class="footer-brand" data-anim="up">
+          <a href="../index.html" class="logo-container" aria-label="Stackly Robotics — home">
+            <img src="../logo.webp" alt="Stackly Robotics logo" style="height: 30px; width: auto;">
+          </a>
+          <p>
+            Stackly designs, installs, and maintains robotic work cells for manufacturers —
+            articulated arms, autonomous mobile robots, and the control software that keeps
+            them moving in sync.
+          </p>
+          <div class="social-row">
+            <a href="../404.html" aria-label="Stackly on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="../404.html" aria-label="Stackly on Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="../404.html" aria-label="Stackly on YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="../404.html" aria-label="Stackly on X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col" data-anim="up" data-delay="0.06">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--systems" data-anim="up" data-delay="0.12">
+          <h4>Systems</h4>
+          <ul>
+            <li><a href="../404.html">Articulated Arms</a></li>
+            <li><a href="../404.html">Mobile Robots</a></li>
+            <li><a href="../404.html">Vision &amp; Control</a></li>
+            <li><a href="../404.html">Cell Integration</a></li>
+            <li><a href="../404.html">Fleet Software</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--support" data-anim="up" data-delay="0.18">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="../404.html">Service Plans</a></li>
+            <li><a href="../404.html">Spare Parts</a></li>
+            <li><a href="../404.html">Remote Diagnostics</a></li>
+            <li><a href="../404.html">Operator Training</a></li>
+            <li><a href="../404.html">Documentation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--contact" data-anim="up" data-delay="0.24">
+          <h4>Contact</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fa-solid fa-phone" aria-hidden="true"></i>
+              <span>+91 90909 90909</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <span>Stackly Robotics<br>Salem, Tamil Nadu, India</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <span>hello@stackly.example</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="footerYear">2026</span> Stackly Robotics. All rights reserved.</p>
+        <p><a href="../404.html">Privacy</a> · <a href="../404.html">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    /* ============================================================
+       ARTICLE FILTERING BY CATEGORY TAB
+       ============================================================ */
+    (function () {
+      const tabs = document.querySelectorAll('.tab-btn');
+      const cards = document.querySelectorAll('.article-card');
+
+      if (!tabs.length || !cards.length) return;
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const filter = tab.getAttribute('data-filter');
+
+          // Update active tab button style
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          // Show/Hide cards according to selected category
+          cards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              card.classList.remove('is-hidden');
+            } else {
+              card.classList.add('is-hidden');
+            }
+          });
+        });
+      });
+    })();
+
+    /* ============================================================
+       HAMBURGER MENU
+       ============================================================ */
+    (function () {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navLinks = document.getElementById('navLinks');
+
+      if (!hamburgerBtn || !navLinks) return;
+
+      function setMenu(open) {
+        hamburgerBtn.classList.toggle('active', open);
+        navLinks.classList.toggle('active', open);
+        hamburgerBtn.setAttribute('aria-expanded', String(open));
+        document.body.classList.toggle('menu-open', open);
+      }
+
+      hamburgerBtn.addEventListener('click', () => {
+        setMenu(!navLinks.classList.contains('active'));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+          setMenu(false);
+          hamburgerBtn.focus();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!navLinks.classList.contains('active')) return;
+        if (navLinks.contains(e.target) || hamburgerBtn.contains(e.target)) return;
+        setMenu(false);
+      });
+
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenu(false));
+      });
+
+      const desktopQuery = window.matchMedia('(min-width: 901px)');
+      desktopQuery.addEventListener('change', (e) => {
+        if (e.matches) setMenu(false);
+      });
+    })();
+
+    /* Fixed Header Navbar Scroll Effect */
+    (function () {
+      const navbar = document.querySelector('.navbar');
+      if (!navbar) return;
+
+      function checkScroll() {
+        if (window.scrollY > 20) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+    })();
+
+    /* ============================================================
+       SCROLL REVEAL ANIMATIONS
+       ============================================================ */
+    (function () {
+      var els = document.querySelectorAll('[data-anim]');
+      if (!els.length) return;
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!('IntersectionObserver' in window) || reduce) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var delay = parseFloat(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(function () {
+            entry.target.classList.add('is-visible');
+          }, delay * 1000);
+          io.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -8% 0px'
+      });
+
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    /* ============================================================
+       FOOTER YEAR
+       ============================================================ */
+    (function () {
+      var y = document.getElementById('footerYear');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+
+  <!-- GSAP Library & Gravity Fall Text Animation Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    (function initGravityFall() {
+      if (typeof gsap === 'undefined') return;
+
+      const titleLines = document.querySelectorAll('.blog-hero-title .title-line-1, .blog-hero-title .title-line-2');
+      if (!titleLines.length) return;
+
+      const allChars = [];
+
+      titleLines.forEach(line => {
+        const text = line.textContent.trim();
+        if (!text) return;
+
+        line.innerHTML = '';
+        [...text].forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'hero-char';
+          if (char === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = char;
+          }
+          line.appendChild(span);
+          allChars.push(span);
+        });
+      });
+
+      if (allChars.length > 0) {
+        gsap.from(allChars, {
+          y: -300,
+          opacity: 0,
+          stagger: 0.04,
+          duration: 0.8,
+          ease: "bounce.out"
+        });
+      }
+    })();
+
+    /* GSAP Popcorn Pop Section Headings Animation */
+    (function initPopcornPopHeadings() {
+      if (typeof gsap === 'undefined') return;
+
+      const headingSelectors = [
+        '.section-title',
+        '.cycle-title',
+        '.machine-title',
+        '.contact-form-title',
+        '.how-it-works-title',
+        '.cta-title',
+        'main section h2'
+      ];
+
+      const headings = document.querySelectorAll(headingSelectors.join(', '));
+      if (!headings.length) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      headings.forEach(heading => {
+        if (heading.closest('.contact-hero-section, .blog-hero-section, .service-hero-section, .about-hero-section, .hero-section, .blog-cta-banner')) {
+          return;
+        }
+
+        if (heading.dataset.popcornSplit === 'true') return;
+        heading.dataset.popcornSplit = 'true';
+
+        const text = heading.textContent.trim();
+        if (!text) return;
+
+        heading.innerHTML = '';
+        const chars = [];
+
+        [...text].forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'popcorn-char';
+          if (char === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = char;
+          }
+          heading.appendChild(span);
+          chars.push(span);
+        });
+
+        if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              gsap.from(chars, {
+                scale: 0,
+                y: 30,
+                rotation: () => gsap.utils.random(-20, 20),
+                stagger: { each: 0.04, from: 'random' },
+                duration: 0.4,
+                ease: 'back.out(2)'
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        observer.observe(heading);
+      });
+    })();
+
+    /* ============================================================
+       NEWSLETTER FORM VALIDATION & REDIRECT
+       ============================================================ */
+    (function () {
+      const form = document.getElementById('newsletterForm');
+      const input = document.getElementById('newsletterInput');
+      const error = document.getElementById('newsletterError');
+
+      if (!form || !input || !error) return;
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      input.addEventListener('input', function () {
+        input.classList.remove('has-error');
+        error.classList.remove('is-visible');
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const value = input.value.trim();
+
+        if (!value || !validateEmail(value)) {
+          input.classList.add('has-error');
+          error.classList.add('is-visible');
+          input.focus();
+          return;
+        }
+
+        // Clear field and redirect to 404 without alert box
+        input.classList.remove('has-error');
+        error.classList.remove('is-visible');
+        input.value = '';
+        window.location.href = '../404.html';
+      });
+    })();
+
+    /* ============================================================
+       CASE STUDY METRICS COUNT-UP ANIMATION
+       ============================================================ */
+    (function () {
+      function initMetricCounters() {
+        const metricValues = document.querySelectorAll('.metric-value');
+        if (!metricValues.length) return;
+
+        function animateCountUp(el) {
+          if (el.dataset.animated === 'true') return;
+          el.dataset.animated = 'true';
+
+          const target = parseFloat(el.getAttribute('data-target'));
+          if (isNaN(target)) return;
+
+          const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+          const suffix = el.getAttribute('data-suffix') || '';
+          const duration = 1600; // ms
+          const startTime = performance.now();
+
+          function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentValue = easeProgress * target;
+
+            el.textContent = currentValue.toFixed(decimals) + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              el.textContent = target.toFixed(decimals) + suffix;
+            }
+          }
+
+          requestAnimationFrame(update);
+        }
+
+        function checkVisibility() {
+          metricValues.forEach(el => {
+            if (el.dataset.animated === 'true') return;
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              animateCountUp(el);
+            }
+          });
+        }
+
+        window.addEventListener('scroll', checkVisibility, { passive: true });
+        window.addEventListener('resize', checkVisibility, { passive: true });
+
+        // Initial checks
+        checkVisibility();
+        setTimeout(checkVisibility, 300);
+        setTimeout(checkVisibility, 1000);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMetricCounters);
+      } else {
+        initMetricCounters();
+      }
+    })();
+  </script>
+
+  <!-- Page Preloader Script (2 Sec Spin) -->
+  <script>
+    (function () {
+      document.body.classList.add('preloading');
+      const preloader = document.getElementById('pagePreloader');
+      if (!preloader) return;
+      setTimeout(function () {
+        preloader.classList.add('is-hidden');
+        document.body.classList.remove('preloading');
+      }, 1000);
+    })();
+  </script>
+
+</body>
+
+</html>

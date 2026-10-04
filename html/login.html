@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <title>Sign in — Stackly Robotics</title>
+    <meta name="description" content="Sign in to your Stackly Robotics account.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body class="auth-page">
+
+    <main class="auth" id="main">
+
+        <!-- ================= RIGHT PANEL (FORM) ================= -->
+        <section class="auth__panel">
+
+            <a class="auth__back" href="../index.html">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to Home</span>
+            </a>
+
+            <div class="auth__inner">
+
+                <a class="auth__brand" href="../index.html" aria-label="Stackly Robotics — home">
+                    <img src="../logo.webp" alt="Stackly Robotics logo">
+                </a>
+
+                <header class="auth__head">
+                    <h1 class="auth__title">Sign in</h1>
+                    <p class="auth__sub">Welcome back. Your control dashboard is one step away.</p>
+                </header>
+
+                <form class="auth__form" id="loginForm" novalidate>
+
+                    <!-- Email -->
+                    <div class="field">
+                        <label class="field__label" for="loginEmail">Email</label>
+                        <div class="field__control">
+                            <span class="field__icon" aria-hidden="true">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" id="loginEmail" name="email" class="field__input" autocomplete="email"
+                                placeholder="your@email.com" required>
+                        </div>
+                        <span class="field__error" id="loginEmailErr" role="alert"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="field">
+                        <div class="field__row">
+                            <label class="field__label" for="loginPassword">Password</label>
+                            <a class="field__aux" href="../404.html">Forgot password?</a>
+                        </div>
+                        <div class="field__control">
+                            <span class="field__icon" aria-hidden="true">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" id="loginPassword" name="password" class="field__input"
+                                autocomplete="current-password" placeholder="Enter your password" required minlength="6">
+                            <button type="button" class="field__eye" id="loginEye" aria-label="Show password"
+                                aria-pressed="false">
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <span class="field__error" id="loginPasswordErr" role="alert"></span>
+                    </div>
+
+                    <!-- Role dropdown -->
+                    <div class="field">
+                        <label class="field__label" id="roleLabel">Sign in as</label>
+                        <div class="dropdown" id="roleDropdown">
+                            <button type="button" class="dropdown__trigger" id="roleTrigger" aria-haspopup="listbox"
+                                aria-expanded="false" aria-labelledby="roleLabel roleTrigger">
+                                <span class="dropdown__value" data-value="">Select role</span>
+                                <i class="fa-solid fa-chevron-down dropdown__arrow" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown__list" id="roleList" role="listbox" aria-labelledby="roleLabel" hidden>
+                                <li class="dropdown__option" role="option" data-value="user" tabindex="-1">Operator /
+                                    Engineer</li>
+                                <li class="dropdown__option" role="option" data-value="admin" tabindex="-1">Admin /
+                                    Integrator</li>
+                            </ul>
+                            <input type="hidden" name="role" id="roleInput" value="">
+                        </div>
+                        <span class="field__error" id="roleErr" role="alert"></span>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn--primary auth__submit">
+                        Sign in <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+
+                </form>
+
+                <!-- Divider -->
+                <div class="auth__divider"><span>or continue with</span></div>
+
+                <!-- Social -->
+                <div class="auth__social">
+                    <a class="auth__social-btn" href="../404.html">
+                        <i class="fa-brands fa-google" aria-hidden="true"></i>
+                        <span>Google</span>
+                    </a>
+                    <a class="auth__social-btn" href="../404.html">
+                        <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                        <span>Apple</span>
+                    </a>
+                </div>
+
+                <p class="auth__foot">
+                    New to Stackly Robotics? <a href="signup.html">Create an account</a>
+                </p>
+
+            </div>
+        </section>
+
+        <!-- ================= LEFT VISUAL (PHOTO) ================= -->
+        <aside class="auth__visual" aria-hidden="true">
+            <img class="auth__visual-img"
+                src="../assets/login_page.webp"
+                alt="">
+            <div class="auth__scrim"></div>
+
+            <div class="auth__visual-brand">
+                <img src="../logo.webp" alt="">
+            </div>
+
+            <div class="auth__quote">
+                <span class="auth__quote-mark">&ldquo;</span>
+                <p>Our first work cell has run three shifts a day for six years without a rebuild.</p>
+                <cite>&mdash; M. Iyer &middot; Pune Plant 2</cite>
+            </div>
+        </aside>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        (function () {
+            "use strict";
+
+            var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var form = document.getElementById("loginForm");
+            var emailInput = document.getElementById("loginEmail");
+            var passInput = document.getElementById("loginPassword");
+            var roleInput = document.getElementById("roleInput");
+
+            var emailErr = document.getElementById("loginEmailErr");
+            var passErr = document.getElementById("loginPasswordErr");
+            var roleErr = document.getElementById("roleErr");
+
+            var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            /* =========================================================
+               CLEAR STALE VALUES (browser back / pageshow)
+               ========================================================= */
+            function clearForm() {
+                if (form) form.reset();
+                if (roleInput) roleInput.value = "";
+                var valEl = document.querySelector("#roleTrigger .dropdown__value");
+                if (valEl) {
+                    valEl.textContent = "Select role";
+                    valEl.dataset.value = "";
+                }
+                document.querySelectorAll(".dropdown__option").forEach(function (o) {
+                    o.classList.remove("is-selected");
+                    o.setAttribute("aria-selected", "false");
+                });
+                [emailErr, passErr, roleErr].forEach(function (el) {
+                    if (el) el.textContent = "";
+                });
+                [emailInput, passInput].forEach(function (el) {
+                    if (el) el.classList.remove("is-invalid");
+                });
+                var drop = document.getElementById("roleDropdown");
+                if (drop) drop.classList.remove("is-invalid");
+            }
+
+            window.addEventListener("pageshow", function (e) {
+                if (e.persisted) clearForm();
+            });
+            window.addEventListener("load", function () {
+                if (performance && performance.navigation &&
+                    performance.navigation.type === 2) {
+                    clearForm();
+                }
+            });
+
+            /* =========================================================
+               PASSWORD REVEAL
+               ========================================================= */
+            var eyeBtn = document.getElementById("loginEye");
+            if (eyeBtn && passInput) {
+                eyeBtn.addEventListener("click", function () {
+                    var showing = passInput.type === "text";
+                    passInput.type = showing ? "password" : "text";
+                    eyeBtn.setAttribute("aria-pressed", showing ? "false" : "true");
+                    eyeBtn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+                    var icon = eyeBtn.querySelector("i");
+                    if (icon) icon.className = showing ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+                    passInput.focus();
+                });
+            }
+
+            /* =========================================================
+               CUSTOM ROLE DROPDOWN
+               ========================================================= */
+            var dropRoot = document.getElementById("roleDropdown");
+            var trigger = document.getElementById("roleTrigger");
+            var list = document.getElementById("roleList");
+            var valueEl = trigger ? trigger.querySelector(".dropdown__value") : null;
+            var options = list ? Array.prototype.slice.call(list.querySelectorAll(".dropdown__option")) : [];
+
+            function openDrop() {
+                if (!list) return;
+                list.hidden = false;
+                dropRoot.classList.add("is-open");
+                trigger.setAttribute("aria-expanded", "true");
+                var selected = options.filter(function (o) { return o.classList.contains("is-selected"); })[0];
+                (selected || options[0]).focus();
+            }
+            function closeDrop() {
+                if (!list) return;
+                list.hidden = true;
+                dropRoot.classList.remove("is-open");
+                trigger.setAttribute("aria-expanded", "false");
+            }
+            function selectOption(opt) {
+                roleInput.value = opt.dataset.value;
+                valueEl.textContent = opt.textContent.trim();
+                valueEl.dataset.value = opt.dataset.value;
+                options.forEach(function (o) {
+                    o.classList.remove("is-selected");
+                    o.setAttribute("aria-selected", "false");
+                });
+                opt.classList.add("is-selected");
+                opt.setAttribute("aria-selected", "true");
+                dropRoot.classList.remove("is-invalid");
+                roleErr.textContent = "";
+                closeDrop();
+                trigger.focus();
+            }
+
+            if (trigger && list) {
+                trigger.addEventListener("click", function () {
+                    if (list.hidden) openDrop(); else closeDrop();
+                });
+                trigger.addEventListener("keydown", function (e) {
+                    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        if (list.hidden) openDrop();
+                    } else if (e.key === "Escape") closeDrop();
+                });
+
+                options.forEach(function (opt, i) {
+                    opt.addEventListener("click", function () { selectOption(opt); });
+                    opt.addEventListener("keydown", function (e) {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            selectOption(opt);
+                        } else if (e.key === "ArrowDown") {
+                            e.preventDefault();
+                            (options[i + 1] || options[0]).focus();
+                        } else if (e.key === "ArrowUp") {
+                            e.preventDefault();
+                            (options[i - 1] || options[options.length - 1]).focus();
+                        } else if (e.key === "Escape") {
+                            closeDrop();
+                            trigger.focus();
+                        } else if (e.key === "Tab") {
+                            closeDrop();
+                        }
+                    });
+                });
+
+                document.addEventListener("click", function (e) {
+                    if (!dropRoot.contains(e.target)) closeDrop();
+                });
+            }
+
+            /* =========================================================
+               VALIDATION
+               ========================================================= */
+            function setErr(input, errEl, msg) {
+                if (input) input.classList.add("is-invalid");
+                if (errEl) errEl.textContent = msg;
+            }
+            function clearErr(input, errEl) {
+                if (input) input.classList.remove("is-invalid");
+                if (errEl) errEl.textContent = "";
+            }
+
+            [emailInput, passInput].forEach(function (input) {
+                input.addEventListener("input", function () {
+                    if (input === emailInput) clearErr(emailInput, emailErr);
+                    if (input === passInput) clearErr(passInput, passErr);
+                });
+            });
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var ok = true;
+
+                // Email
+                var emailVal = emailInput.value.trim();
+                if (!emailVal) {
+                    setErr(emailInput, emailErr, "Please enter your email address.");
+                    ok = false;
+                } else if (!emailRe.test(emailVal)) {
+                    setErr(emailInput, emailErr, "Please enter a valid email address.");
+                    ok = false;
+                } else {
+                    clearErr(emailInput, emailErr);
+                }
+
+                // Password
+                if (!passInput.value) {
+                    setErr(passInput, passErr, "Please enter your password.");
+                    ok = false;
+                } else if (passInput.value.length < 6) {
+                    setErr(passInput, passErr, "Password must be at least 6 characters.");
+                    ok = false;
+                } else {
+                    clearErr(passInput, passErr);
+                }
+
+                // Role
+                if (!roleInput.value) {
+                    dropRoot.classList.add("is-invalid");
+                    roleErr.textContent = "Please choose a role.";
+                    ok = false;
+                } else {
+                    dropRoot.classList.remove("is-invalid");
+                    roleErr.textContent = "";
+                }
+
+                if (!ok) {
+                    var firstInvalid = form.querySelector(".is-invalid");
+                    if (firstInvalid && typeof firstInvalid.focus === "function") firstInvalid.focus();
+                    else if (dropRoot.classList.contains("is-invalid")) trigger.focus();
+                    return;
+                }
+
+                // Success: store email + role, redirect by role
+                try {
+                    localStorage.setItem("stackly_user_email", emailVal);
+                    localStorage.setItem("stackly_user_role", roleInput.value);
+                } catch (err) { /* ignore */ }
+
+                var target = roleInput.value === "admin" ? "admin.html" : "user.html";
+                window.location.href = target;
+            });
+
+            /* =========================================================
+               ENTRANCE ANIMATION
+               ========================================================= */
+            if (typeof gsap === "undefined" || reduceMotion) {
+                document.querySelectorAll(".auth__inner > *, .auth__visual > *").forEach(function (el) {
+                    el.style.opacity = 1;
+                    el.style.transform = "none";
+                });
+                return;
+            }
+
+            var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+            tl.from(".auth__quote > *", { opacity: 0, x: -30, duration: 1.0, stagger: 0.1 }, 0.3)
+                .from(".auth__visual-brand", { opacity: 0, y: -18, duration: 0.8 }, 0.2)
+                .from(".auth__back", { opacity: 0, x: 30, duration: 0.9 }, 0.15)
+                .from(".auth__brand", { opacity: 0, y: -18, duration: 0.9 }, 0.25)
+                .from(".auth__head > *", { opacity: 0, y: 24, duration: 0.9, stagger: 0.08 }, 0.35)
+                .from(".auth__form .field", { opacity: 0, y: 22, duration: 0.85, stagger: 0.08 }, 0.5)
+                .from(".auth__submit", { opacity: 0, y: 18, duration: 0.8 }, 0.8)
+                .from(".auth__divider", { opacity: 0, duration: 0.7 }, 0.9)
+                .from(".auth__social-btn", { opacity: 0, y: 18, duration: 0.7, stagger: 0.08 }, 0.95)
+                .from(".auth__foot", { opacity: 0, duration: 0.7 }, 1.1);
+
+            tl.eventCallback("onComplete", function () {
+                gsap.set(".auth__form .field", { clearProps: "transform" });
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <title>Create account — Stackly Robotics</title>
+    <meta name="description" content="Create your Stackly Robotics account.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,500;1,700&family=Inter:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+
+<body class="auth-page">
+
+
+    <main class="auth auth--signup" id="main">
+
+        <!-- ================= LEFT PANEL (FORM) ================= -->
+        <section class="auth__panel">
+
+            <a class="auth__back" href="../index.html">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                <span>Back to Home</span>
+            </a>
+
+            <div class="auth__inner">
+
+                <a class="auth__brand" href="../index.html" aria-label="Stackly Robotics — home">
+                    <img src="../logo.webp" alt="Stackly Robotics logo">
+                </a>
+
+                <header class="auth__head">
+                    <h1 class="auth__title">Create account</h1>
+                    <p class="auth__sub">A short form. Then you're ready to configure a work cell.</p>
+                </header>
+
+                <form class="auth__form" id="signupForm" novalidate>
+
+                    <!-- Name -->
+                    <div class="field">
+                        <label class="field__label" for="signupName">Full name</label>
+                        <div class="field__control">
+                            <span class="field__icon" aria-hidden="true">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input type="text" id="signupName" name="name" class="field__input" autocomplete="name"
+                                placeholder="Your name" required>
+                        </div>
+                        <span class="field__error" id="signupNameErr" role="alert"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field">
+                        <label class="field__label" for="signupEmail">Email</label>
+                        <div class="field__control">
+                            <span class="field__icon" aria-hidden="true">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" id="signupEmail" name="email" class="field__input" autocomplete="email"
+                                placeholder="your@email.com" required>
+                        </div>
+                        <span class="field__error" id="signupEmailErr" role="alert"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="field">
+                        <label class="field__label" for="signupPassword">Password</label>
+                        <div class="field__control">
+                            <span class="field__icon" aria-hidden="true">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" id="signupPassword" name="password" class="field__input"
+                                autocomplete="new-password" placeholder="At least 6 characters" required minlength="6">
+                            <button type="button" class="field__eye" id="signupEye" aria-label="Show password"
+                                aria-pressed="false">
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <span class="field__error" id="signupPasswordErr" role="alert"></span>
+                    </div>
+
+                    <!-- Confirm -->
+                    <div class="field">
+                        <label class="field__label" for="signupConfirm">Confirm password</label>
+                        <div class="field__control">
+                            <span class="field__icon" aria-hidden="true">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" id="signupConfirm" name="confirm" class="field__input"
+                                autocomplete="new-password" placeholder="Re-enter your password" required minlength="6">
+                            <button type="button" class="field__eye" id="signupConfirmEye" aria-label="Show password"
+                                aria-pressed="false">
+                                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <span class="field__error" id="signupConfirmErr" role="alert"></span>
+                    </div>
+
+                    <!-- Role -->
+                    <div class="field">
+                        <label class="field__label" id="signupRoleLabel">Account type</label>
+                        <div class="dropdown" id="signupRoleDropdown">
+                            <button type="button" class="dropdown__trigger" id="signupRoleTrigger"
+                                aria-haspopup="listbox" aria-expanded="false"
+                                aria-labelledby="signupRoleLabel signupRoleTrigger">
+                                <span class="dropdown__value" data-value="">Select account type</span>
+                                <i class="fa-solid fa-chevron-down dropdown__arrow" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown__list" id="signupRoleList" role="listbox"
+                                aria-labelledby="signupRoleLabel" hidden>
+                                <li class="dropdown__option" role="option" data-value="user" tabindex="-1">Operator /
+                                    Engineer</li>
+                                <li class="dropdown__option" role="option" data-value="admin" tabindex="-1">Admin /
+                                    Integrator</li>
+                            </ul>
+                            <input type="hidden" name="role" id="signupRoleInput" value="">
+                        </div>
+                        <span class="field__error" id="signupRoleErr" role="alert"></span>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn--primary auth__submit">
+                        Create account <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+
+                </form>
+
+                <p class="auth__foot">
+                    Already have an account? <a href="login.html">Sign in</a>
+                </p>
+
+            </div>
+        </section>
+
+        <!-- ================= RIGHT VISUAL (PHOTO) ================= -->
+        <aside class="auth__visual" aria-hidden="true">
+            <img class="auth__visual-img"
+                src="../assets/signup_page.webp"
+                alt="">
+            <div class="auth__scrim"></div>
+
+            <div class="auth__visual-brand">
+                <img src="../logo.webp" alt="">
+            </div>
+
+            <div class="auth__quote">
+                <span class="auth__quote-mark">&ldquo;</span>
+                <p>Built on the factory floor, by people who've stood on it.</p>
+                <cite>&mdash; Stackly Robotics &middot; Since 2018</cite>
+            </div>
+        </aside>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        (function () {
+            "use strict";
+
+            var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            var form = document.getElementById("signupForm");
+            var nameInput = document.getElementById("signupName");
+            var emailInput = document.getElementById("signupEmail");
+            var passInput = document.getElementById("signupPassword");
+            var confirmInput = document.getElementById("signupConfirm");
+            var roleInput = document.getElementById("signupRoleInput");
+
+            var nameErr = document.getElementById("signupNameErr");
+            var emailErr = document.getElementById("signupEmailErr");
+            var passErr = document.getElementById("signupPasswordErr");
+            var confirmErr = document.getElementById("signupConfirmErr");
+            var roleErr = document.getElementById("signupRoleErr");
+
+            var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            /* =========================================================
+               CLEAR STALE VALUES (browser back / pageshow)
+               ========================================================= */
+            function clearForm() {
+                if (form) form.reset();
+                if (roleInput) roleInput.value = "";
+                var valEl = document.querySelector("#signupRoleTrigger .dropdown__value");
+                if (valEl) {
+                    valEl.textContent = "Select account type";
+                    valEl.dataset.value = "";
+                }
+                document.querySelectorAll("#signupRoleDropdown .dropdown__option").forEach(function (o) {
+                    o.classList.remove("is-selected");
+                    o.setAttribute("aria-selected", "false");
+                });
+                [nameErr, emailErr, passErr, confirmErr, roleErr].forEach(function (el) {
+                    if (el) el.textContent = "";
+                });
+                [nameInput, emailInput, passInput, confirmInput].forEach(function (el) {
+                    if (el) el.classList.remove("is-invalid");
+                });
+                var drop = document.getElementById("signupRoleDropdown");
+                if (drop) drop.classList.remove("is-invalid");
+            }
+
+            window.addEventListener("pageshow", function (e) {
+                if (e.persisted) clearForm();
+            });
+            window.addEventListener("load", function () {
+                if (performance && performance.navigation &&
+                    performance.navigation.type === 2) {
+                    clearForm();
+                }
+            });
+
+            /* =========================================================
+               PASSWORD REVEAL (both fields)
+               ========================================================= */
+            function bindEye(btnId, input) {
+                var btn = document.getElementById(btnId);
+                if (!btn || !input) return;
+                btn.addEventListener("click", function () {
+                    var showing = input.type === "text";
+                    input.type = showing ? "password" : "text";
+                    btn.setAttribute("aria-pressed", showing ? "false" : "true");
+                    btn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+                    var icon = btn.querySelector("i");
+                    if (icon) icon.className = showing ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+                    input.focus();
+                });
+            }
+            bindEye("signupEye", passInput);
+            bindEye("signupConfirmEye", confirmInput);
+
+            /* =========================================================
+               CUSTOM ROLE DROPDOWN
+               ========================================================= */
+            var dropRoot = document.getElementById("signupRoleDropdown");
+            var trigger = document.getElementById("signupRoleTrigger");
+            var list = document.getElementById("signupRoleList");
+            var valueEl = trigger ? trigger.querySelector(".dropdown__value") : null;
+            var options = list ? Array.prototype.slice.call(list.querySelectorAll(".dropdown__option")) : [];
+
+            function openDrop() {
+                if (!list) return;
+                list.hidden = false;
+                dropRoot.classList.add("is-open");
+                trigger.setAttribute("aria-expanded", "true");
+                var selected = options.filter(function (o) { return o.classList.contains("is-selected"); })[0];
+                (selected || options[0]).focus();
+            }
+            function closeDrop() {
+                if (!list) return;
+                list.hidden = true;
+                dropRoot.classList.remove("is-open");
+                trigger.setAttribute("aria-expanded", "false");
+            }
+            function selectOption(opt) {
+                roleInput.value = opt.dataset.value;
+                valueEl.textContent = opt.textContent.trim();
+                valueEl.dataset.value = opt.dataset.value;
+                options.forEach(function (o) {
+                    o.classList.remove("is-selected");
+                    o.setAttribute("aria-selected", "false");
+                });
+                opt.classList.add("is-selected");
+                opt.setAttribute("aria-selected", "true");
+                dropRoot.classList.remove("is-invalid");
+                roleErr.textContent = "";
+                closeDrop();
+                trigger.focus();
+            }
+
+            if (trigger && list) {
+                trigger.addEventListener("click", function () {
+                    if (list.hidden) openDrop(); else closeDrop();
+                });
+                trigger.addEventListener("keydown", function (e) {
+                    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        if (list.hidden) openDrop();
+                    } else if (e.key === "Escape") closeDrop();
+                });
+
+                options.forEach(function (opt, i) {
+                    opt.addEventListener("click", function () { selectOption(opt); });
+                    opt.addEventListener("keydown", function (e) {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            selectOption(opt);
+                        } else if (e.key === "ArrowDown") {
+                            e.preventDefault();
+                            (options[i + 1] || options[0]).focus();
+                        } else if (e.key === "ArrowUp") {
+                            e.preventDefault();
+                            (options[i - 1] || options[options.length - 1]).focus();
+                        } else if (e.key === "Escape") {
+                            closeDrop();
+                            trigger.focus();
+                        } else if (e.key === "Tab") {
+                            closeDrop();
+                        }
+                    });
+                });
+
+                document.addEventListener("click", function (e) {
+                    if (!dropRoot.contains(e.target)) closeDrop();
+                });
+            }
+
+            /* =========================================================
+               VALIDATION
+               ========================================================= */
+            function setErr(input, errEl, msg) {
+                if (input) input.classList.add("is-invalid");
+                if (errEl) errEl.textContent = msg;
+            }
+            function clearErr(input, errEl) {
+                if (input) input.classList.remove("is-invalid");
+                if (errEl) errEl.textContent = "";
+            }
+
+            [
+                [nameInput, nameErr],
+                [emailInput, emailErr],
+                [passInput, passErr],
+                [confirmInput, confirmErr]
+            ].forEach(function (pair) {
+                if (!pair[0]) return;
+                pair[0].addEventListener("input", function () { clearErr(pair[0], pair[1]); });
+            });
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var ok = true;
+
+                if (!nameInput.value.trim()) {
+                    setErr(nameInput, nameErr, "Please tell us your name.");
+                    ok = false;
+                } else { clearErr(nameInput, nameErr); }
+
+                var emailVal = emailInput.value.trim();
+                if (!emailVal) {
+                    setErr(emailInput, emailErr, "Please enter your email address.");
+                    ok = false;
+                } else if (!emailRe.test(emailVal)) {
+                    setErr(emailInput, emailErr, "Please enter a valid email address.");
+                    ok = false;
+                } else { clearErr(emailInput, emailErr); }
+
+                if (!passInput.value) {
+                    setErr(passInput, passErr, "Please choose a password.");
+                    ok = false;
+                } else if (passInput.value.length < 6) {
+                    setErr(passInput, passErr, "Password must be at least 6 characters.");
+                    ok = false;
+                } else { clearErr(passInput, passErr); }
+
+                if (!confirmInput.value) {
+                    setErr(confirmInput, confirmErr, "Please confirm your password.");
+                    ok = false;
+                } else if (confirmInput.value !== passInput.value) {
+                    setErr(confirmInput, confirmErr, "Passwords do not match.");
+                    ok = false;
+                } else { clearErr(confirmInput, confirmErr); }
+
+                if (!roleInput.value) {
+                    dropRoot.classList.add("is-invalid");
+                    roleErr.textContent = "Please choose an account type.";
+                    ok = false;
+                } else {
+                    dropRoot.classList.remove("is-invalid");
+                    roleErr.textContent = "";
+                }
+
+                if (!ok) {
+                    var firstInvalid = form.querySelector(".is-invalid");
+                    if (firstInvalid && typeof firstInvalid.focus === "function") firstInvalid.focus();
+                    else if (dropRoot.classList.contains("is-invalid")) trigger.focus();
+                    return;
+                }
+
+                /* Success — do NOT persist signup data; just route to login */
+                form.reset();
+                window.location.href = "login.html";
+            });
+
+            /* =========================================================
+               ENTRANCE ANIMATION
+               ========================================================= */
+            if (typeof gsap === "undefined" || reduceMotion) return;
+
+            var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+            tl.from(".auth__quote > *", { opacity: 0, x: -30, duration: 1.0, stagger: 0.1 }, 0.3)
+                .from(".auth__visual-brand", { opacity: 0, y: -18, duration: 0.8 }, 0.2)
+                .from(".auth__back", { opacity: 0, x: 30, duration: 0.9 }, 0.15)
+                .from(".auth__brand", { opacity: 0, y: -18, duration: 0.9 }, 0.25)
+                .from(".auth__head > *", { opacity: 0, y: 24, duration: 0.9, stagger: 0.08 }, 0.35)
+                .from(".auth__form .field", { opacity: 0, y: 22, duration: 0.85, stagger: 0.06 }, 0.5)
+                .from(".auth__submit", { opacity: 0, y: 18, duration: 0.8 }, 0.95)
+                .from(".auth__foot", { opacity: 0, duration: 0.7 }, 1.1);
+
+            tl.eventCallback("onComplete", function () {
+                gsap.set(".auth__form .field", { clearProps: "transform" });
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

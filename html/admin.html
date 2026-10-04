@@ -1,0 +1,5106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fleet Command — Stackly Robotics</title>
+
+  <style>
+    /* ============================================================
+       RESET
+    ============================================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background: var(--bg-base);
+      color: var(--text-primary);
+
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* ============================================================
+       VARIABLES — Robotics Control Room theme
+    ============================================================ */
+
+    :root {
+      /* Layout */
+      --rail-width: 250px;
+
+      /* Surfaces */
+      --bg-base: #0A0A0A;
+      --bg-surface: #111111;
+      --bg-elevated: #181818;
+      --bg-hud: #1E1E1E;
+
+      /* Lines */
+      --line-subtle: #1F1F1F;
+      --line-strong: #2A2A2A;
+
+      /* Text */
+      --text-primary: #FFFFFF;
+      --text-secondary: rgba(255, 255, 255, 0.68);
+      --text-muted: rgba(255, 255, 255, 0.40);
+
+      /* Signal — primary accent (robotics yellow) */
+      --signal: #DBFE01;
+      --signal-dim: rgba(219, 254, 1, 0.10);
+      --signal-glow: rgba(219, 254, 1, 0.35);
+      --signal-ink: #000000;
+
+      /* Status — semantic */
+      --status-online: #22c55e;
+      --status-online-bg: rgba(34, 197, 94, 0.12);
+
+      --status-alert: #ef4444;
+      --status-alert-bg: rgba(239, 68, 68, 0.12);
+
+      --status-standby: #f59e0b;
+      --status-standby-bg: rgba(245, 158, 11, 0.12);
+
+      --status-info: #38bdf8;
+      --status-info-bg: rgba(56, 189, 248, 0.12);
+
+      --status-ai: #a855f7;
+      --status-ai-bg: rgba(168, 85, 247, 0.12);
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.55);
+    }
+
+
+    /* ============================================================
+       APP
+    ============================================================ */
+
+    .admin-app {
+      min-height: 100vh;
+      display: flex;
+    }
+
+
+    /* ============================================================
+       RAIL (sidebar)
+    ============================================================ */
+
+    .sidebar {
+      width: var(--rail-width);
+      height: 100vh;
+
+      position: fixed;
+      left: 0;
+      top: 0;
+
+      background: var(--bg-surface);
+
+      border-right: 1px solid var(--line-subtle);
+
+      display: flex;
+      flex-direction: column;
+
+      padding: 22px 14px;
+
+      z-index: 1000;
+
+      transition:
+        width 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .sidebar-brand {
+      height: 50px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 12px;
+
+      margin-bottom: 24px;
+
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      height: 28px;
+      width: auto;
+
+      filter: brightness(0) invert(1);
+
+      object-fit: contain;
+    }
+
+    .brand-name {
+      margin-left: 10px;
+
+      font-size: 17px;
+      font-weight: 700;
+
+      white-space: nowrap;
+    }
+
+
+    /* ============================================================
+       RAIL USER
+    ============================================================ */
+
+    .sidebar-user {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 10px 12px;
+
+      background: var(--bg-elevated);
+
+      border: 1px solid var(--line-subtle);
+
+      border-radius: 10px;
+
+      margin-bottom: 20px;
+    }
+
+    .user-avatar {
+      width: 34px;
+      height: 34px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--signal);
+      color: var(--signal-ink);
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .user-details {
+      min-width: 0;
+    }
+
+    .user-details strong {
+      display: block;
+
+      font-size: 13px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-details span {
+      display: block;
+
+      font-size: 11px;
+
+      color: var(--text-muted);
+
+      margin-top: 2px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+
+      gap: 4px;
+
+      flex: 1;
+    }
+
+    .nav-label-heading {
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 0.1em;
+
+      text-transform: uppercase;
+
+      color: var(--text-muted);
+
+      padding: 8px 12px 7px;
+
+      margin-top: 4px;
+    }
+
+    .nav-item,
+    .logout-btn {
+      width: 100%;
+
+      border: 0;
+
+      background: transparent;
+
+      display: flex;
+      align-items: center;
+
+      gap: 11px;
+
+      padding: 11px 12px;
+
+      border-radius: 9px;
+
+      color: var(--text-secondary);
+
+      font-size: 13px;
+
+      text-align: left;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .nav-item:hover,
+    .logout-btn:hover {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+
+    .nav-item.active {
+      background: var(--signal);
+      color: var(--signal-ink);
+    }
+
+    .nav-icon {
+      width: 20px;
+
+      display: flex;
+      justify-content: center;
+
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-label {
+      white-space: nowrap;
+    }
+
+    .nav-count {
+      margin-left: auto;
+
+      min-width: 20px;
+      height: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 20px;
+
+      background: var(--bg-hud);
+      color: var(--text-secondary);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .nav-item.active .nav-count {
+      background: rgba(0, 0, 0, 0.18);
+      color: var(--signal-ink);
+    }
+
+
+    /* ============================================================
+       RAIL FOOTER
+    ============================================================ */
+
+    .sidebar-footer {
+      padding-top: 12px;
+
+      border-top: 1px solid var(--line-subtle);
+    }
+
+
+    /* ============================================================
+       RAIL COLLAPSED
+    ============================================================ */
+
+    .sidebar.collapsed {
+      width: 76px;
+    }
+
+    .sidebar.collapsed .brand-name,
+    .sidebar.collapsed .user-details,
+    .sidebar.collapsed .nav-label,
+    .sidebar.collapsed .nav-count {
+      display: none;
+    }
+
+    .sidebar.collapsed .sidebar-brand,
+    .sidebar.collapsed .sidebar-user {
+      justify-content: center;
+    }
+
+    .sidebar.collapsed .nav-item,
+    .sidebar.collapsed .logout-btn {
+      justify-content: center;
+    }
+
+    .sidebar.collapsed .nav-label-heading {
+      display: none;
+    }
+
+
+    /* ============================================================
+       MAIN CONTENT
+    ============================================================ */
+
+    .main-content {
+      width: calc(100% - var(--rail-width));
+
+      margin-left: var(--rail-width);
+
+      min-height: 100vh;
+      min-width: 0;
+
+      padding: 28px 34px;
+
+      transition:
+        margin-left 0.3s ease,
+        width 0.3s ease;
+    }
+
+    .sidebar.collapsed ~ .main-content {
+      width: calc(100% - 76px);
+      margin-left: 76px;
+    }
+
+
+    /* ============================================================
+       TOP HEADER
+    ============================================================ */
+
+    .page-header {
+      min-height: 54px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 28px;
+
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-base);
+      padding-top: 15px;
+      padding-bottom: 15px;
+      margin-top: -15px;
+    }
+
+    .page-header::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      bottom: 0;
+      left: -34px;
+      right: -34px;
+      background: var(--bg-base);
+      z-index: -1;
+    }
+
+    .page-title-area h1 {
+      font-size: 25px;
+
+      letter-spacing: -0.04em;
+
+      margin-bottom: 4px;
+    }
+
+    .page-title-area p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+
+      gap: 14px;
+    }
+
+    .header-date {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .sidebar-toggle {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--line-subtle);
+
+      background: var(--bg-surface);
+
+      color: var(--text-primary);
+
+      border-radius: 9px;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 17px;
+
+      transition: background 0.2s ease;
+    }
+
+    .sidebar-toggle:hover {
+      background: var(--bg-elevated);
+    }
+
+
+    /* ============================================================
+       SECTION CONTENT
+    ============================================================ */
+
+    .section-content {
+      display: none;
+
+      animation: sectionEnter 0.35s ease;
+    }
+
+    .section-content.active {
+      display: block;
+    }
+
+    @keyframes sectionEnter {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* ============================================================
+       SECTION HEADER
+    ============================================================ */
+
+    .content-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      margin-bottom: 20px;
+    }
+
+    .content-heading h2 {
+      font-size: 19px;
+
+      letter-spacing: -0.025em;
+
+      margin-bottom: 4px;
+    }
+
+    .content-heading p {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .heading-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+
+    .btn {
+      border: 1px solid var(--line-subtle);
+
+      background: var(--bg-surface);
+
+      color: var(--text-primary);
+
+      border-radius: 8px;
+
+      padding: 9px 13px;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--bg-elevated);
+      transform: translateY(-1px);
+    }
+
+    .btn-dark {
+      background: var(--signal);
+      border-color: var(--signal);
+      color: var(--signal-ink);
+    }
+
+    .btn-dark:hover {
+      background: #c7e800;
+    }
+
+
+    /* ============================================================
+       STAT CARDS
+    ============================================================ */
+
+    .stats-grid {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 14px;
+
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-surface);
+
+      border: 1px solid var(--line-subtle);
+
+      border-radius: 12px;
+
+      padding: 18px;
+
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-label {
+      font-size: 11px;
+
+      color: var(--text-secondary);
+
+      margin-bottom: 9px;
+    }
+
+    .stat-value {
+      font-size: 27px;
+
+      line-height: 1;
+
+      font-weight: 700;
+
+      letter-spacing: -0.04em;
+
+      margin-bottom: 8px;
+    }
+
+    .stat-change {
+      font-size: 11px;
+      color: var(--signal);
+      font-weight: 600;
+    }
+
+    .stat-change.negative {
+      color: var(--status-alert);
+    }
+
+
+    /* ============================================================
+       CARD GRID
+    ============================================================ */
+
+    .grid-2 {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 16px;
+
+      margin-bottom: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 16px;
+
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+
+      border: 1px solid var(--line-subtle);
+
+      border-radius: 12px;
+
+      box-shadow: var(--shadow-sm);
+
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line-subtle);
+    }
+
+    .card-header h3 {
+      font-size: 13px;
+
+      margin: 0;
+
+      letter-spacing: -0.01em;
+    }
+
+    .card-header span {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+
+    /* ============================================================
+       CHARTS
+    ============================================================ */
+
+    .chart-container {
+      position: relative;
+
+      height: 250px;
+
+      padding-top: 10px;
+    }
+
+    .line-chart {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart-grid-lines line {
+      stroke: var(--line-subtle);
+      stroke-width: 1;
+    }
+
+    .chart-line {
+      fill: none;
+      stroke: var(--signal);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+
+      animation: drawChart 1.6s ease forwards;
+    }
+
+    @keyframes drawChart {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .chart-area {
+      fill: rgba(219, 254, 1, 0.06);
+    }
+
+    .chart-point {
+      fill: var(--signal);
+    }
+
+
+    /* ============================================================
+       BAR CHART
+    ============================================================ */
+
+    .bar-chart {
+      height: 250px;
+
+      display: flex;
+      align-items: flex-end;
+
+      gap: 15px;
+
+      padding: 20px 5px 5px;
+    }
+
+    .bar-group {
+      flex: 1;
+
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+
+      gap: 8px;
+    }
+
+    .bar {
+      width: 100%;
+      max-width: 35px;
+
+      background: var(--signal);
+
+      border-radius: 5px 5px 0 0;
+
+      transform-origin: bottom;
+
+      animation: barRise 0.9s ease backwards;
+    }
+
+    .bar:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    @keyframes barRise {
+      from {
+        transform: scaleY(0);
+      }
+
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    .bar-label {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+
+    /* ============================================================
+       DONUT
+    ============================================================ */
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 30px;
+
+      min-height: 220px;
+    }
+
+    .donut {
+      width: 150px;
+      height: 150px;
+
+      border-radius: 50%;
+
+      background:
+        conic-gradient(
+          var(--signal) 0deg 252deg,
+          rgba(219, 254, 1, 0.45) 252deg 324deg,
+          rgba(219, 254, 1, 0.15) 324deg 360deg
+        );
+
+      position: relative;
+    }
+
+    .donut::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 28px;
+
+      background: var(--bg-surface);
+
+      border-radius: 50%;
+    }
+
+    .donut-center {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 2;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .legend {
+      display: flex;
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+
+      gap: 8px;
+
+      font-size: 11px;
+
+      color: var(--text-secondary);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--signal);
+    }
+
+    .legend-dot.gray {
+      background: rgba(219, 254, 1, 0.45);
+    }
+
+    .legend-dot.light {
+      background: rgba(219, 254, 1, 0.15);
+    }
+
+
+    /* ============================================================
+       ACTIVITY
+    ============================================================ */
+
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .activity-item {
+      display: flex;
+
+      gap: 12px;
+
+      padding: 13px 0;
+
+      border-bottom: 1px solid var(--line-subtle);
+    }
+
+    .activity-item:last-child {
+      border-bottom: 0;
+    }
+
+    .activity-icon {
+      width: 32px;
+      height: 32px;
+
+      flex-shrink: 0;
+
+      border-radius: 8px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--signal-dim);
+
+      color: var(--signal);
+
+      font-size: 13px;
+    }
+
+    .activity-text {
+      flex: 1;
+    }
+
+    .activity-text strong {
+      display: block;
+
+      font-size: 12px;
+
+      margin-bottom: 2px;
+    }
+
+    .activity-text span {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+
+    /* ============================================================
+       TABLE
+    ============================================================ */
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 600px;
+    }
+
+    th {
+      text-align: left;
+
+      padding: 12px 16px;
+
+      background: var(--bg-elevated);
+
+      border-bottom: 1px solid var(--line-subtle);
+
+      color: var(--text-muted);
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 14px 16px;
+
+      border-bottom: 1px solid var(--line-subtle);
+
+      font-size: 12px;
+    }
+
+    tbody tr {
+      transition: background 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background: var(--bg-elevated);
+    }
+
+
+    /* ============================================================
+       AVATARS
+    ============================================================ */
+
+    .person {
+      display: flex;
+      align-items: center;
+
+      gap: 9px;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+
+      border-radius: 50%;
+
+      background: var(--bg-hud);
+
+      color: var(--text-primary);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 10px;
+
+      font-weight: 700;
+    }
+
+    .person-name strong {
+      display: block;
+
+      font-size: 12px;
+    }
+
+    .person-name span {
+      display: block;
+
+      color: var(--text-muted);
+
+      font-size: 10px;
+    }
+
+
+    /* ============================================================
+       BADGES
+    ============================================================ */
+
+    .badge {
+      display: inline-flex;
+
+      align-items: center;
+
+      padding: 5px 8px;
+
+      border-radius: 20px;
+
+      font-size: 10px;
+
+      font-weight: 600;
+    }
+
+    .badge-green {
+      background: var(--status-online-bg);
+      color: var(--status-online);
+    }
+
+    .badge-red {
+      background: var(--status-alert-bg);
+      color: var(--status-alert);
+    }
+
+    .badge-orange {
+      background: var(--status-standby-bg);
+      color: var(--status-standby);
+    }
+
+    .badge-blue {
+      background: var(--status-info-bg);
+      color: var(--status-info);
+    }
+
+    .badge-purple {
+      background: var(--status-ai-bg);
+      color: var(--status-ai);
+    }
+
+
+    /* ============================================================
+       UNIT HEALTH
+    ============================================================ */
+
+    .health-score {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .health-bar {
+      width: 70px;
+      height: 5px;
+
+      background: var(--bg-hud);
+
+      border-radius: 10px;
+
+      overflow: hidden;
+    }
+
+    .health-fill {
+      height: 100%;
+
+      background: var(--signal);
+
+      border-radius: inherit;
+    }
+
+
+    /* ============================================================
+       INCIDENT LAYOUT
+    ============================================================ */
+
+    .conversation-layout {
+      display: grid;
+
+      grid-template-columns: 320px 1fr;
+
+      min-height: 520px;
+    }
+
+    .conversation-list {
+      border-right: 1px solid var(--line-subtle);
+    }
+
+    .conversation-search {
+      padding: 14px;
+
+      border-bottom: 1px solid var(--line-subtle);
+    }
+
+    .search-input {
+      width: 100%;
+
+      padding: 9px 11px;
+
+      border: 1px solid var(--line-subtle);
+
+      border-radius: 8px;
+
+      outline: none;
+
+      font-size: 12px;
+
+      background: var(--bg-elevated);
+
+      color: var(--text-primary);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      border-color: var(--signal);
+      background: var(--bg-surface);
+    }
+
+    .conversation-item {
+      padding: 14px;
+
+      display: flex;
+
+      gap: 10px;
+
+      border-bottom: 1px solid var(--line-subtle);
+
+      cursor: pointer;
+
+      transition: background 0.2s ease;
+    }
+
+    .conversation-item:hover {
+      background: var(--bg-elevated);
+    }
+
+    .conversation-item.active {
+      background: var(--bg-elevated);
+
+      border-left: 3px solid var(--signal);
+    }
+
+    .conversation-info {
+      flex: 1;
+
+      min-width: 0;
+    }
+
+    .conversation-info strong {
+      display: block;
+
+      font-size: 12px;
+
+      margin-bottom: 3px;
+    }
+
+    .conversation-info p {
+      color: var(--text-muted);
+
+      font-size: 10px;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+    .conversation-time {
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+
+    /* ============================================================
+       INCIDENT DETAIL WINDOW
+    ============================================================ */
+
+    .chat-window {
+      display: flex;
+      flex-direction: column;
+
+      background: var(--bg-surface);
+    }
+
+    .chat-header {
+      padding: 16px 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line-subtle);
+    }
+
+    .chat-person {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .online-dot {
+      width: 7px;
+      height: 7px;
+
+      background: var(--status-online);
+
+      border-radius: 50%;
+    }
+
+    .chat-body {
+      flex: 1;
+
+      padding: 24px;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 15px;
+
+      background: var(--bg-base);
+    }
+
+    .message {
+      max-width: 70%;
+
+      padding: 11px 14px;
+
+      border-radius: 10px;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+    }
+
+    .message.customer {
+      background: var(--bg-surface);
+
+      border: 1px solid var(--line-subtle);
+
+      align-self: flex-start;
+    }
+
+    .message.agent {
+      background: var(--signal);
+
+      color: var(--signal-ink);
+
+      align-self: flex-end;
+
+      font-weight: 500;
+    }
+
+    .ai-response {
+      max-width: 80%;
+
+      padding: 14px;
+
+      background: var(--signal-dim);
+
+      border: 1px dashed rgba(219, 254, 1, 0.4);
+
+      border-radius: 10px;
+
+      font-size: 11px;
+
+      color: var(--text-primary);
+    }
+
+    .ai-response strong {
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: var(--signal);
+    }
+
+    .chat-input {
+      display: flex;
+
+      gap: 8px;
+
+      padding: 14px;
+
+      border-top: 1px solid var(--line-subtle);
+    }
+
+    .chat-input input {
+      flex: 1;
+
+      border: 1px solid var(--line-subtle);
+
+      background: var(--bg-elevated);
+
+      color: var(--text-primary);
+
+      border-radius: 8px;
+
+      padding: 10px;
+
+      outline: none;
+    }
+
+    .chat-input input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .chat-input input:focus {
+      border-color: var(--signal);
+    }
+
+
+    /* ============================================================
+       OPERATOR CARDS
+    ============================================================ */
+
+    .agent-card {
+      padding: 18px;
+    }
+
+    .agent-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .agent-profile {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .large-avatar {
+      width: 42px;
+      height: 42px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--signal);
+      color: var(--signal-ink);
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .agent-name strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .agent-name span {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    .productivity {
+      margin-top: 18px;
+    }
+
+    .productivity-row {
+      display: flex;
+
+      justify-content: space-between;
+
+      margin-bottom: 6px;
+
+      font-size: 10px;
+    }
+
+    .progress {
+      height: 6px;
+
+      background: var(--bg-hud);
+
+      border-radius: 20px;
+
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+
+      background: var(--signal);
+
+      border-radius: inherit;
+    }
+
+
+    /* ============================================================
+       AUTONOMY
+    ============================================================ */
+
+    .automation-card {
+      padding: 18px;
+    }
+
+    .automation-icon {
+      width: 42px;
+      height: 42px;
+
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--signal);
+      color: var(--signal-ink);
+
+      margin-bottom: 14px;
+    }
+
+    .automation-card h3 {
+      font-size: 14px;
+
+      margin-bottom: 5px;
+    }
+
+    .automation-card p {
+      color: var(--text-secondary);
+
+      font-size: 11px;
+
+      line-height: 1.6;
+
+      margin-bottom: 15px;
+    }
+
+    .automation-footer {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding-top: 12px;
+
+      border-top: 1px solid var(--line-subtle);
+    }
+
+
+    /* ============================================================
+       TOGGLE
+    ============================================================ */
+
+    .toggle {
+      width: 40px;
+      height: 22px;
+
+      border: 0;
+
+      background: var(--bg-hud);
+
+      border-radius: 20px;
+
+      position: relative;
+
+      transition: background 0.2s ease;
+    }
+
+    .toggle::after {
+      content: "";
+
+      position: absolute;
+
+      width: 16px;
+      height: 16px;
+
+      top: 3px;
+      left: 3px;
+
+      background: #ffffff;
+
+      border-radius: 50%;
+
+      transition: transform 0.2s ease;
+    }
+
+    .toggle.active {
+      background: var(--signal);
+    }
+
+    .toggle.active::after {
+      transform: translateX(18px);
+    }
+
+
+    /* ============================================================
+       SYSTEM SETTINGS
+    ============================================================ */
+
+    .settings-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .setting-row {
+      padding: 18px 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line-subtle);
+
+      gap: 20px;
+    }
+
+    .setting-row:last-child {
+      border-bottom: 0;
+    }
+
+    .setting-info strong {
+      display: block;
+
+      font-size: 12px;
+
+      margin-bottom: 3px;
+    }
+
+    .setting-info span {
+      display: block;
+
+      color: var(--text-muted);
+
+      font-size: 10px;
+    }
+
+    .setting-select {
+      padding: 8px 10px;
+
+      border: 1px solid var(--line-subtle);
+
+      border-radius: 7px;
+
+      background: var(--bg-elevated);
+
+      color: var(--text-primary);
+
+      font-size: 11px;
+
+      min-width: 130px;
+
+      outline: none;
+    }
+
+    .setting-select:focus {
+      border-color: var(--signal);
+    }
+
+
+    /* ============================================================
+       OVERLAY
+    ============================================================ */
+
+    .sidebar-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0, 0, 0, 0.55);
+
+      z-index: 900;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+    /* ============================================================
+       MOBILE
+    ============================================================ */
+
+    @media (max-width: 1100px) {
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .conversation-layout {
+        grid-template-columns: 280px 1fr;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .page-header::before {
+        left: -15px;
+        right: -15px;
+      }
+
+      :root {
+        --rail-width: 250px;
+      }
+
+      .sidebar {
+        transform: translateX(-100%);
+
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .sidebar.collapsed {
+        width: var(--rail-width);
+      }
+
+      .sidebar.collapsed .brand-name,
+      .sidebar.collapsed .user-details,
+      .sidebar.collapsed .nav-label,
+      .sidebar.collapsed .nav-count {
+        display: block;
+      }
+
+      .sidebar.collapsed .sidebar-brand,
+      .sidebar.collapsed .sidebar-user {
+        justify-content: flex-start;
+      }
+
+      .sidebar.collapsed .nav-item,
+      .sidebar.collapsed .logout-btn {
+        justify-content: flex-start;
+      }
+
+      .main-content,
+      .sidebar.collapsed ~ .main-content {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 20px 15px;
+      }
+
+      .page-header {
+        margin-bottom: 22px;
+      }
+
+      .sidebar-toggle {
+        display: flex;
+      }
+
+      .page-title-area h1 {
+        font-size: 21px;
+      }
+
+      .header-date {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 14px;
+      }
+
+      .stat-value {
+        font-size: 22px;
+      }
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .content-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+      }
+
+      .heading-actions {
+        width: 100%;
+      }
+
+      .heading-actions .btn {
+        flex: 1;
+      }
+
+      .conversation-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .conversation-list {
+        border-right: 0;
+
+        border-bottom: 1px solid var(--line-subtle);
+
+        max-height: 300px;
+
+        overflow-y: auto;
+      }
+
+      .chat-window {
+        min-height: 450px;
+      }
+
+      .donut-wrap {
+        flex-direction: column;
+
+        gap: 20px;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-card {
+        padding: 12px;
+      }
+
+      .stat-label {
+        font-size: 10px;
+      }
+
+      .stat-value {
+        font-size: 20px;
+      }
+
+      .stat-change {
+        font-size: 9px;
+      }
+
+      .card-header {
+        padding: 13px;
+      }
+
+      .card-body {
+        padding: 13px;
+      }
+
+      .chart-container {
+        height: 210px;
+      }
+
+      .bar-chart {
+        gap: 7px;
+      }
+
+      .bar {
+        max-width: 24px;
+      }
+
+      .message {
+        max-width: 88%;
+      }
+
+      .setting-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .setting-select {
+        width: 100%;
+      }
+    }
+
+
+    /* ============================================================
+       REDUCED MOTION
+    ============================================================ */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    img[src*="logo_trimmed"] {
+      filter: brightness(0) invert(1) !important;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+
+<body>
+
+<div class="admin-app">
+
+
+  <!-- ==========================================================
+       RAIL
+  =========================================================== -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-brand" id="sidebarBrand">
+      <a href="javascript:void(0)" id="logoBrandLink" style="cursor: pointer;">
+        <img
+          src="../logo.webp"
+          alt="Stackly Robotics"
+          style="height: 26px; width: auto; filter: brightness(0) invert(1);"
+        >
+      </a>
+    </div>
+
+
+    <!-- OPERATOR -->
+
+    <div class="sidebar-user">
+
+      <div class="user-avatar" id="adminAvatar">
+        SK
+      </div>
+
+      <div class="user-details">
+
+        <strong id="adminName">
+          Sujith Kumar
+        </strong>
+
+        <span>
+          Fleet Manager
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar-nav">
+
+      <div class="nav-label-heading">
+        Operations
+      </div>
+
+
+      <button
+        class="nav-item active"
+        data-section="dashboard"
+      >
+        <span class="nav-icon">◉</span>
+        <span class="nav-label">Control Room</span>
+      </button>
+
+
+      <button
+        class="nav-item"
+        data-section="customers"
+      >
+        <span class="nav-icon">⬡</span>
+        <span class="nav-label">Fleet</span>
+
+        <span class="nav-count">
+          248
+        </span>
+      </button>
+
+
+
+
+
+      <button
+        class="nav-item"
+        data-section="analytics"
+      >
+        <span class="nav-icon">∿</span>
+        <span class="nav-label">Telemetry</span>
+      </button>
+
+
+      <div class="nav-label-heading">
+        Team &amp; Autonomy
+      </div>
+
+
+      <button
+        class="nav-item"
+        data-section="agents"
+      >
+        <span class="nav-icon">◈</span>
+        <span class="nav-label">Operators</span>
+      </button>
+
+
+      <button
+        class="nav-item"
+        data-section="automation"
+      >
+        <span class="nav-icon">⚡</span>
+        <span class="nav-label">Autonomy</span>
+      </button>
+
+
+      <div class="nav-label-heading">
+        System
+      </div>
+
+
+      <button
+        class="nav-item"
+        data-section="settings"
+      >
+        <span class="nav-icon">⚙</span>
+        <span class="nav-label">System</span>
+      </button>
+
+    </nav>
+
+
+    <!-- RAIL FOOTER -->
+
+    <div class="sidebar-footer">
+
+      <button
+        class="logout-btn"
+        onclick="location.href='login.html'"
+      >
+
+        <span class="nav-icon">
+          ⏻
+        </span>
+
+        <span class="nav-label">
+          Logout
+        </span>
+
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MOBILE OVERLAY -->
+
+  <div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+  ></div>
+
+
+  <!-- ==========================================================
+       MAIN
+  =========================================================== -->
+
+  <main
+    class="main-content"
+    id="mainContent"
+  >
+
+
+    <!-- ========================================================
+         HEADER
+    ========================================================= -->
+
+    <header class="page-header">
+
+      <div class="page-title-area">
+
+        <h1>
+          <span id="pageGreeting">
+            Control Room
+          </span>
+        </h1>
+
+        <p id="pageDescription">
+          Real-time status across every deployed work cell.
+        </p>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <span
+          class="header-date"
+          id="currentDate"
+        ></span>
+
+        <button
+          class="sidebar-toggle"
+          id="sidebarToggle"
+          aria-label="Open navigation"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- ========================================================
+         CONTROL ROOM  (was Dashboard)
+    ========================================================= -->
+
+    <section
+      class="section-content active"
+      data-section="dashboard"
+    >
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Tasks Completed
+          </div>
+
+          <div class="stat-value">
+            24,892
+          </div>
+
+          <div class="stat-change">
+            ↑ 18.4% this week
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Task Success Rate
+          </div>
+
+          <div class="stat-value">
+            98.4%
+          </div>
+
+          <div class="stat-change">
+            ↑ 1.2% this week
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Active Robots
+          </div>
+
+          <div class="stat-value">
+            248
+          </div>
+
+          <div class="stat-change">
+            ↑ 12 commissioned
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Avg. Cycle Time
+          </div>
+
+          <div class="stat-value">
+            42 sec
+          </div>
+
+          <div class="stat-change">
+            ↓ 8.1% faster
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-2">
+
+        <!-- THROUGHPUT -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Fleet Throughput
+            </h3>
+
+            <span>
+              Last 7 days
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="chart-container">
+
+              <svg
+                class="line-chart"
+                viewBox="0 0 700 250"
+                preserveAspectRatio="none"
+              >
+
+                <g class="chart-grid-lines">
+
+                  <line x1="0" y1="30" x2="700" y2="30"/>
+                  <line x1="0" y1="90" x2="700" y2="90"/>
+                  <line x1="0" y1="150" x2="700" y2="150"/>
+                  <line x1="0" y1="210" x2="700" y2="210"/>
+
+                </g>
+
+                <path
+                  class="chart-area"
+                  d="M0 190 L100 160 L200 175 L300 110 L400 130 L500 80 L600 105 L700 45 L700 250 L0 250 Z"
+                />
+
+                <path
+                  class="chart-line"
+                  d="M0 190 L100 160 L200 175 L300 110 L400 130 L500 80 L600 105 L700 45"
+                />
+
+                <circle class="chart-point" cx="700" cy="45" r="5"/>
+
+              </svg>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FLEET MIX -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Fleet by Robot Type
+            </h3>
+
+            <span>
+              This month
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="donut-wrap">
+
+              <div class="donut">
+
+                <div class="donut-center">
+                  248
+                </div>
+
+              </div>
+
+
+              <div class="legend">
+
+                <div class="legend-item">
+
+                  <span class="legend-dot"></span>
+
+                  Articulated Arms — 70%
+
+                </div>
+
+
+                <div class="legend-item">
+
+                  <span class="legend-dot gray"></span>
+
+                  Mobile Robots — 20%
+
+                </div>
+
+
+                <div class="legend-item">
+
+                  <span class="legend-dot light"></span>
+
+                  Vision Cells — 10%
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-2">
+
+        <!-- RECENT DEPLOYMENTS -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Recent Deployments
+            </h3>
+
+            <span>
+              View all <i class="fa-solid fa-arrow-right"></i>
+            </span>
+
+          </div>
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Unit</th>
+                  <th>Task</th>
+                  <th>Status</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+
+                  <td>
+                    <div class="person">
+
+                      <div class="avatar">
+                        R7
+                      </div>
+
+                      <div class="person-name">
+
+                        <strong>
+                          R-007 · Articulated Arm
+                        </strong>
+
+                        <span>
+                          Commissioned 2 min ago
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td>
+                    Weld cycle — Line A
+                  </td>
+
+                  <td>
+                    <span class="badge badge-green">
+                      Operational
+                    </span>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <div class="person">
+
+                      <div class="avatar">
+                        A4
+                      </div>
+
+                      <div class="person-name">
+
+                        <strong>
+                          AMR-04 · Mobile Carrier
+                        </strong>
+
+                        <span>
+                          Docked 8 min ago
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td>
+                    Pallet transfer — Bay 3
+                  </td>
+
+                  <td>
+                    <span class="badge badge-orange">
+                      Standby
+                    </span>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <div class="person">
+
+                      <div class="avatar">
+                        V2
+                      </div>
+
+                      <div class="person-name">
+
+                        <strong>
+                          VC-12 · Vision Cell
+                        </strong>
+
+                        <span>
+                          Calibrated 12 min ago
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td>
+                    Inspection — Line 2
+                  </td>
+
+                  <td>
+                    <span class="badge badge-blue">
+                      Calibrating
+                    </span>
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACTIVITY -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Recent Activity
+            </h3>
+
+            <span>
+              Today
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="activity-list">
+
+              <div class="activity-item">
+
+                <div class="activity-icon">
+                  ⚡
+                </div>
+
+                <div class="activity-text">
+
+                  <strong>
+                    Auto-recovery resolved an incident
+                  </strong>
+
+                  <span>
+                    Gripper timeout — Cell 3 · 2m ago
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="activity-item">
+
+                <div class="activity-icon">
+                  +
+                </div>
+
+                <div class="activity-text">
+
+                  <strong>
+                    New cell commissioned
+                  </strong>
+
+                  <span>
+                    Arcturus Motors · Plant 02 · 18m ago
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="activity-item">
+
+                <div class="activity-icon">
+                  ✓
+                </div>
+
+                <div class="activity-text">
+
+                  <strong>
+                    Operator closed an incident
+                  </strong>
+
+                  <span>
+                    AMR dock alignment — Bay 3 · 32m ago
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         FLEET  (was Customers)
+    ========================================================= -->
+
+    <section
+      class="section-content"
+      data-section="customers"
+    >
+
+      <div class="content-heading">
+
+        <div>
+
+          <h2>
+            Fleet
+          </h2>
+
+          <p>
+            Every deployed unit, live health and last-known state.
+          </p>
+
+        </div>
+
+        <div class="heading-actions">
+
+          <button onclick="window.location.href='../404.html'" class="btn">
+            Export
+          </button>
+
+          <button onclick="window.location.href='../404.html'" class="btn btn-dark">
+            + Commission Unit
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Total Units
+          </div>
+
+          <div class="stat-value">
+            248
+          </div>
+
+          <div class="stat-change">
+            ↑ 12 this month
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Commissioned
+          </div>
+
+          <div class="stat-value">
+            18
+          </div>
+
+          <div class="stat-change">
+            ↑ 24% vs last month
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Needs Service
+          </div>
+
+          <div class="stat-value">
+            7
+          </div>
+
+          <div class="stat-change negative">
+            ↑ 2 since Monday
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Avg. Fleet Health
+          </div>
+
+          <div class="stat-value">
+            92.4
+          </div>
+
+          <div class="stat-change">
+            ↑ 1.6 pts
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <h3>
+            Unit Directory
+          </h3>
+
+          <span>
+            248 units
+          </span>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>Unit</th>
+                <th>Site</th>
+                <th>Tasks</th>
+                <th>Health</th>
+                <th>Status</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr>
+
+                <td>
+
+                  <div class="person">
+
+                    <div class="avatar">
+                      R7
+                    </div>
+
+                    <div class="person-name">
+
+                      <strong>
+                        R-007 · Articulated Arm
+                      </strong>
+
+                      <span>
+                        Arcturus Motors · Plant 02
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  Line A
+                </td>
+
+                <td>
+                  1,842
+                </td>
+
+                <td>
+
+                  <div class="health-score">
+
+                    96%
+
+                    <div class="health-bar">
+                      <div
+                        class="health-fill"
+                        style="width:96%"
+                      ></div>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge badge-green">
+                    Optimal
+                  </span>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+
+                  <div class="person">
+
+                    <div class="avatar">
+                      A4
+                    </div>
+
+                    <div class="person-name">
+
+                      <strong>
+                        AMR-04 · Mobile Carrier
+                      </strong>
+
+                      <span>
+                        Vantage Systems · Line 4
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  Line 4
+                </td>
+
+                <td>
+                  942
+                </td>
+
+                <td>
+
+                  <div class="health-score">
+
+                    88%
+
+                    <div class="health-bar">
+                      <div
+                        class="health-fill"
+                        style="width:88%"
+                      ></div>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge badge-blue">
+                    Deployed
+                  </span>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+
+                  <div class="person">
+
+                    <div class="avatar">
+                      V2
+                    </div>
+
+                    <div class="person-name">
+
+                      <strong>
+                        VC-12 · Vision Cell
+                      </strong>
+
+                      <span>
+                        Northline Fab · Bay 1
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  Bay 1
+                </td>
+
+                <td>
+                  618
+                </td>
+
+                <td>
+
+                  <div class="health-score">
+
+                    44%
+
+                    <div class="health-bar">
+                      <div
+                        class="health-fill"
+                        style="width:44%"
+                      ></div>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge badge-orange">
+                    Degraded
+                  </span>
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         INCIDENTS  (was Conversations)
+    ========================================================= -->
+
+    <section
+      class="section-content"
+      data-section="conversations"
+    >
+
+      <div class="content-heading">
+
+        <div>
+
+          <h2>
+            Incidents
+          </h2>
+
+          <p>
+            Faults, alerts and open issues across the fleet.
+          </p>
+
+        </div>
+
+        <div class="heading-actions">
+
+          <button onclick="window.location.href='../404.html'" class="btn">
+            Filter
+          </button>
+
+          <button onclick="window.location.href='../404.html'" class="btn btn-dark">
+            Open Incident
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="conversation-layout">
+
+
+          <!-- INCIDENT LIST -->
+
+          <div class="conversation-list">
+
+            <div class="conversation-search">
+
+              <input
+                class="search-input"
+                placeholder="Search incidents..."
+              >
+
+            </div>
+
+
+            <div
+              class="conversation-item active"
+            >
+
+              <div class="avatar">
+                R7
+              </div>
+
+              <div class="conversation-info">
+
+                <strong>
+                  R-007 · Gripper timeout
+                </strong>
+
+                <p>
+                  E-stop triggered after 3 failed pick attempts...
+                </p>
+
+              </div>
+
+              <span class="conversation-time">
+                2m
+              </span>
+
+            </div>
+
+
+            <div class="conversation-item">
+
+              <div class="avatar">
+                A4
+              </div>
+
+              <div class="conversation-info">
+
+                <strong>
+                  AMR-04 · Dock alignment
+                </strong>
+
+                <p>
+                  Docking drift detected at Bay 3...
+                </p>
+
+              </div>
+
+              <span class="conversation-time">
+                8m
+              </span>
+
+            </div>
+
+
+            <div class="conversation-item">
+
+              <div class="avatar">
+                V2
+              </div>
+
+              <div class="conversation-info">
+
+                <strong>
+                  VC-12 · Calibration drift
+                </strong>
+
+                <p>
+                  Vision calibration off by 0.4 mm on Line 2...
+                </p>
+
+              </div>
+
+              <span class="conversation-time">
+                12m
+              </span>
+
+            </div>
+
+
+            <div class="conversation-item">
+
+              <div class="avatar">
+                A1
+              </div>
+
+              <div class="conversation-info">
+
+                <strong>
+                  AMR-01 · Low battery
+                </strong>
+
+                <p>
+                  Below 15% — scheduled for auto-dock...
+                </p>
+
+              </div>
+
+              <span class="conversation-time">
+                21m
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- INCIDENT DETAIL -->
+
+          <div class="chat-window">
+
+            <div class="chat-header">
+
+              <div class="chat-person">
+
+                <div class="avatar">
+                  R7
+                </div>
+
+                <div>
+
+                  <strong>
+                    R-007 · Articulated Arm
+                  </strong>
+
+                  <div
+                    style="
+                    display:flex;
+                    align-items:center;
+                    gap:5px;
+                    color:rgba(255,255,255,0.5);
+                    font-size:10px;
+                    "
+                  >
+
+                    <span class="online-dot"></span>
+
+                    Live telemetry
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <span class="badge badge-green">
+                Resolved
+              </span>
+
+            </div>
+
+
+            <div class="chat-body">
+
+              <div class="message customer">
+
+                [ 14:02:11 ] Gripper timeout on pick attempt #3.
+                E-stop latched. Cell 3 halted.
+
+              </div>
+
+
+              <div class="ai-response">
+
+                <strong>
+                  ⚡ Auto-Recovery Suggested
+                </strong>
+
+                Fault matches known calibration drift.
+                Recommend: release E-stop, re-home axis 5,
+                resume from last waypoint.
+
+              </div>
+
+
+              <div class="message agent">
+
+                Re-homing axis 5. Cell resumed at 14:02:34.
+                Task resumed from waypoint 12.
+
+              </div>
+
+
+              <div class="message customer">
+
+                [ 14:02:41 ] Cycle resumed. Task complete in 42s.
+                No further faults.
+
+              </div>
+
+            </div>
+
+
+            <div class="chat-input">
+
+              <input
+                placeholder="Add a note..."
+              >
+
+              <button onclick="window.location.href='../404.html'" class="btn btn-dark">
+                Send ↗
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         TELEMETRY  (was Analytics)
+    ========================================================= -->
+
+    <section
+      class="section-content"
+      data-section="analytics"
+    >
+
+      <div class="content-heading">
+
+        <div>
+
+          <h2>
+            Telemetry
+          </h2>
+
+          <p>
+            Throughput, reliability and cell efficiency across the fleet.
+          </p>
+
+        </div>
+
+        <div class="heading-actions">
+
+          <button onclick="window.location.href='../404.html'" class="btn">
+            Last 30 days ▾
+          </button>
+
+          <button onclick="window.location.href='../404.html'" class="btn btn-dark">
+            Export Report
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Task Success Rate
+          </div>
+
+          <div class="stat-value">
+            98.4%
+          </div>
+
+          <div class="stat-change">
+            ↑ 1.2%
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Mean Time Between Faults
+          </div>
+
+          <div class="stat-value">
+            142 hrs
+          </div>
+
+          <div class="stat-change">
+            ↑ 9.6 hrs
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Avg. Cycle Time
+          </div>
+
+          <div class="stat-value">
+            42 sec
+          </div>
+
+          <div class="stat-change">
+            ↓ 8.1%
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Fleet OEE
+          </div>
+
+          <div class="stat-value">
+            87.2%
+          </div>
+
+          <div class="stat-change">
+            ↑ 2.4 pts
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-2">
+
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Weekly Throughput
+            </h3>
+
+            <span>
+              7 days
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="bar-chart">
+
+              <div class="bar-group">
+
+                <div
+                  class="bar"
+                  style="height:48%"
+                ></div>
+
+                <span class="bar-label">
+                  Mon
+                </span>
+
+              </div>
+
+
+              <div class="bar-group">
+
+                <div
+                  class="bar"
+                  style="height:62%"
+                ></div>
+
+                <span class="bar-label">
+                  Tue
+                </span>
+
+              </div>
+
+
+              <div class="bar-group">
+
+                <div
+                  class="bar"
+                  style="height:56%"
+                ></div>
+
+                <span class="bar-label">
+                  Wed
+                </span>
+
+              </div>
+
+
+              <div class="bar-group">
+
+                <div
+                  class="bar"
+                  style="height:79%"
+                ></div>
+
+                <span class="bar-label">
+                  Thu
+                </span>
+
+              </div>
+
+
+              <div class="bar-group">
+
+                <div
+                  class="bar"
+                  style="height:68%"
+                ></div>
+
+                <span class="bar-label">
+                  Fri
+                </span>
+
+              </div>
+
+
+              <div class="bar-group">
+
+                <div
+                  class="bar"
+                  style="height:45%"
+                ></div>
+
+                <span class="bar-label">
+                  Sat
+                </span>
+
+              </div>
+
+
+              <div class="bar-group">
+
+                <div
+                  class="bar"
+                  style="height:38%"
+                ></div>
+
+                <span class="bar-label">
+                  Sun
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Diagnostic Breakdown
+            </h3>
+
+            <span>
+              This month
+            </span>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="donut-wrap">
+
+              <div class="donut">
+
+                <div class="donut-center">
+                  98.4%
+                </div>
+
+              </div>
+
+
+              <div class="legend">
+
+                <div class="legend-item">
+
+                  <span class="legend-dot"></span>
+
+                  Auto-recovered — 68.4%
+
+                </div>
+
+
+                <div class="legend-item">
+
+                  <span class="legend-dot gray"></span>
+
+                  Operator resolved — 14.2%
+
+                </div>
+
+
+                <div class="legend-item">
+
+                  <span class="legend-dot light"></span>
+
+                  Escalated — 17.4%
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <h3>
+            Unit Class Performance
+          </h3>
+
+          <span>
+            By robot type
+          </span>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>Class</th>
+                <th>Units</th>
+                <th>Success Rate</th>
+                <th>Avg. Cycle</th>
+                <th>Uptime</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+
+                <td>
+                  Articulated Arms
+                </td>
+
+                <td>
+                  174
+                </td>
+
+                <td>
+                  99.2%
+                </td>
+
+                <td>
+                  38 sec
+                </td>
+
+                <td>
+                  99.6%
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  Mobile Robots
+                </td>
+
+                <td>
+                  50
+                </td>
+
+                <td>
+                  97.4%
+                </td>
+
+                <td>
+                  1m 12s
+                </td>
+
+                <td>
+                  98.8%
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  Vision Cells
+                </td>
+
+                <td>
+                  24
+                </td>
+
+                <td>
+                  98.1%
+                </td>
+
+                <td>
+                  22 sec
+                </td>
+
+                <td>
+                  99.1%
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         OPERATORS  (was Agents)
+    ========================================================= -->
+
+    <section
+      class="section-content"
+      data-section="agents"
+    >
+
+      <div class="content-heading">
+
+        <div>
+
+          <h2>
+            Operator Performance
+          </h2>
+
+          <p>
+            Workload, response and throughput for the floor team.
+          </p>
+
+        </div>
+
+        <div class="heading-actions">
+
+          <button onclick="window.location.href='../404.html'" class="btn">
+            Manage Team
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Active Operators
+          </div>
+
+          <div class="stat-value">
+            24
+          </div>
+
+          <div class="stat-change">
+            21 on shift now
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Incidents / Operator
+          </div>
+
+          <div class="stat-value">
+            38.4
+          </div>
+
+          <div class="stat-change">
+            ↑ 12.8%
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Avg. Resolution Time
+          </div>
+
+          <div class="stat-value">
+            4m 18s
+          </div>
+
+          <div class="stat-change">
+            ↓ 8.4%
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Team Rating
+          </div>
+
+          <div class="stat-value">
+            94.8
+          </div>
+
+          <div class="stat-change">
+            ↑ 2.1 pts
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-3">
+
+
+        <div class="card agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-profile">
+
+              <div class="large-avatar">
+                SK
+              </div>
+
+              <div class="agent-name">
+
+                <strong>
+                  Sarah Kim
+                </strong>
+
+                <span>
+                  Senior Robotics Tech
+                </span>
+
+              </div>
+
+            </div>
+
+            <span class="badge badge-green">
+              On Shift
+            </span>
+
+          </div>
+
+
+          <div class="productivity">
+
+            <div class="productivity-row">
+
+              <span>
+                Productivity
+              </span>
+
+              <strong>
+                94%
+              </strong>
+
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="progress-fill"
+                style="width:94%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-profile">
+
+              <div class="large-avatar">
+                JD
+              </div>
+
+              <div class="agent-name">
+
+                <strong>
+                  James Davis
+                </strong>
+
+                <span>
+                  Automation Engineer
+                </span>
+
+              </div>
+
+            </div>
+
+            <span class="badge badge-green">
+              On Shift
+            </span>
+
+          </div>
+
+
+          <div class="productivity">
+
+            <div class="productivity-row">
+
+              <span>
+                Productivity
+              </span>
+
+              <strong>
+                87%
+              </strong>
+
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="progress-fill"
+                style="width:87%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card agent-card">
+
+          <div class="agent-top">
+
+            <div class="agent-profile">
+
+              <div class="large-avatar">
+                EM
+              </div>
+
+              <div class="agent-name">
+
+                <strong>
+                  Emma Miller
+                </strong>
+
+                <span>
+                  Cell Operator
+                </span>
+
+              </div>
+
+            </div>
+
+            <span class="badge badge-orange">
+              Idle
+            </span>
+
+          </div>
+
+
+          <div class="productivity">
+
+            <div class="productivity-row">
+
+              <span>
+                Productivity
+              </span>
+
+              <strong>
+                81%
+              </strong>
+
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="progress-fill"
+                style="width:81%"
+              ></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <h3>
+            Operator Scorecard
+          </h3>
+
+          <span>
+            This week
+          </span>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>Operator</th>
+                <th>Assigned</th>
+                <th>Resolved</th>
+                <th>Rating</th>
+                <th>Avg. Handle</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+
+                <td>
+                  Sarah Kim
+                </td>
+
+                <td>
+                  184
+                </td>
+
+                <td>
+                  176
+                </td>
+
+                <td>
+                  97.2
+                </td>
+
+                <td>
+                  3m 42s
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  James Davis
+                </td>
+
+                <td>
+                  168
+                </td>
+
+                <td>
+                  151
+                </td>
+
+                <td>
+                  94.6
+                </td>
+
+                <td>
+                  4m 08s
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  Emma Miller
+                </td>
+
+                <td>
+                  149
+                </td>
+
+                <td>
+                  138
+                </td>
+
+                <td>
+                  92.4
+                </td>
+
+                <td>
+                  4m 32s
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         AUTONOMY  (was AI Automation)
+    ========================================================= -->
+
+    <section
+      class="section-content"
+      data-section="automation"
+    >
+
+      <div class="content-heading">
+
+        <div>
+
+          <h2>
+            Autonomy
+          </h2>
+
+          <p>
+            Configure routines that keep cells running without operator input.
+          </p>
+
+        </div>
+
+        <button onclick="window.location.href='../404.html'" class="btn btn-dark">
+          + New Routine
+        </button>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Auto-Resolved Tasks
+          </div>
+
+          <div class="stat-value">
+            17,026
+          </div>
+
+          <div class="stat-change">
+            ↑ 24.8%
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Autonomy Rate
+          </div>
+
+          <div class="stat-value">
+            68.4%
+          </div>
+
+          <div class="stat-change">
+            ↑ 11.6%
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Operator Hours Saved
+          </div>
+
+          <div class="stat-value">
+            1,248
+          </div>
+
+          <div class="stat-change">
+            This month
+          </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-label">
+            Decision Accuracy
+          </div>
+
+          <div class="stat-value">
+            97.8%
+          </div>
+
+          <div class="stat-change">
+            ↑ 1.4%
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-3">
+
+
+        <div class="card automation-card">
+
+          <div class="automation-icon">
+            ⚡
+          </div>
+
+          <h3>
+            Auto-Recovery
+          </h3>
+
+          <p>
+            Release E-stops and re-home axes automatically
+            when a fault matches a known pattern.
+          </p>
+
+          <div class="automation-footer">
+
+            <span class="badge badge-green">
+              8,420 recovered
+            </span>
+
+            <button
+              class="toggle active"
+              onclick="toggleAutomation(this)"
+            ></button>
+
+          </div>
+
+        </div>
+
+
+        <div class="card automation-card">
+
+          <div class="automation-icon">
+            ◈
+          </div>
+
+          <h3>
+            Smart Dispatch
+          </h3>
+
+          <p>
+            Route tasks to the nearest available unit based
+            on payload, range and current load.
+          </p>
+
+          <div class="automation-footer">
+
+            <span class="badge badge-blue">
+              4,218 dispatched
+            </span>
+
+            <button
+              class="toggle active"
+              onclick="toggleAutomation(this)"
+            ></button>
+
+          </div>
+
+        </div>
+
+
+        <div class="card automation-card">
+
+          <div class="automation-icon">
+            ✦
+          </div>
+
+          <h3>
+            AI Diagnostics
+          </h3>
+
+          <p>
+            Predict faults before they halt a cycle using
+            motor current and vibration signatures.
+          </p>
+
+          <div class="automation-footer">
+
+            <span class="badge badge-purple">
+              12,842 predictions
+            </span>
+
+            <button
+              class="toggle active"
+              onclick="toggleAutomation(this)"
+            ></button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <h3>
+            Autonomy Adoption
+          </h3>
+
+          <span>
+            Last 30 days
+          </span>
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="bar-chart">
+
+            <div class="bar-group">
+
+              <div
+                class="bar"
+                style="height:45%"
+              ></div>
+
+              <span class="bar-label">
+                W1
+              </span>
+
+            </div>
+
+
+            <div class="bar-group">
+
+              <div
+                class="bar"
+                style="height:56%"
+              ></div>
+
+              <span class="bar-label">
+                W2
+              </span>
+
+            </div>
+
+
+            <div class="bar-group">
+
+              <div
+                class="bar"
+                style="height:63%"
+              ></div>
+
+              <span class="bar-label">
+                W3
+              </span>
+
+            </div>
+
+
+            <div class="bar-group">
+
+              <div
+                class="bar"
+                style="height:72%"
+              ></div>
+
+              <span class="bar-label">
+                W4
+              </span>
+
+            </div>
+
+
+            <div class="bar-group">
+
+              <div
+                class="bar"
+                style="height:88%"
+              ></div>
+
+              <span class="bar-label">
+                W5
+              </span>
+
+            </div>
+
+
+            <div class="bar-group">
+
+              <div
+                class="bar"
+                style="height:94%"
+              ></div>
+
+              <span class="bar-label">
+                W6
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ========================================================
+         SYSTEM  (was Settings)
+    ========================================================= -->
+
+    <section
+      class="section-content"
+      data-section="settings"
+    >
+
+      <div class="content-heading">
+
+        <div>
+
+          <h2>
+            System
+          </h2>
+
+          <p>
+            Facility configuration, safety and operator preferences.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-2">
+
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              Facility
+            </h3>
+
+          </div>
+
+
+          <div class="card-body">
+
+            <div class="settings-list">
+
+
+              <div class="setting-row">
+
+                <div class="setting-info">
+
+                  <strong>
+                    Facility Name
+                  </strong>
+
+                  <span>
+                    Shown across the control room.
+                  </span>
+
+                </div>
+
+                <input
+                  class="setting-select"
+                  value="Stackly Plant 02"
+                >
+
+              </div>
+
+
+              <div class="setting-row">
+
+                <div class="setting-info">
+
+                  <strong>
+                    Default Language
+                  </strong>
+
+                  <span>
+                    Language used by operators.
+                  </span>
+
+                </div>
+
+                <select class="setting-select">
+
+                  <option>
+                    English
+                  </option>
+
+                  <option>
+                    Telugu
+                  </option>
+
+                  <option>
+                    Hindi
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="setting-row">
+
+                <div class="setting-info">
+
+                  <strong>
+                    AI Diagnostics
+                  </strong>
+
+                  <span>
+                    Allow predictive fault detection.
+                  </span>
+
+                </div>
+
+                <button
+                  class="toggle active"
+                  onclick="toggleAutomation(this)"
+                ></button>
+
+              </div>
+
+
+              <div class="setting-row">
+
+                <div class="setting-info">
+
+                  <strong>
+                    Alert Notifications
+                  </strong>
+
+                  <span>
+                    Notify operators on critical faults.
+                  </span>
+
+                </div>
+
+                <button
+                  class="toggle active"
+                  onclick="toggleAutomation(this)"
+                ></button>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <h3>
+              System Integrity
+            </h3>
+
+          </div>
+
+
+          <div class="card-body">
+
+            <div class="settings-list">
+
+
+              <div class="setting-row">
+
+                <div class="setting-info">
+
+                  <strong>
+                    Two-factor Authentication
+                  </strong>
+
+                  <span>
+                    Protect manager accounts.
+                  </span>
+
+                </div>
+
+                <button
+                  class="toggle active"
+                  onclick="toggleAutomation(this)"
+                ></button>
+
+              </div>
+
+
+              <div class="setting-row">
+
+                <div class="setting-info">
+
+                  <strong>
+                    Session Timeout
+                  </strong>
+
+                  <span>
+                    Sign out idle operators automatically.
+                  </span>
+
+                </div>
+
+                <select class="setting-select">
+
+                  <option>
+                    30 minutes
+                  </option>
+
+                  <option>
+                    1 hour
+                  </option>
+
+                  <option>
+                    4 hours
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="setting-row">
+
+                <div class="setting-info">
+
+                  <strong>
+                    Login Alerts
+                  </strong>
+
+                  <span>
+                    Notify managers of new logins.
+                  </span>
+
+                </div>
+
+                <button
+                  class="toggle active"
+                  onclick="toggleAutomation(this)"
+                ></button>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+</div>
+
+
+
+<script>
+
+  /* ============================================================
+     USER
+  ============================================================ */
+
+  const urlParams =
+    new URLSearchParams(window.location.search);
+
+  let userEmail =
+    urlParams.get("email");
+
+  let formattedName = "Sujith";
+
+
+  if (userEmail) {
+
+    const userName =
+      userEmail.split("@")[0];
+
+    formattedName =
+      userName.charAt(0).toUpperCase() +
+      userName.slice(1);
+
+    localStorage.setItem(
+      "stackly_operator_name",
+      formattedName
+    );
+
+  } else if (
+    localStorage.getItem("stackly_operator_name")
+  ) {
+
+    formattedName =
+      localStorage.getItem("stackly_operator_name");
+
+  }
+
+
+  /* ============================================================
+     DATE
+  ============================================================ */
+
+  function showDate() {
+
+    const date =
+      new Date();
+
+    const options = {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    };
+
+    document.getElementById(
+      "currentDate"
+    ).textContent =
+      date.toLocaleDateString(
+        "en-US",
+        options
+      );
+  }
+
+  showDate();
+
+
+  /* ============================================================
+     SECTION CONFIGURATION
+  ============================================================ */
+
+  const sectionMeta = {
+
+    dashboard: {
+      title: "Control Room",
+      description:
+        "Real-time status across every deployed work cell."
+    },
+
+    customers: {
+      title: "Fleet",
+      description:
+        "Every deployed unit, live health and last-known state."
+    },
+
+    conversations: {
+      title: "Incidents",
+      description:
+        "Faults, alerts and open issues across the fleet."
+    },
+
+    analytics: {
+      title: "Telemetry",
+      description:
+        "Throughput, reliability and cell efficiency across the fleet."
+    },
+
+    agents: {
+      title: "Operator Performance",
+      description:
+        "Workload, response and throughput for the floor team."
+    },
+
+    automation: {
+      title: "Autonomy",
+      description:
+        "Configure routines that keep cells running without operator input."
+    },
+
+    settings: {
+      title: "System",
+      description:
+        "Facility configuration, safety and operator preferences."
+    }
+
+  };
+
+
+  /* ============================================================
+     NAVIGATION
+  ============================================================ */
+
+  const navItems =
+    document.querySelectorAll(
+      ".nav-item[data-section]"
+    );
+
+  const sections =
+    document.querySelectorAll(
+      ".section-content"
+    );
+
+
+  function activateSection(sectionId) {
+
+    /*
+      Remove active state from all navigation items.
+    */
+
+    navItems.forEach(item => {
+
+      item.classList.remove("active");
+
+    });
+
+
+    /*
+      Add active state to selected navigation item.
+    */
+
+    const activeNav =
+      document.querySelector(
+        `.nav-item[data-section="${sectionId}"]`
+      );
+
+    if (activeNav) {
+
+      activeNav.classList.add("active");
+
+    }
+
+
+    /*
+      Hide every dashboard view.
+    */
+
+    sections.forEach(section => {
+
+      section.classList.remove("active");
+
+    });
+
+
+    /*
+      Show selected dashboard view.
+    */
+
+    const targetSection =
+      document.querySelector(
+        `.section-content[data-section="${sectionId}"]`
+      );
+
+    if (targetSection) {
+
+      targetSection.classList.add("active");
+
+    }
+
+
+    /*
+      Update main header.
+    */
+
+    if (sectionMeta[sectionId]) {
+
+      document.getElementById(
+        "pageGreeting"
+      ).textContent =
+        sectionMeta[sectionId].title;
+
+
+      document.getElementById(
+        "pageDescription"
+      ).textContent =
+        sectionMeta[sectionId].description;
+
+    }
+
+
+    /*
+      Close mobile sidebar.
+    */
+
+    closeSidebarMobile();
+
+
+    /*
+      Scroll main content to top.
+    */
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  navItems.forEach(item => {
+
+    item.addEventListener(
+      "click",
+      () => {
+
+        const section =
+          item.dataset.section;
+
+        activateSection(section);
+
+      }
+    );
+
+  });
+
+  const logoBrandLink = document.getElementById("logoBrandLink");
+  if (logoBrandLink) {
+    logoBrandLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      activateSection("dashboard");
+    });
+  }
+
+
+  /* ============================================================
+     SIDEBAR COLLAPSE
+  ============================================================ */
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const sidebarBrand =
+    document.getElementById("sidebarBrand");
+
+  let collapsed = false;
+
+
+  /*
+    Desktop:
+    Double-click the logo/brand to collapse.
+  */
+
+  sidebarBrand.addEventListener(
+    "dblclick",
+    event => {
+
+      event.preventDefault();
+
+      if (window.innerWidth <= 768) {
+        return;
+      }
+
+      collapsed =
+        !collapsed;
+
+      sidebar.classList.toggle(
+        "collapsed",
+        collapsed
+      );
+
+    }
+  );
+
+
+  /* ============================================================
+     MOBILE SIDEBAR
+  ============================================================ */
+
+  const sidebarToggle =
+    document.getElementById(
+      "sidebarToggle"
+    );
+
+  const sidebarOverlay =
+    document.getElementById(
+      "sidebarOverlay"
+    );
+
+
+  function openSidebarMobile() {
+
+    sidebar.classList.add("open");
+
+    sidebarOverlay.classList.add(
+      "active"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+  function closeSidebarMobile() {
+
+    sidebar.classList.remove("open");
+
+    sidebarOverlay.classList.remove(
+      "active"
+    );
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+
+  sidebarToggle.addEventListener(
+    "click",
+    () => {
+
+      if (
+        sidebar.classList.contains("open")
+      ) {
+
+        closeSidebarMobile();
+
+      } else {
+
+        openSidebarMobile();
+
+      }
+
+    }
+  );
+
+
+  sidebarOverlay.addEventListener(
+    "click",
+    closeSidebarMobile
+  );
+
+
+  /* ============================================================
+     AUTOMATION TOGGLE
+  ============================================================ */
+
+  function toggleAutomation(button) {
+
+    button.classList.toggle("active");
+
+  }
+
+
+  /* ============================================================
+     INCIDENT SELECTION
+  ============================================================ */
+
+  const conversationItems =
+    document.querySelectorAll(
+      ".conversation-item"
+    );
+
+
+  conversationItems.forEach(item => {
+
+    item.addEventListener(
+      "click",
+      () => {
+
+        conversationItems.forEach(
+          conversation => {
+
+            conversation.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+        item.classList.add(
+          "active"
+        );
+
+      }
+    );
+
+  });
+
+
+  /* ============================================================
+     SEARCH
+  ============================================================ */
+
+  const searchInput =
+    document.querySelector(
+      ".search-input"
+    );
+
+
+  if (searchInput) {
+
+    searchInput.addEventListener(
+      "input",
+      () => {
+
+        const query =
+          searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+        conversationItems.forEach(
+          item => {
+
+            const text =
+              item.textContent
+                .toLowerCase();
+
+
+            if (
+              text.includes(query)
+            ) {
+
+              item.style.display =
+                "flex";
+
+            } else {
+
+              item.style.display =
+                "none";
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  }
+
+
+  /* ============================================================
+     RESIZE
+  ============================================================ */
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      if (window.innerWidth > 768) {
+
+        closeSidebarMobile();
+
+      }
+
+    }
+  );
+
+
+  /* ============================================================
+     INITIAL STATE
+  ============================================================ */
+
+  activateSection("dashboard");
+
+
+  /* ============================================================
+     REDIRECT DATA-SECTION BUTTONS
+  ============================================================ */
+
+  document.querySelectorAll(".section-content[data-section] a, .section-content[data-section] button, .section-content[data-section] .btn, .section-content[data-section] [role='button']").forEach(el => {
+    el.addEventListener("click", (e) => {
+      if (el.classList.contains("toggle")) return; // let toggles work
+      e.preventDefault();
+      window.location.href = "../404.html";
+    });
+  });
+
+  /* ============================================================
+     DYNAMIC OPERATOR PROFILE
+  ============================================================ */
+  document.addEventListener("DOMContentLoaded", function () {
+    const storedUsername = localStorage.getItem("stackly_operator_name");
+
+    let username = storedUsername || "Sujith Kumar";
+
+    // Capitalize first letters for display
+    username = username
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    const initials = username
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(word => word.charAt(0).toUpperCase())
+      .join("");
+
+    const avatarEl = document.getElementById("adminAvatar");
+    const nameEl = document.getElementById("adminName");
+
+    if (avatarEl) avatarEl.textContent = initials;
+    if (nameEl) nameEl.textContent = username;
+  });
+
+</script>
+
+</body>
+</html>

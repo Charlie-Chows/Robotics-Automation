@@ -1,0 +1,633 @@
+/* ============================================================
+   SIGNUP.CSS — Create account page (Robotics & Automation)
+   Mirrors login.css with the form panel on the LEFT,
+   photo panel on the RIGHT.
+   ============================================================ */
+
+body.auth-page {
+    /* ---- Theme bridge: local tokens mapped onto the Stackly
+            Robotics palette (--primary-yellow / --white / --bg-black). ---- */
+    --maroon: var(--primary-yellow);              /* accent (was deep red) */
+    --cream: #0A0A0A;                             /* surface (was cream)   */
+    --ink: var(--white);                          /* primary text          */
+    --ink-soft: rgba(255, 255, 255, 0.72);
+    --harvest: var(--primary-yellow);             /* secondary accent      */
+    --line: rgba(255, 255, 255, 0.14);
+    --line-strong: rgba(255, 255, 255, 0.28);
+    --field-bg: #101010;
+    --field-bg-hover: #151515;
+    --error: #ff6b5b;
+
+    /* Defensive fallbacks so this page renders correctly even if the
+       companion global.css doesn't ship these tokens. */
+    --font-display: 'Barlow Condensed', 'Zen Maru Gothic', sans-serif;
+    --font-body: 'Inter', 'Outfit', sans-serif;
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    background: var(--bg-black);
+    overflow-x: hidden;
+    padding-top: 0 !important;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.auth {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    min-height: 100svh;
+}
+
+/* Signup: form panel first (left), visual second (right) */
+.auth--signup .auth__panel {
+    order: 1;
+}
+
+.auth--signup .auth__visual {
+    order: 2;
+}
+
+/* ============================================================
+   PHOTO SIDE
+   ============================================================ */
+.auth__visual {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-black);
+}
+
+.auth__visual-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 45%;
+}
+
+.auth__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.30) 40%, rgba(0, 0, 0, 0.92) 100%),
+        linear-gradient(90deg, rgba(219, 254, 1, 0.10) 0%, rgba(219, 254, 1, 0) 100%);
+}
+
+.auth__quote {
+    position: absolute;
+    left: 56px;
+    right: 56px;
+    bottom: 56px;
+    z-index: 2;
+    color: var(--white);
+    max-width: 44ch;
+}
+
+.auth__quote-mark {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    line-height: 0.8;
+    color: var(--primary-yellow);
+    margin-bottom: 12px;
+}
+
+.auth__quote p {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+    line-height: 1.25;
+    color: var(--white);
+    max-width: none;
+    margin-bottom: 14px;
+    text-transform: none;
+}
+
+.auth__quote cite {
+    display: block;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--primary-yellow);
+    font-weight: 600;
+}
+
+.auth__visual-brand {
+    position: absolute;
+    top: 32px;
+    left: 56px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+}
+
+.auth__visual-brand img {
+    width: 150px;
+    height: 44px;
+    object-fit: contain;
+    /* Force logo to white over the dark scrim */
+    filter: brightness(0) invert(1);
+}
+
+/* ============================================================
+   FORM SIDE
+   ============================================================ */
+.auth__panel {
+    position: relative;
+    background: var(--cream);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 56px 40px;
+    overflow-y: auto;
+}
+
+.auth__back {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 2px;
+    border: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    transition: background .4s var(--ease-out), color .4s var(--ease-out),
+        border-color .4s var(--ease-out);
+    z-index: 3;
+    text-decoration: none;
+}
+
+.auth__back i {
+    font-size: 0.68rem;
+    transition: transform .4s var(--ease-out);
+}
+
+.auth__back:hover {
+    background: var(--primary-yellow);
+    color: var(--bg-black);
+    border-color: var(--primary-yellow);
+}
+
+.auth__back:hover i {
+    transform: translateX(-4px);
+}
+
+.auth__inner {
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth__brand {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+
+.auth__brand img {
+    width: 140px;
+    height: 38px;
+    object-fit: contain;
+    /* Force logo to white on dark panel */
+    filter: brightness(0) invert(1) !important;
+}
+
+.auth__head {
+    margin-bottom: 20px;
+}
+
+.auth__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.auth__sub {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: none;
+}
+
+/* ============================================================
+   FORM FIELDS
+   ============================================================ */
+.auth__form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field__label {
+    font-family: var(--font-body);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary-yellow);
+}
+
+.field__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.field__aux {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--primary-yellow);
+    transition: color .35s var(--ease-out), border-color .35s var(--ease-out);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+}
+
+.field__aux:hover {
+    border-color: var(--primary-yellow);
+}
+
+.field__control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--field-bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    transition: border-color .35s var(--ease-out), box-shadow .35s var(--ease-out), background .35s var(--ease-out);
+}
+
+.field__control:hover {
+    border-color: var(--line-strong);
+    background: var(--field-bg-hover);
+}
+
+.field__control:focus-within {
+    border-color: var(--primary-yellow);
+    box-shadow: 0 0 0 3px rgba(219, 254, 1, 0.18);
+}
+
+.field__icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 48px;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    flex-shrink: 0;
+}
+
+.field__input {
+    flex: 1;
+    width: 100%;
+    padding: 14px 14px 14px 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    font-size: 0.96rem;
+    color: var(--white);
+    font-family: var(--font-body);
+}
+
+.field__input::placeholder {
+    color: rgba(255, 255, 255, 0.32);
+}
+
+/* Password reveal */
+.field__eye {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 48px;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    transition: color .3s var(--ease-out), background .3s var(--ease-out);
+    border-radius: 0 2px 2px 0;
+    flex-shrink: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.field__eye:hover {
+    color: var(--primary-yellow);
+    background: rgba(219, 254, 1, 0.08);
+}
+
+.field__eye[aria-pressed="true"] {
+    color: var(--primary-yellow);
+}
+
+/* Edge / Chromium native reveal removed */
+.field__input::-ms-reveal,
+.field__input::-ms-clear {
+    display: none;
+}
+
+.field__input::-webkit-credentials-auto-fill-button,
+.field__input::-webkit-strong-password-auto-fill-button {
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Autofill — dark surface */
+.field__input:-webkit-autofill,
+.field__input:-webkit-autofill:hover,
+.field__input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--white);
+    -webkit-box-shadow: 0 0 0 1000px var(--field-bg) inset;
+    box-shadow: 0 0 0 1000px var(--field-bg) inset;
+    transition: background-color 9999s ease-in-out 0s;
+    caret-color: var(--white);
+    font-family: var(--font-body);
+}
+
+/* Invalid */
+.field__input.is-invalid,
+.field__control.is-invalid {
+    border-color: var(--error);
+}
+
+.field__error {
+    display: none;
+    font-size: 0.76rem;
+    color: var(--error);
+}
+
+.field__error:not(:empty) {
+    display: block;
+}
+
+/* ============================================================
+   CUSTOM DROPDOWN
+   ============================================================ */
+.dropdown {
+    position: relative;
+}
+
+.dropdown__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--field-bg);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-size: 0.96rem;
+    font-family: var(--font-body);
+    color: var(--white);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .35s var(--ease-out), box-shadow .35s var(--ease-out), background .35s var(--ease-out);
+}
+
+.dropdown__trigger:hover {
+    border-color: var(--line-strong);
+    background: var(--field-bg-hover);
+}
+
+.dropdown__trigger:focus-visible {
+    outline: none;
+    border-color: var(--primary-yellow);
+    box-shadow: 0 0 0 3px rgba(219, 254, 1, 0.18);
+}
+
+.dropdown.is-open .dropdown__trigger {
+    border-color: var(--primary-yellow);
+    box-shadow: 0 0 0 3px rgba(219, 254, 1, 0.18);
+}
+
+.dropdown.is-invalid .dropdown__trigger {
+    border-color: var(--error);
+}
+
+.dropdown__value {
+    flex: 1;
+    color: var(--white);
+}
+
+.dropdown__value[data-value=""] {
+    color: rgba(255, 255, 255, 0.36);
+}
+
+.dropdown__arrow {
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    transition: transform .35s var(--ease-out);
+}
+
+.dropdown.is-open .dropdown__arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown__list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: #141414;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+    padding: 6px;
+    max-height: 220px;
+    overflow-y: auto;
+    list-style: none;
+}
+
+.dropdown__option {
+    padding: 12px 14px;
+    font-size: 0.94rem;
+    color: var(--white);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .25s var(--ease-out), color .25s var(--ease-out);
+}
+
+.dropdown__option:hover,
+.dropdown__option:focus {
+    background: rgba(219, 254, 1, 0.10);
+    color: var(--primary-yellow);
+    outline: none;
+}
+
+.dropdown__option.is-selected {
+    background: rgba(219, 254, 1, 0.16);
+    color: var(--primary-yellow);
+    font-weight: 600;
+}
+
+/* ============================================================
+   SUBMIT
+   ============================================================ */
+.auth__submit {
+    width: 100%;
+    padding: 18px 32px;
+    margin-top: 8px;
+}
+
+.auth__submit i {
+    font-size: 0.72rem;
+    transition: transform .4s var(--ease-out);
+}
+
+.auth__submit:hover i {
+    transform: translateX(5px);
+}
+
+/* ============================================================
+   FOOT
+   ============================================================ */
+.auth__foot {
+    margin-top: 26px;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    max-width: none;
+}
+
+.auth__foot a {
+    color: var(--primary-yellow);
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color .35s var(--ease-out);
+}
+
+.auth__foot a:hover {
+    border-color: var(--primary-yellow);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+    .auth {
+        grid-template-columns: 1fr;
+    }
+
+    .auth__visual {
+        display: none;
+    }
+
+    .auth--signup .auth__panel {
+        order: 1;
+    }
+
+    .auth__panel {
+        padding: 96px 24px 48px;
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+
+    .auth__back {
+        top: 22px;
+        right: 20px;
+        padding: 8px 14px;
+        font-size: 0.62rem;
+    }
+
+    .auth__inner {
+        max-width: 100%;
+    }
+
+    /* Mobile centered */
+    .auth__inner {
+        align-items: center;
+        text-align: center;
+    }
+
+    .auth__brand {
+        align-self: center;
+    }
+
+    .auth__head {
+        text-align: center;
+    }
+
+    .field {
+        text-align: left;
+    }
+
+    .auth__foot {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth__panel {
+        padding: 88px 20px 40px;
+    }
+
+    .auth__brand {
+        margin-bottom: 26px;
+    }
+
+    .auth__brand img {
+        width: 150px;
+        height: 36px;
+    }
+
+    .auth__head {
+        margin-bottom: 22px;
+    }
+
+    .auth__back span {
+        display: none;
+    }
+
+    .auth__back {
+        padding: 9px;
+    }
+
+    .auth__back i {
+        font-size: 0.8rem;
+    }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+
+    .auth__back,
+    .auth__back i,
+    .field__control,
+    .field__eye,
+    .dropdown__trigger,
+    .dropdown__arrow,
+    .dropdown__option,
+    .auth__submit i,
+    .auth__foot a {
+        transition: none;
+        transform: none !important;
+    }
+}

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="Stackly designs, installs, and maintains robotic work cells for manufacturers — articulated arms, autonomous mobile robots, and the control software that keeps them in sync.">
+
+  <title>Stackly - Robotics &amp; Automation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Zen+Maru+Gothic:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <!-- ===================== PAGE PRELOADER ===================== -->
+  <div class="page-preloader" id="pagePreloader">
+    <div class="preloader-content">
+      <div class="preloader-spinner"></div>
+      <img src="logo.webp" alt="Stackly Robotics" class="preloader-logo">
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="navbar">
+    <a href="#" class="logo-container">
+      <img src="logo.webp" alt="Stackly Logo">
+    </a>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false"
+      aria-controls="navLinks">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="html/about.html">About</a></li>
+      <li><a href="html/services.html">Services</a></li>
+      <li><a href="html/blog.html">Blog</a></li>
+      <li><a href="html/contact.html">Contact</a></li>
+      <li class="mobile-register-item"><a href="html/login.html" class="btn-login-mobile">Login</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="html/login.html" class="btn-login">Login</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero-section">
+      <p class="hero-subhead" data-anim="up">STACKLY ROBOTICS &amp; AUTOMATION</p>
+
+      <div class="hero-stack-container" data-anim="up" data-delay="0.1">
+        <h1 class="text-robotics">ROBOTICS</h1>
+        <div class="hero-img-wrapper">
+          <img src="assets/home/hero.webp" alt="Robotic Arm Automation Wireframe">
+        </div>
+        <h2 class="text-automation">AUTOMATION</h2>
+      </div>
+
+      <div class="hero-actions" data-anim="up" data-delay="0.3">
+        <a href="./html/contact.html" class="btn-consult">Request a consult</a>
+        <a href="./html/blog.html" class="link-built">See what we built</a>
+      </div>
+    </section>
+
+    <!-- ===================== MACHINES ===================== -->
+    <section class="machine-section">
+      <div class="machine-header">
+        <h2 class="machine-title">MACHINES THAT FINISH THE SHIFT YOU STARTED.</h2>
+        <p class="machine-description" data-anim="right" data-delay="0.1">
+          Stackly designs, installs, and maintains robotic work cells for manufacturers who can't afford downtime —
+          arms, mobile robots, and the control software that keeps them moving in sync.
+        </p>
+      </div>
+
+      <div class="machine-img-wrapper" data-anim="up" data-delay="0.15">
+        <img src="assets/home/machine.webp" alt="Robotic Work Cells Machine Automation">
+      </div>
+    </section>
+
+    <!-- ===================== CYCLE ===================== -->
+    <section class="cycle-section">
+      <div class="cycle-header">
+        <h2 class="cycle-title">
+          FROM FLOOR<br>
+          <span class="highlight">WALK TO FIRST CYCLE</span>
+        </h2>
+        <p class="cycle-subtext" data-anim="right" data-delay="0.1">
+          A typical deployment, start to finish. Most lines are running production within a single fiscal quarter.
+        </p>
+      </div>
+
+      <div class="cycle-diagram-container">
+        <img src="assets/home/arm.webp" alt="Robotic Arm Deployment Cycle Wireframe" class="arm-image" data-anim="up">
+
+        <div class="callout callout-top-right" data-anim="right" data-delay="0.1">
+          <div class="callout-content">
+            <h3 class="callout-title">ASSESS THE FLOOR</h3>
+            <p class="callout-desc">Our engineers measure cycle times, part tolerances, and existing conveyance before
+              drawing anything.</p>
+          </div>
+          <svg class="callout-line" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+            <polyline points="290,65 180,65 90,10 0,10" fill="none" stroke="rgba(255, 255, 255, 0.4)"
+              stroke-width="1.5" />
+          </svg>
+        </div>
+
+        <div class="callout callout-mid-left" data-anim="left" data-delay="0.2">
+          <div class="callout-content">
+            <h3 class="callout-title">DESIGN THE CELL</h3>
+            <p class="callout-desc">A digital twin is built and stress-tested in simulation against your actual
+              throughput targets.</p>
+          </div>
+          <svg class="callout-line" viewBox="0 0 250 50" preserveAspectRatio="none" aria-hidden="true">
+            <polyline points="10,5 150,5 210,40 240,40" fill="none" stroke="rgba(255, 255, 255, 0.4)"
+              stroke-width="1.5" />
+          </svg>
+        </div>
+
+        <div class="callout callout-mid-right" data-anim="right" data-delay="0.3">
+          <div class="callout-content">
+            <h3 class="callout-title">BUILD &amp; INTEGRATE</h3>
+            <p class="callout-desc">The cell is assembled off-line, wired into your PLC and MES, then dry-cycled before
+              it touches product.</p>
+          </div>
+          <svg class="callout-line" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+            <polyline points="290,65 180,65 90,10 0,10" fill="none" stroke="rgba(255, 255, 255, 0.4)"
+              stroke-width="1.5" />
+          </svg>
+        </div>
+
+        <div class="callout callout-bottom-left" data-anim="left" data-delay="0.4">
+          <div class="callout-content">
+            <h3 class="callout-title">COMMISSION &amp; HANDOVER</h3>
+            <p class="callout-desc">We run production alongside your team until takt time holds, then train operators
+              and hand over the runbook.</p>
+          </div>
+          <svg class="callout-line" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+            <polyline points="10,5 210,5 270,55 290,55" fill="none" stroke="rgba(255, 255, 255, 0.4)"
+              stroke-width="1.5" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SYSTEMS ===================== -->
+    <section class="systems-section">
+      <div class="systems-header">
+        <h2 class="systems-title">THREE SYSTEMS, ONE CONTROL LAYER</h2>
+        <p class="systems-description" data-anim="right" data-delay="0.1">
+          Every product we ship speaks the same language, so a line built over five years still runs from a single
+          dashboard.
+        </p>
+      </div>
+
+      <div class="systems-grid">
+        <div class="system-card yellow-card" data-anim="left">
+          <div class="card-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path d="M12 40H36M18 40V32M30 40V32M24 32V20M24 20L14 12M24 20L34 12M14 12L10 16M34 12L38 16"
+                stroke="#000000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="24" cy="20" r="3" fill="#000000" />
+              <circle cx="14" cy="12" r="2.5" fill="#000000" />
+              <circle cx="34" cy="12" r="2.5" fill="#000000" />
+            </svg>
+          </div>
+          <h3 class="card-title">ARTICULATED ARMS</h3>
+          <p class="card-desc">
+            Six-axis arms for welding, pick-and-place, and precision assembly, sized from bench-top to heavy payload.
+          </p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-label">Payload</span> <span class="spec-val">3-210 kg</span></div>
+            <div class="spec-item"><span class="spec-label">Repeatability</span> <span class="spec-val">&plusmn;0.02
+                mm</span></div>
+            <div class="spec-item"><span class="spec-val">ISO 9283 tested</span></div>
+          </div>
+        </div>
+
+        <div class="system-card gray-card" data-anim="up" data-delay="0.1">
+          <div class="card-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path d="M14 16L24 26L34 16M14 32L24 22L34 32" stroke="#DBFE01" stroke-width="3.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <rect x="10" y="10" width="8" height="8" rx="2" fill="#DBFE01" />
+              <rect x="30" y="30" width="8" height="8" rx="2" fill="#DBFE01" />
+            </svg>
+          </div>
+          <h3 class="card-title">AUTONOMOUS MOBILE ROBOTS</h3>
+          <p class="card-desc">
+            Lidar-guided carriers that move material between cells without fixed rails or floor tape.
+          </p>
+          <div class="card-specs">
+            <div class="spec-item">Payload up to 1,500 kg</div>
+            <div class="spec-item">Dynamic re-routing</div>
+            <div class="spec-item">Fleet scales to 200 units</div>
+          </div>
+        </div>
+
+        <div class="system-card gray-card" data-anim="right" data-delay="0.2">
+          <div class="card-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <path d="M10 16V10H16M32 10H38V16M38 32V38H32M16 38H10V32" stroke="#DBFE01" stroke-width="3.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="24" cy="24" r="7" stroke="#DBFE01" stroke-width="3.5" />
+              <circle cx="24" cy="24" r="2.5" fill="#DBFE01" />
+            </svg>
+          </div>
+          <h3 class="card-title">VISION &amp; CONTROL</h3>
+          <p class="card-desc">
+            3D vision and edge controllers that let arms adapt to part variance in real time, no re-teaching required.
+          </p>
+          <div class="card-specs">
+            <div class="spec-item">Sub-5 ms inference</div>
+            <div class="spec-item">Works with existing PLCs</div>
+            <div class="spec-item">OTA model updates</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NEW: BY THE NUMBERS ===================== -->
+    <section class="numbers-section">
+      <div class="numbers-header">
+        <p class="numbers-eyebrow" data-anim="up">By the Numbers</p>
+        <h2 class="numbers-title" data-anim="up" data-delay="0.1">
+          Scale that shows up <em>on the floor.</em>
+        </h2>
+      </div>
+
+      <div class="numbers-grid">
+        <div class="number-card" data-anim="left">
+          <span class="number-value" data-count="2400">0</span>
+          <span class="number-label">Work cells deployed</span>
+          <span class="number-desc">Across automotive, electronics, warehousing and heavy industry.</span>
+        </div>
+
+        <div class="number-card" data-anim="up" data-delay="0.1">
+          <span class="number-value" data-count="99.4" data-decimals="1">0</span>
+          <span class="number-label">Percent uptime</span>
+          <span class="number-desc">Median across all Stackly-managed cells in the last 12 months.</span>
+        </div>
+
+        <div class="number-card" data-anim="up" data-delay="0.2">
+          <span class="number-value" data-count="18">0</span>
+          <span class="number-label">Countries served</span>
+          <span class="number-desc">Direct operations plus certified integrator partners.</span>
+        </div>
+
+        <div class="number-card" data-anim="right" data-delay="0.3">
+          <span class="number-value" data-count="72" data-suffix=" hr">0</span>
+          <span class="number-label">Parts dispatch window</span>
+          <span class="number-desc">Guaranteed spare-part turnaround for critical cells.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BUILT FOR THE LINES ===================== -->
+    <section class="built-section">
+      <div class="built-header">
+        <h2 class="built-title">BUILT FOR THE LINES YOU<br>ALREADY RUN</h2>
+        <p class="built-description" data-anim="right" data-delay="0.1">
+          Different tolerances, different regulations, the same control layer underneath.
+        </p>
+      </div>
+
+      <div class="built-grid">
+        <div class="built-card" style="background-image: url('assets/home/b_1.webp');" data-anim="left">
+          <div class="built-card-overlay">
+            <h3 class="built-card-title">AUTOMOTIVE</h3>
+            <p class="built-card-desc">Welding, riveting, and process line cells to aerospace standards.</p>
+          </div>
+        </div>
+
+        <div class="built-card" style="background-image: url('assets/home/b_2.webp');" data-anim="up" data-delay="0.1">
+          <div class="built-card-overlay">
+            <h3 class="built-card-title">ELECTRONICS</h3>
+            <p class="built-card-desc">Sub-millimeter pick-for-clean-rooms and micro-fasteners.</p>
+          </div>
+        </div>
+
+        <div class="built-card" style="background-image: url('assets/home/b_3.webp');" data-anim="right"
+          data-delay="0.2">
+          <div class="built-card-overlay">
+            <h3 class="built-card-title">WAREHOUSING</h3>
+            <p class="built-card-desc">AMR fleets moving pallets and totes across mixed-floor plans.</p>
+          </div>
+        </div>
+
+        <div class="built-card" style="background-image: url('assets/home/b_4.webp');" data-anim="left"
+          data-delay="0.05">
+          <div class="built-card-overlay">
+            <h3 class="built-card-title">FOOD &amp; BEVERAGE</h3>
+            <p class="built-card-desc">IP69K washdown-rated arms and sanitary grippers.</p>
+          </div>
+        </div>
+
+        <div class="built-card" style="background-image: url('assets/home/b_5.webp');" data-anim="up" data-delay="0.15">
+          <div class="built-card-overlay">
+            <h3 class="built-card-title">PHARMA</h3>
+            <p class="built-card-desc">Clean-room-compatible cells for fill-finish and inspection.</p>
+          </div>
+        </div>
+
+        <div class="built-card" style="background-image: url('assets/home/b_6.webp');" data-anim="right"
+          data-delay="0.25">
+          <div class="built-card-overlay">
+            <h3 class="built-card-title">METAL FABRICATION</h3>
+            <p class="built-card-desc">Heavy-payload arms for press tending and CNC tending.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NEW: WHY STACKLY ===================== -->
+    <section class="why-section">
+      <div class="why-container">
+        <div class="why-image" data-anim="left">
+          <img src="assets/remote/remote_4.webp"
+            alt="Engineer working alongside a robotic arm on a manufacturing floor" loading="lazy" decoding="async">
+        </div>
+
+        <div class="why-content">
+          <p class="why-eyebrow" data-anim="right">Why Stackly</p>
+          <h2 class="why-title" data-anim="right" data-delay="0.1">
+            Built by people who've <em>stood on the floor.</em>
+          </h2>
+
+          <ul class="why-list">
+            <li data-anim="right" data-delay="0.15">
+              <span class="why-list-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 2l3 6 6 .9-4.5 4.4 1 6.1L12 16.9 6.5 19.4l1-6.1L3 8.9 9 8z" />
+                </svg>
+              </span>
+              <div class="why-list-text">
+                <h4>Simulation-first</h4>
+                <p>Every cell is stress-tested as a digital twin against your real throughput targets before we cut
+                  steel.</p>
+              </div>
+            </li>
+
+            <li data-anim="right" data-delay="0.22">
+              <span class="why-list-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 2v20M2 12h20" />
+                </svg>
+              </span>
+              <div class="why-list-text">
+                <h4>One control layer</h4>
+                <p>Arms, AMRs and vision share a single command plane — add a second cell five years later and it still
+                  speaks the same language.</p>
+              </div>
+            </li>
+
+            <li data-anim="right" data-delay="0.29">
+              <span class="why-list-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg>
+              </span>
+              <div class="why-list-text">
+                <h4>Uptime as the metric</h4>
+                <p>We're measured on OEE, not delivery dates. Remote diagnostics and 72-hour parts turnaround keep the
+                  line running.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TRANSFORM ===================== -->
+    <section class="transform-section">
+      <div class="transform-container">
+        <div class="transform-content">
+          <h2 class="transform-title">
+            TRANSFORMING COMPLEX INDUSTRIAL ENVIRONMENTS WITH AUTONOMOUS TECHNOLOGIES DESIGNED FOR PRECISION,
+            RELIABILITY, AND CONTINUOUS OPTIMIZATION
+          </h2>
+          <div class="transform-text">
+            <p data-anim="left" data-delay="0.1">
+              Stackly designs and deploys intelligent automation systems that optimize operations, reduce human error,
+              and unlock scalable efficiency across industrial environments.
+            </p>
+            <p data-anim="left" data-delay="0.18">
+              We don't just implement technology — we engineer outcomes.
+            </p>
+          </div>
+        </div>
+
+        <div class="transform-image-wrapper" data-anim="right" data-delay="0.15">
+          <img src="assets/home/transform.webp" alt="Transforming Complex Industrial Environments Robotics"
+            class="transform-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NEW: CASE STUDY ===================== -->
+    <section class="case-section">
+      <div class="case-container">
+        <div class="case-content">
+          <p class="case-eyebrow" data-anim="left">Case Study · Arcturus Motors</p>
+          <blockquote class="case-quote" data-anim="left" data-delay="0.1">
+            "The cell has run three shifts a day for six years without a rebuild. <em>That's the whole story.</em>"
+          </blockquote>
+
+          <div class="case-author" data-anim="left" data-delay="0.2">
+            <img class="case-avatar"
+              src="assets/remote/remote_5.webp"
+              alt="Portrait of Arcturus Motors plant manager" loading="lazy" decoding="async">
+            <div>
+              <span class="case-author-name">Michael Iyer</span>
+              <span class="case-author-role">Plant Manager · Arcturus Motors, Pune</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-image" data-anim="right" data-delay="0.15">
+          <img src="assets/about/facility.webp"
+            alt="Arcturus Motors manufacturing floor with active robotic work cells" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NEW: FINAL CTA ===================== -->
+    <section class="final-cta">
+      <div class="final-cta__inner">
+        <div class="final-cta__bg" aria-hidden="true">
+          <img src="assets/remote/remote_3.webp"
+            alt="" loading="lazy" decoding="async">
+        </div>
+
+        <div class="final-cta__content">
+          <p class="final-cta__eyebrow" data-anim="up">Ready to Automate</p>
+          <h2 class="final-cta__title" data-anim="up" data-delay="0.1">
+            Ready to automate <em>the line?</em>
+          </h2>
+          <p class="final-cta__lead" data-anim="up" data-delay="0.18">
+            Book a 30-minute call with our engineering team. We'll walk your floor, review your
+            throughput targets, and give you a straight answer on where automation pays back first.
+          </p>
+
+          <div class="final-cta__actions" data-anim="up" data-delay="0.26">
+            <a href="./html/contact.html" class="btn-consult">Request a consult</a>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== SITE FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <div class="footer-brand" data-anim="up">
+          <a href="index.html" class="logo-container" aria-label="Stackly Robotics — home">
+            <img src="logo.webp" alt="Stackly Robotics logo" style="height: 30px; width: auto;">
+          </a>
+          <p>
+            Stackly designs, installs, and maintains robotic work cells for manufacturers —
+            articulated arms, autonomous mobile robots, and the control software that keeps
+            them moving in sync.
+          </p>
+          <div class="social-row">
+            <a href="404.html" aria-label="Stackly on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="404.html" aria-label="Stackly on Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="404.html" aria-label="Stackly on YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="404.html" aria-label="Stackly on X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col" data-anim="up" data-delay="0.06">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="html/about.html">About</a></li>
+            <li><a href="html/services.html">Services</a></li>
+            <li><a href="html/blog.html">Blog</a></li>
+            <li><a href="html/contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--systems" data-anim="up" data-delay="0.12">
+          <h4>Systems</h4>
+          <ul>
+            <li><a href="404.html">Articulated Arms</a></li>
+            <li><a href="404.html">Mobile Robots</a></li>
+            <li><a href="404.html">Vision &amp; Control</a></li>
+            <li><a href="404.html">Cell Integration</a></li>
+            <li><a href="404.html">Fleet Software</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--support" data-anim="up" data-delay="0.18">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="404.html">Service Plans</a></li>
+            <li><a href="404.html">Spare Parts</a></li>
+            <li><a href="404.html">Remote Diagnostics</a></li>
+            <li><a href="404.html">Operator Training</a></li>
+            <li><a href="404.html">Documentation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--contact" data-anim="up" data-delay="0.24">
+          <h4>Contact</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fa-solid fa-phone" aria-hidden="true"></i>
+              <span>+91 90909 90909</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <span>Stackly Robotics<br>Salem, Tamil Nadu, India</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <span>hello@stackly.example</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="footerYear">2026</span> Stackly Robotics. All rights reserved.</p>
+        <p><a href="404.html">Privacy</a> · <a href="404.html">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    /* ============================================================
+       HAMBURGER MENU
+       ============================================================ */
+    (function () {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navLinks = document.getElementById('navLinks');
+
+      function setMenu(open) {
+        hamburgerBtn.classList.toggle('active', open);
+        navLinks.classList.toggle('active', open);
+        hamburgerBtn.setAttribute('aria-expanded', String(open));
+        document.body.classList.toggle('menu-open', open);
+      }
+
+      hamburgerBtn.addEventListener('click', () => {
+        setMenu(!navLinks.classList.contains('active'));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+          setMenu(false);
+          hamburgerBtn.focus();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!navLinks.classList.contains('active')) return;
+        if (navLinks.contains(e.target) || hamburgerBtn.contains(e.target)) return;
+        setMenu(false);
+      });
+
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenu(false));
+      });
+
+      const desktopQuery = window.matchMedia('(min-width: 901px)');
+      desktopQuery.addEventListener('change', (e) => {
+        if (e.matches) setMenu(false);
+      });
+    })();
+
+    /* Fixed Header Navbar Scroll Effect */
+    (function () {
+      const navbar = document.querySelector('.navbar');
+      if (!navbar) return;
+
+      function checkScroll() {
+        if (window.scrollY > 20) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+    })();
+
+    /* ============================================================
+       SCROLL REVEAL — slides elements in when they enter viewport
+       ============================================================ */
+    (function () {
+      var els = document.querySelectorAll('[data-anim]');
+      if (!els.length) return;
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!('IntersectionObserver' in window) || reduce) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var delay = parseFloat(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(function () {
+            entry.target.classList.add('is-visible');
+          }, delay * 1000);
+          io.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -8% 0px'
+      });
+
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    /* ============================================================
+       NUMBER COUNTERS — animate the numbers in the stats section
+       ============================================================ */
+    (function () {
+      var counters = document.querySelectorAll('[data-count]');
+      if (!counters.length) return;
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function formatValue(val, decimals, suffix) {
+        var out;
+        if (decimals > 0) {
+          out = val.toFixed(decimals);
+        } else {
+          out = Math.round(val).toLocaleString();
+        }
+        return out + (suffix || '');
+      }
+
+      counters.forEach(function (el) {
+        var target = parseFloat(el.getAttribute('data-count')) || 0;
+        var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+        var suffix = el.getAttribute('data-suffix') || '';
+
+        if (reduce) {
+          el.textContent = formatValue(target, decimals, suffix);
+          return;
+        }
+
+        var fired = false;
+
+        function animate() {
+          var duration = 1800;
+          var start = null;
+
+          function step(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = formatValue(target * eased, decimals, suffix);
+            if (p < 1) requestAnimationFrame(step);
+          }
+
+          requestAnimationFrame(step);
+        }
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting || fired) return;
+            fired = true;
+            animate();
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.3 });
+
+        io.observe(el);
+      });
+    })();
+
+    /* ============================================================
+       FOOTER YEAR
+       ============================================================ */
+    (function () {
+      var y = document.getElementById('footerYear');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+
+  <!-- GSAP Library & Gravity Fall Text Animation Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    (function initGravityFall() {
+      if (typeof gsap === 'undefined') return;
+
+      const titleLines = document.querySelectorAll('.text-robotics, .text-automation');
+      if (!titleLines.length) return;
+
+      const allChars = [];
+
+      titleLines.forEach(line => {
+        const text = line.textContent.trim();
+        if (!text) return;
+
+        line.innerHTML = '';
+        [...text].forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'hero-char';
+          if (char === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = char;
+          }
+          line.appendChild(span);
+          allChars.push(span);
+        });
+      });
+
+      if (allChars.length > 0) {
+        gsap.from(allChars, {
+          y: -300,
+          opacity: 0,
+          stagger: 0.04,
+          duration: 0.8,
+          ease: "bounce.out"
+        });
+      }
+    })();
+
+    /* GSAP Popcorn Pop Section Headings Animation */
+    (function initPopcornPopHeadings() {
+      if (typeof gsap === 'undefined') return;
+
+      const headingSelectors = [
+        '.section-title',
+        '.cycle-title',
+        '.machine-title',
+        '.contact-form-title',
+        '.how-it-works-title',
+        '.cta-title',
+        'main section h2'
+      ];
+
+      const headings = document.querySelectorAll(headingSelectors.join(', '));
+      if (!headings.length) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      headings.forEach(heading => {
+        if (heading.closest('.contact-hero-section, .blog-hero-section, .service-hero-section, .about-hero-section, .hero-section, .machine-section, .cycle-section, .systems-section, .built-section, .transform-section') || heading.matches('.machine-title, .cycle-title, .systems-title, .built-title, .transform-title')) {
+          return;
+        }
+
+        if (heading.dataset.popcornSplit === 'true') return;
+        heading.dataset.popcornSplit = 'true';
+
+        const text = heading.textContent.trim();
+        if (!text) return;
+
+        heading.innerHTML = '';
+        const chars = [];
+
+        [...text].forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'popcorn-char';
+          if (char === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = char;
+          }
+          heading.appendChild(span);
+          chars.push(span);
+        });
+
+        if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              gsap.from(chars, {
+                scale: 0,
+                y: 30,
+                rotation: () => gsap.utils.random(-20, 20),
+                stagger: { each: 0.04, from: 'random' },
+                duration: 0.4,
+                ease: 'back.out(2)'
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        observer.observe(heading);
+      });
+    })();
+  </script>
+
+  <!-- Page Preloader Script (2 Sec Spin) -->
+  <script>
+    (function () {
+      document.body.classList.add('preloading');
+      const preloader = document.getElementById('pagePreloader');
+      if (!preloader) return;
+      setTimeout(function () {
+        preloader.classList.add('is-hidden');
+        document.body.classList.remove('preloading');
+      }, 1000);
+    })();
+  </script>
+
+</body>
+
+</html>

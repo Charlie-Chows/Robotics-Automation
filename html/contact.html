@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="Contact Stackly Robotics & Automation. Tell us your production volumes, and we'll tell you what robotic cell, automation, and software integration it takes.">
+
+  <title>Contact Us - Stackly Robotics &amp; Automation</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="../css/contact.css">
+</head>
+
+<body>
+
+  <!-- ===================== PAGE PRELOADER ===================== -->
+  <div class="page-preloader" id="pagePreloader">
+    <div class="preloader-content">
+      <div class="preloader-spinner"></div>
+      <img src="../logo.webp" alt="Stackly Robotics" class="preloader-logo">
+    </div>
+  </div>
+
+  <!-- ===================== HEADER NAVBAR ===================== -->
+  <header class="navbar">
+    <a href="../index.html" class="logo-container" aria-label="Stackly Robotics — home">
+      <img src="../logo.webp" alt="Stackly Logo">
+    </a>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false"
+      aria-controls="navLinks">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li class="mobile-register-item"><a href="login.html" class="btn-login-mobile">Login</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn-login">Login</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== CONTACT HERO SECTION ===================== -->
+    <section class="contact-hero-section">
+
+      <!-- Header Typography -->
+      <div class="contact-hero-header">
+        <h1 class="contact-hero-title">
+          <span class="title-line-1" data-anim="up">TELL US YOUR VOLUMES</span>
+          <span class="title-line-2" data-anim="up" data-delay="0.1">WE'LL TELL YOU WHAT IT TAKES</span>
+        </h1>
+      </div>
+
+      <!-- 5 Robotic Arms Stage -->
+      <div class="contact-hero-stage" data-anim="fade" data-delay="0.2">
+        <div class="rings-container">
+
+          <!-- Left Column (Top & Bottom Rings) -->
+          <div class="ring-col ring-col-left">
+            <div class="ring-card ring-left-top" data-anim="left" data-delay="0.25">
+              <img src="../assets/contact/left_top.webp" alt="Robotic Arm - Top Left Workcell">
+            </div>
+            <div class="ring-card ring-left-bottom" data-anim="left" data-delay="0.35">
+              <img src="../assets/contact/left_bottom.webp" alt="Robotic Arm - Bottom Left Assembly">
+            </div>
+          </div>
+
+          <!-- Center Column (Main Large Ring) -->
+          <div class="ring-col ring-col-center">
+            <div class="ring-card ring-center" data-anim="up" data-delay="0.15">
+              <img src="../assets/contact/center.webp" alt="Main Stackly Industrial Robotic Arm">
+            </div>
+          </div>
+
+          <!-- Right Column (Top & Bottom Rings) -->
+          <div class="ring-col ring-col-right">
+            <div class="ring-card ring-right-top" data-anim="right" data-delay="0.25">
+              <img src="../assets/contact/right_top.webp" alt="Robotic Arm - Top Right Payload">
+            </div>
+            <div class="ring-card ring-right-bottom" data-anim="right" data-delay="0.35">
+              <img src="../assets/contact/right_bottom.webp" alt="Robotic Arm - Bottom Right Precision Tooling">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Hero Sub-Bar (Text & Contact Us CTA Button) -->
+      <div class="contact-hero-subbar" data-anim="up" data-delay="0.4">
+        <p class="contact-hero-subbar-text">
+          Most conversations start with a 20-minute call &mdash; no sales deck, just questions about what you actually need run.
+        </p>
+        <a href="#contactForm" class="btn-contact-us">Contact us</a>
+      </div>
+
+    </section>
+
+    <!-- ===================== CONTACT FORM SECTION ===================== -->
+    <section class="contact-form-section" id="contactForm">
+      <div class="contact-form-container">
+
+        <!-- Header Row -->
+        <div class="contact-form-header">
+          <h2 class="contact-form-title" data-anim="up">TALK TO AN ENGINEER</h2>
+          <p class="contact-form-desc" data-anim="up" data-delay="0.1">
+            Tell us the part, the cycle time and the robot you run.<br>
+            An application engineer reads every message and replies with questions, not a brochure.
+          </p>
+        </div>
+
+        <!-- 2 Column Cards Layout -->
+        <div class="contact-cards-grid">
+
+          <!-- Left Card: Fill The Form Below -->
+          <div class="contact-card contact-card-form" data-anim="left" data-delay="0.15">
+            <h3 class="card-title">FILL THE FORM BELOW</h3>
+
+            <form id="engineerContactForm" class="engineer-form" novalidate>
+              <div class="form-grid">
+                <div class="form-group">
+                  <input type="text" id="userName" name="name" placeholder="Your name" required>
+                  <span class="error-text" id="nameError"></span>
+                </div>
+                <div class="form-group">
+                  <input type="email" id="userEmail" name="email" placeholder="Your Email" required>
+                  <span class="error-text" id="emailError"></span>
+                </div>
+                <div class="form-group">
+                  <input type="tel" id="userPhone" name="phone" placeholder="Phone" required>
+                  <span class="error-text" id="phoneError"></span>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="businessType" name="businessType" placeholder="Business Type">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="userCompany" name="company" placeholder="Company">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="userLocation" name="location" placeholder="Location">
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <textarea id="userMessage" name="message" rows="4" placeholder="Type your message" required></textarea>
+                <span class="error-text" id="messageError"></span>
+              </div>
+
+              <div class="form-checkbox-group">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="privacyAgree" required>
+                  <span class="checkbox-text">I agree to the privacy policy</span>
+                </label>
+                <span class="error-text" id="privacyError"></span>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-submit-form">Submit</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right Card: Prefer To Reach Out Directly? (All items link to 404) -->
+          <div class="contact-card contact-card-info" data-anim="right" data-delay="0.2">
+            <h3 class="card-title">PREFER TO REACH OUT DIRECTLY?</h3>
+
+            <div class="direct-contact-list">
+
+              <!-- Email Item -->
+              <a href="../404.html" class="direct-contact-item direct-contact-link">
+                <div class="contact-icon">
+                  <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div class="contact-detail">
+                  <span class="contact-label">Email</span>
+                  <span class="contact-value">Stacklyrobotics@stackly.com</span>
+                </div>
+              </a>
+
+              <!-- Phone Item -->
+              <a href="../404.html" class="direct-contact-item direct-contact-link">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-detail">
+                  <span class="contact-label">Phone</span>
+                  <span class="contact-value">+91 98765 43210</span>
+                </div>
+              </a>
+
+              <!-- Address Item -->
+              <a href="../404.html" class="direct-contact-item direct-contact-link">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="contact-detail">
+                  <span class="contact-label">Address</span>
+                  <address class="contact-value contact-address">
+                    Stackly Office,<br>
+                    Salem, Tamil Nadu,<br>
+                    India
+                  </address>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== FAQ SECTION ===================== -->
+    <section class="contact-faq-section" id="faqSection">
+      <div class="faq-container">
+        
+        <div class="faq-header">
+          <p class="section-eyebrow" data-anim="up">GOT QUESTIONS? WE HAVE ANSWERS</p>
+          <h2 class="section-title" data-anim="up" data-delay="0.1">FREQUENTLY ASKED QUESTIONS</h2>
+        </div>
+
+        <div class="faq-accordion" data-anim="up" data-delay="0.2">
+
+          <!-- FAQ Item 1 -->
+          <div class="faq-item active">
+            <button class="faq-question" aria-expanded="true">
+              <span>How long does a typical robotic cell installation take?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Most standard robotic cells deploy in 4 to 8 weeks from final design sign-off. This timeline includes 3D simulation, offline programming, factory acceptance testing (FAT), on-site mechanical integration, and operator commissioning.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What information do you need for a 20-minute introductory call?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Just basic details about the parts you're processing, your current cycle time bottlenecks, target volume goals, and any existing machines or PLC controls you plan to interface with. No sales deck needed!
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do you support custom robotic end-of-arm tooling (EOAT) &amp; vision?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Yes! We design custom 3D-printed and CNC-machined grippers, pneumatic end-effectors, 2D/3D vision guidance systems, and laser inspection sensors tailored specifically to your part geometry.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 4 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What maintenance &amp; post-deployment support do you offer?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                We provide 24/7 remote telemetry diagnostic support, scheduled preventative maintenance plans, full documentation, and rapid spare parts fulfillment to guarantee maximum equipment effectiveness (OEE).
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can your automated cells integrate with existing PLC &amp; SCADA networks?</span>
+              <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Absolutely. Our systems natively support Ethernet/IP, PROFINET, Modbus TCP, and OPC UA protocols, allowing seamless data exchange with Siemens, Allen-Bradley, Beckhoff PLCs, and factory MES/ERP platforms.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== ENGAGEMENT PROCESS SECTION ===================== -->
+    <section class="contact-process-section">
+      <div class="process-container">
+        
+        <div class="process-header">
+          <p class="section-eyebrow" data-anim="up">FROM INITIAL CALL TO DEPLOYMENT</p>
+          <h2 class="section-title" data-anim="up" data-delay="0.1">HOW WE ENGAGE WITH YOU</h2>
+        </div>
+
+        <div class="process-grid">
+
+          <!-- Step 1 -->
+          <div class="process-card" data-anim="up" data-delay="0.15">
+            <div class="process-badge">01</div>
+            <div class="process-icon"><i class="fa-solid fa-comments"></i></div>
+            <h3 class="process-title">20-Min Discovery Call</h3>
+            <p class="process-desc">
+              Rapid feasibility evaluation focused on your production volume requirements, part dimensions, and ROI targets.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-card" data-anim="up" data-delay="0.25">
+            <div class="process-badge">02</div>
+            <div class="process-icon"><i class="fa-solid fa-cube"></i></div>
+            <h3 class="process-title">3D Digital Twin Simulation</h3>
+            <p class="process-desc">
+              We model your complete robotic work cell layout, proving exact cycle times and reach envelopes before fabrication.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-card" data-anim="up" data-delay="0.35">
+            <div class="process-badge">03</div>
+            <div class="process-icon"><i class="fa-solid fa-gears"></i></div>
+            <h3 class="process-title">Build &amp; FAT Validation</h3>
+            <p class="process-desc">
+              Cell assembly, tooling integration, PLC programming, and full Factory Acceptance Testing in our engineering facility.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-card" data-anim="up" data-delay="0.45">
+            <div class="process-badge">04</div>
+            <div class="process-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h3 class="process-title">Turnkey On-Site Launch</h3>
+            <p class="process-desc">
+              On-site installation, safety validation, operator training, and continuous production monitoring for seamless handover.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== MAP SECTION ===================== -->
+    <section class="contact-map-section" data-anim="up" data-delay="0.2">
+      <div class="contact-map-container">
+        <iframe
+          class="google-map-iframe"
+          src="https://maps.google.com/maps?q=Salem%2C+Tamil+Nadu%2C+India&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="480"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Stackly Office Location - Salem, Tamil Nadu, India">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- ===================== CTA BANNER SECTION ===================== -->
+    <section class="contact-cta-section">
+      <div class="cta-banner-container" data-anim="up">
+        <div class="cta-banner-content">
+          <h2 class="cta-title">READY TO TRANSFORM YOUR PRODUCTION LINE?</h2>
+          <p class="cta-desc">
+            Connect directly with an automation engineer. Get precise cycle time predictions, cell layout designs, and transparent investment quotes.
+          </p>
+          <div class="cta-actions">
+            <a href="#contactForm" class="btn-cta-primary">Schedule a 20-Min Call</a>
+            <a href="services.html" class="btn-cta-secondary">Explore Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== SITE FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <div class="footer-brand" data-anim="up">
+          <a href="../index.html" class="logo-container" aria-label="Stackly Robotics — home">
+            <img src="../logo.webp" alt="Stackly Robotics logo" style="height: 30px; width: auto;">
+          </a>
+          <p>
+            Stackly designs, installs, and maintains robotic work cells for manufacturers —
+            articulated arms, autonomous mobile robots, and the control software that keeps
+            them moving in sync.
+          </p>
+          <div class="social-row">
+            <a href="../404.html" aria-label="Stackly on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="../404.html" aria-label="Stackly on Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="../404.html" aria-label="Stackly on YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="../404.html" aria-label="Stackly on X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col" data-anim="up" data-delay="0.06">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--systems" data-anim="up" data-delay="0.12">
+          <h4>Systems</h4>
+          <ul>
+            <li><a href="../404.html">Articulated Arms</a></li>
+            <li><a href="../404.html">Mobile Robots</a></li>
+            <li><a href="../404.html">Vision &amp; Control</a></li>
+            <li><a href="../404.html">Cell Integration</a></li>
+            <li><a href="../404.html">Fleet Software</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--support" data-anim="up" data-delay="0.18">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="../404.html">Service Plans</a></li>
+            <li><a href="../404.html">Spare Parts</a></li>
+            <li><a href="../404.html">Remote Diagnostics</a></li>
+            <li><a href="../404.html">Operator Training</a></li>
+            <li><a href="../404.html">Documentation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-col--contact" data-anim="up" data-delay="0.24">
+          <h4>Contact</h4>
+          <ul class="footer-contact">
+            <li>
+              <i class="fa-solid fa-phone" aria-hidden="true"></i>
+              <span>+91 90909 90909</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <span>Stackly Robotics<br>Salem, Tamil Nadu, India</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <span>hello@stackly.example</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="footerYear">2026</span> Stackly Robotics. All rights reserved.</p>
+        <p><a href="../404.html">Privacy</a> · <a href="../404.html">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== JAVASCRIPT LOGIC ===================== -->
+  <script>
+    /* Mobile Navigation Hamburger Menu Toggle */
+    (function () {
+      const btn = document.getElementById('hamburgerBtn');
+      const navLinks = document.getElementById('navLinks');
+      if (!btn || !navLinks) return;
+
+      function setMenu(open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        navLinks.classList.toggle('is-open', open);
+        document.body.classList.toggle('menu-open', open);
+      }
+
+      btn.addEventListener('click', () => {
+        const isOpen = navLinks.classList.contains('is-open');
+        setMenu(!isOpen);
+      });
+
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenu(false));
+      });
+
+      const desktopQuery = window.matchMedia('(min-width: 901px)');
+      desktopQuery.addEventListener('change', (e) => {
+        if (e.matches) setMenu(false);
+      });
+    })();
+
+    /* Fixed Header Navbar Scroll Effect */
+    (function () {
+      const navbar = document.querySelector('.navbar');
+      if (!navbar) return;
+
+      function checkScroll() {
+        if (window.scrollY > 20) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+    })();
+
+    /* Scroll Reveal Animations Observer */
+    (function () {
+      var els = document.querySelectorAll('[data-anim]');
+      if (!els.length) return;
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!('IntersectionObserver' in window) || reduce) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var delay = parseFloat(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(function () {
+            entry.target.classList.add('is-visible');
+          }, delay * 1000);
+          io.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -8% 0px'
+      });
+
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    /* Contact Form Submission Handler with Custom Validation Errors */
+    (function () {
+      const form = document.getElementById('engineerContactForm');
+      if (!form) return;
+
+      const fields = [
+        { id: 'userName', errId: 'nameError', msg: 'Please enter your name' },
+        { id: 'userEmail', errId: 'emailError', msg: 'Please enter a valid email address', isEmail: true },
+        { id: 'userPhone', errId: 'phoneError', msg: 'Please enter your phone number' },
+        { id: 'userMessage', errId: 'messageError', msg: 'Please enter your message' },
+        { id: 'privacyAgree', errId: 'privacyError', msg: 'You must agree to the privacy policy', isCheckbox: true }
+      ];
+
+      function clearError(field) {
+        const input = document.getElementById(field.id);
+        const errSpan = document.getElementById(field.errId);
+        if (input) input.classList.remove('is-invalid');
+        if (errSpan) errSpan.textContent = '';
+      }
+
+      fields.forEach(field => {
+        const input = document.getElementById(field.id);
+        if (input) {
+          input.addEventListener('input', () => clearError(field));
+          input.addEventListener('change', () => clearError(field));
+        }
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        let isValid = true;
+
+        fields.forEach(field => {
+          const input = document.getElementById(field.id);
+          const errSpan = document.getElementById(field.errId);
+          clearError(field);
+
+          if (!input) return;
+
+          let val = input.value ? input.value.trim() : '';
+          let fieldValid = true;
+
+          if (field.isCheckbox) {
+            if (!input.checked) fieldValid = false;
+          } else if (field.isEmail) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!val || !emailRegex.test(val)) fieldValid = false;
+          } else {
+            if (!val) fieldValid = false;
+          }
+
+          if (!fieldValid) {
+            isValid = false;
+            input.classList.add('is-invalid');
+            if (errSpan) errSpan.textContent = field.msg;
+          }
+        });
+
+        if (!isValid) return;
+
+        // Clear all fields & redirect to 404
+        form.reset();
+        window.location.href = '../404.html';
+      });
+    })();
+
+    /* FAQ Accordion Toggle Handler */
+    (function () {
+      const faqItems = document.querySelectorAll('.faq-item');
+      if (!faqItems.length) return;
+
+      faqItems.forEach(item => {
+        const btn = item.querySelector('.faq-question');
+        if (!btn) return;
+
+        btn.addEventListener('click', () => {
+          const isOpen = item.classList.contains('active');
+
+          // Close all items
+          faqItems.forEach(i => {
+            i.classList.remove('active');
+            const b = i.querySelector('.faq-question');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          });
+
+          // Open clicked item if it wasn't active
+          if (!isOpen) {
+            item.classList.add('active');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+
+    /* Dynamic Footer Year */
+    (function () {
+      var y = document.getElementById('footerYear');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+
+  <!-- GSAP Library & Gravity Fall Text Animation Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    (function initGravityFall() {
+      if (typeof gsap === 'undefined') return;
+
+      const titleLines = document.querySelectorAll('.contact-hero-title .title-line-1, .contact-hero-title .title-line-2');
+      if (!titleLines.length) return;
+
+      const allChars = [];
+
+      titleLines.forEach(line => {
+        const text = line.textContent.trim();
+        if (!text) return;
+
+        line.innerHTML = '';
+        [...text].forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'hero-char';
+          if (char === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = char;
+          }
+          line.appendChild(span);
+          allChars.push(span);
+        });
+      });
+
+      if (allChars.length > 0) {
+        gsap.from(allChars, {
+          y: -300,
+          opacity: 0,
+          stagger: 0.04,
+          duration: 0.8,
+          ease: "bounce.out"
+        });
+      }
+    })();
+
+    /* GSAP Popcorn Pop Section Headings Animation */
+    (function initPopcornPopHeadings() {
+      if (typeof gsap === 'undefined') return;
+
+      const headingSelectors = [
+        '.section-title',
+        '.cycle-title',
+        '.machine-title',
+        '.contact-form-title',
+        '.how-it-works-title',
+        '.cta-title',
+        'main section h2'
+      ];
+
+      const headings = document.querySelectorAll(headingSelectors.join(', '));
+      if (!headings.length) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      headings.forEach(heading => {
+        if (heading.closest('.contact-hero-section, .blog-hero-section, .service-hero-section, .about-hero-section, .hero-section')) {
+          return;
+        }
+
+        if (heading.dataset.popcornSplit === 'true') return;
+        heading.dataset.popcornSplit = 'true';
+
+        const text = heading.textContent.trim();
+        if (!text) return;
+
+        heading.innerHTML = '';
+        const chars = [];
+
+        [...text].forEach(char => {
+          const span = document.createElement('span');
+          span.className = 'popcorn-char';
+          if (char === ' ') {
+            span.innerHTML = '&nbsp;';
+          } else {
+            span.textContent = char;
+          }
+          heading.appendChild(span);
+          chars.push(span);
+        });
+
+        if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              gsap.from(chars, {
+                scale: 0,
+                y: 30,
+                rotation: () => gsap.utils.random(-20, 20),
+                stagger: { each: 0.04, from: 'random' },
+                duration: 0.4,
+                ease: 'back.out(2)'
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        observer.observe(heading);
+      });
+    })();
+  </script>
+
+  <!-- Page Preloader Script (2 Sec Spin) -->
+  <script>
+    (function () {
+      document.body.classList.add('preloading');
+      const preloader = document.getElementById('pagePreloader');
+      if (!preloader) return;
+      setTimeout(function () {
+        preloader.classList.add('is-hidden');
+        document.body.classList.remove('preloading');
+      }, 1000);
+    })();
+  </script>
+
+</body>
+
+</html>
