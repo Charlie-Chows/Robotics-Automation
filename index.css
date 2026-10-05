@@ -336,11 +336,16 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.35s ease, 
+              color 0.35s ease, 
+              box-shadow 0.35s ease, 
+              border-color 0.35s ease;
 }
 
 .system-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 
 .card-icon {
@@ -352,6 +357,12 @@
   justify-content: flex-start;
 }
 
+.card-icon svg path,
+.card-icon svg circle,
+.card-icon svg rect {
+  transition: stroke 0.35s ease, fill 0.35s ease;
+}
+
 .card-title {
   font-family: var(--font-retro);
   font-size: 24px;
@@ -360,6 +371,7 @@
   letter-spacing: 0.5px;
   margin-bottom: 18px;
   text-transform: uppercase;
+  transition: color 0.35s ease, text-shadow 0.35s ease;
 }
 
 .card-desc {
@@ -368,6 +380,7 @@
   line-height: 1.55;
   margin-bottom: 32px;
   flex-grow: 1;
+  transition: color 0.35s ease;
 }
 
 .card-specs {
@@ -377,6 +390,7 @@
   font-family: var(--font-nav);
   font-size: 13.5px;
   line-height: 1.4;
+  transition: color 0.35s ease;
 }
 
 /* CHANGED: was previously unstyled, so label/value rows in the yellow card
@@ -386,6 +400,7 @@
   display: flex;
   align-items: baseline;
   gap: 6px;
+  transition: color 0.35s ease;
 }
 
 .spec-label {
@@ -417,6 +432,35 @@
   font-weight: 600;
 }
 
+.system-card.yellow-card:hover {
+  background-color: #161616;
+  color: var(--white);
+  border-color: var(--primary-yellow);
+  box-shadow: 0 16px 40px rgba(219, 254, 1, 0.25);
+}
+
+.system-card.yellow-card:hover .card-title {
+  color: var(--primary-yellow);
+}
+
+.system-card.yellow-card:hover .card-desc {
+  color: #E0E0E0;
+}
+
+.system-card.yellow-card:hover .card-specs {
+  color: #CCCCCC;
+}
+
+.system-card.yellow-card:hover .card-icon svg path {
+  stroke: var(--primary-yellow);
+}
+
+.system-card.yellow-card:hover .card-icon svg circle,
+.system-card.yellow-card:hover .card-icon svg rect {
+  fill: var(--primary-yellow);
+  stroke: var(--primary-yellow);
+}
+
 /* Gray Cards */
 .system-card.gray-card {
   background-color: #9A9A9A;
@@ -436,6 +480,38 @@
 .system-card.gray-card .card-specs {
   color: #2c2c2c;
   font-weight: 500;
+}
+
+.system-card.gray-card:hover {
+  background-color: var(--primary-yellow);
+  color: #000000;
+  box-shadow: 0 16px 40px rgba(219, 254, 1, 0.35);
+  border-color: transparent;
+}
+
+.system-card.gray-card:hover .card-title {
+  color: #000000;
+  text-shadow: none;
+}
+
+.system-card.gray-card:hover .card-desc {
+  color: #111111;
+  font-weight: 600;
+}
+
+.system-card.gray-card:hover .card-specs {
+  color: #222222;
+  font-weight: 600;
+}
+
+.system-card.gray-card:hover .card-icon svg path {
+  stroke: #000000;
+}
+
+.system-card.gray-card:hover .card-icon svg rect,
+.system-card.gray-card:hover .card-icon svg circle {
+  fill: #000000;
+  stroke: #000000;
 }
 
 /* Responsive adjustments for Systems Section */
@@ -982,12 +1058,17 @@
   border-radius: 20px;
   background: var(--surface-1);
   text-align: left;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition: transform 0.35s ease, 
+              background-color 0.35s ease, 
+              border-color 0.35s ease, 
+              box-shadow 0.35s ease;
 }
 
 .number-card:hover {
+  background-color: var(--primary-yellow);
   border-color: var(--primary-yellow);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+  box-shadow: 0 14px 35px rgba(219, 254, 1, 0.25);
 }
 
 .number-value {
@@ -999,6 +1080,11 @@
   color: var(--primary-yellow);
   letter-spacing: -0.02em;
   margin-bottom: 14px;
+  transition: color 0.35s ease;
+}
+
+.number-card:hover .number-value {
+  color: #000000;
 }
 
 .number-label {
@@ -1007,6 +1093,13 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--white);
+  line-height: 1.4;
+  transition: color 0.35s ease;
+}
+
+.number-card:hover .number-label {
+  color: #111111;
+}
   line-height: 1.4;
   margin-bottom: 8px;
 }

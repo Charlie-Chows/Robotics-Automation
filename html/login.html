@@ -354,13 +354,38 @@
                     return;
                 }
 
-                // Success: store email + role, redirect by role
+                function extractNameFromEmail(email, role) {
+                    if (!email || typeof email !== "string" || !email.includes("@")) {
+                        return role === "admin" ? "Admin" : "User";
+                    }
+                    var part = email.split("@")[0].trim();
+                    if (!part) return role === "admin" ? "Admin" : "User";
+                    var clean = part.replace(/[._-]/g, " ");
+                    var formatted = clean
+                        .split(" ")
+                        .filter(Boolean)
+                        .map(function (w) {
+                            return w.charAt(0).toUpperCase() + w.slice(1);
+                        })
+                        .join(" ");
+                    return formatted || (role === "admin" ? "Admin" : "User");
+                }
+
+                // Success: store email, name + role, redirect by role
+                var emailVal = emailInput.value.trim();
+                var selectedRole = roleInput.value;
+                var displayName = extractNameFromEmail(emailVal, selectedRole);
+
                 try {
                     localStorage.setItem("stackly_user_email", emailVal);
-                    localStorage.setItem("stackly_user_role", roleInput.value);
+                    localStorage.setItem("stackly_operator_email", emailVal);
+                    localStorage.setItem("stackly_user_role", selectedRole);
+                    localStorage.setItem("stackly_operator_role", selectedRole);
+                    localStorage.setItem("stackly_user_name", displayName);
+                    localStorage.setItem("stackly_operator_name", displayName);
                 } catch (err) { /* ignore */ }
 
-                var target = roleInput.value === "admin" ? "admin.html" : "user.html";
+                var target = selectedRole === "admin" ? "admin.html" : "user.html";
                 window.location.href = target;
             });
 

@@ -14,6 +14,9 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Global Styles & Thin Scrollbar -->
+    <link rel="stylesheet" href="../global.css">
+
     <style>
         /* ============================================================
        OPERATOR CONSOLE
@@ -98,6 +101,7 @@
             min-height: 100vh;
 
             overflow-x: hidden;
+            padding-top: 0 !important;
         }
 
         button,
@@ -1956,17 +1960,17 @@
                 <div class="user-mini-profile">
 
                     <div class="user-avatar" id="sidebarAvatar">
-                        SU
+                        US
                     </div>
 
                     <div class="user-mini-info">
 
                         <strong id="sidebarUsername">
-                            Sujith
+                            User
                         </strong>
 
-                        <span>
-                            Fleet Operator
+                        <span id="sidebarEmail" style="font-size: 11px; opacity: 0.7; display: block; word-break: break-all;">
+                            user@stackly.example
                         </span>
 
                     </div>
@@ -2004,7 +2008,7 @@
                 <h1>
                     Hello,
                     <span id="userGreeting">
-                        Sujith
+                        User
                     </span>
                 </h1>
 
@@ -2412,11 +2416,63 @@
                     </h2>
 
                     <p>
-                        Track every service request, fault and calibration job in one place.
+                        Track every service request, fault diagnosis, maintenance log, and calibration job across your automated facility.
                     </p>
 
                 </div>
 
+                <!-- WORK ORDERS SUMMARY METRICS -->
+                <div class="stats-grid" style="margin-bottom: 24px;">
+
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            Open Orders
+                        </div>
+                        <div class="stat-value" style="color: var(--status-standby);">
+                            04
+                        </div>
+                        <div class="stat-change">
+                            2 high priority
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            In Progress
+                        </div>
+                        <div class="stat-value" style="color: var(--status-info);">
+                            02
+                        </div>
+                        <div class="stat-change">
+                            Tech assigned on-site
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            Awaiting Parts
+                        </div>
+                        <div class="stat-value" style="color: var(--status-alert);">
+                            01
+                        </div>
+                        <div class="stat-change">
+                            SLA dispatch active
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">
+                            Resolved (30 Days)
+                        </div>
+                        <div class="stat-value" style="color: var(--status-online);">
+                            24
+                        </div>
+                        <div class="stat-change">
+                            100% SLA compliance
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="toolbar">
 
@@ -2426,7 +2482,7 @@
                             search
                         </span>
 
-                        <input type="search" id="ticketSearch" placeholder="Search work orders...">
+                        <input type="search" id="ticketSearch" placeholder="Search by work order ID, system, or robot unit...">
 
                     </div>
 
@@ -2450,8 +2506,9 @@
                             <thead>
 
                                 <tr>
-                                    <th>Work Order</th>
-                                    <th>System</th>
+                                    <th>Work Order &amp; Unit</th>
+                                    <th>Subsystem</th>
+                                    <th>Priority</th>
                                     <th>Opened</th>
                                     <th>Last update</th>
                                     <th>Status</th>
@@ -2472,19 +2529,24 @@
 
                                             <div>
                                                 <span class="ticket-title">
-                                                    Gripper calibration — R-007
+                                                    Gripper servo calibration — R-007
                                                 </span>
 
                                                 <span class="ticket-subtitle">
-                                                    #WO-10482
+                                                    #WO-10482 · Line 3 Pick-and-Place
                                                 </span>
                                             </div>
 
                                         </div>
                                     </td>
 
-                                    <td>End Effector</td>
-                                    <td>Aug 23, 2026</td>
+                                    <td>End Effector / Kinematics</td>
+
+                                    <td>
+                                        <span class="status alert" style="background: var(--status-alert-bg); color: var(--status-alert); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700;">HIGH</span>
+                                    </td>
+
+                                    <td>Oct 05, 2026</td>
                                     <td>12 min ago</td>
 
                                     <td>
@@ -2507,19 +2569,24 @@
 
                                             <div>
                                                 <span class="ticket-title">
-                                                    Dock alignment — AMR-04
+                                                    Charging dock laser re-alignment — AMR-04
                                                 </span>
 
                                                 <span class="ticket-subtitle">
-                                                    #WO-10461
+                                                    #WO-10461 · Bay B Transport
                                                 </span>
                                             </div>
 
                                         </div>
                                     </td>
 
-                                    <td>Navigation</td>
-                                    <td>Aug 22, 2026</td>
+                                    <td>LiDAR &amp; Docking</td>
+
+                                    <td>
+                                        <span class="status standby" style="background: var(--status-standby-bg); color: var(--status-standby); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700;">MEDIUM</span>
+                                    </td>
+
+                                    <td>Oct 04, 2026</td>
                                     <td>1 hour ago</td>
 
                                     <td>
@@ -2536,25 +2603,30 @@
                                     <td>
                                         <div class="ticket-name">
 
-                                            <span class="ticket-avatar">
+                                            <span class="ticket-avatar" style="background: var(--status-ai-bg); color: var(--status-ai);">
                                                 V2
                                             </span>
 
                                             <div>
                                                 <span class="ticket-title">
-                                                    Vision calibration — VC-12
+                                                    3D Stereo vision camera re-indexing — VC-12
                                                 </span>
 
                                                 <span class="ticket-subtitle">
-                                                    #WO-10432
+                                                    #WO-10432 · Inspection Cell 1
                                                 </span>
                                             </div>
 
                                         </div>
                                     </td>
 
-                                    <td>Vision</td>
-                                    <td>Aug 20, 2026</td>
+                                    <td>Optical / AI Edge</td>
+
+                                    <td>
+                                        <span class="status standby" style="background: var(--status-standby-bg); color: var(--status-standby); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700;">MEDIUM</span>
+                                    </td>
+
+                                    <td>Oct 02, 2026</td>
                                     <td>Yesterday</td>
 
                                     <td>
@@ -2577,20 +2649,103 @@
 
                                             <div>
                                                 <span class="ticket-title">
-                                                    Battery pack replacement — AMR-01
+                                                    High-capacity LiFePO4 battery pack cycle check — AMR-01
                                                 </span>
 
                                                 <span class="ticket-subtitle">
-                                                    #WO-10398
+                                                    #WO-10398 · Main Assembly Floor
                                                 </span>
                                             </div>
 
                                         </div>
                                     </td>
 
-                                    <td>Power</td>
-                                    <td>Aug 18, 2026</td>
-                                    <td>Aug 19</td>
+                                    <td>Power Systems</td>
+
+                                    <td>
+                                        <span class="status info" style="background: var(--status-info-bg); color: var(--status-info); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700;">LOW</span>
+                                    </td>
+
+                                    <td>Sep 28, 2026</td>
+                                    <td>Sep 29</td>
+
+                                    <td>
+                                        <span class="status resolved">
+                                            Complete
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        <div class="ticket-name">
+
+                                            <span class="ticket-avatar">
+                                                R2
+                                            </span>
+
+                                            <div>
+                                                <span class="ticket-title">
+                                                    Axis 3 harmonic drive lubrication &amp; seal check — R-002
+                                                </span>
+
+                                                <span class="ticket-subtitle">
+                                                    #WO-10355 · Heavy Palletizing Cell
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    <td>Mechanical / Drivetrain</td>
+
+                                    <td>
+                                        <span class="status standby" style="background: var(--status-standby-bg); color: var(--status-standby); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700;">MEDIUM</span>
+                                    </td>
+
+                                    <td>Sep 22, 2026</td>
+                                    <td>Sep 23</td>
+
+                                    <td>
+                                        <span class="status resolved">
+                                            Complete
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        <div class="ticket-name">
+
+                                            <span class="ticket-avatar">
+                                                PLC
+                                            </span>
+
+                                            <div>
+                                                <span class="ticket-title">
+                                                    EtherNet/IP bus jitter diagnosis &amp; safety PLC sync
+                                                </span>
+
+                                                <span class="ticket-subtitle">
+                                                    #WO-10310 · Master Control Cabinet 4
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    <td>Industrial Communication</td>
+
+                                    <td>
+                                        <span class="status alert" style="background: var(--status-alert-bg); color: var(--status-alert); padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700;">CRITICAL</span>
+                                    </td>
+
+                                    <td>Sep 15, 2026</td>
+                                    <td>Sep 16</td>
 
                                     <td>
                                         <span class="status resolved">
@@ -2832,24 +2987,33 @@
                 <div class="section-heading">
 
                     <h2>
-                        Field Manual
+                        Field Manual &amp; Knowledge Base
                     </h2>
 
                     <p>
-                        Wiring diagrams, setup guides, fault codes and integration references.
+                        Comprehensive technical documentation, wiring schematics, fault code lookup, and integration references for plant engineers.
                     </p>
 
                 </div>
 
 
-                <div class="search-box" style="max-width: 520px; margin-bottom: 24px;">
+                <div class="search-box" style="max-width: 600px; margin-bottom: 14px;">
 
                     <span class="material-symbols-outlined">
                         search
                     </span>
 
-                    <input type="search" id="knowledgeSearch" placeholder="Search the manual...">
+                    <input type="search" id="knowledgeSearch" placeholder="Search by error code (e.g., ERR-502), topic, or system...">
 
+                </div>
+
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; align-items: center;">
+                    <span style="font-size: 0.68rem; color: var(--text-muted); font-weight: 600;">Popular tags:</span>
+                    <span class="badge" style="background: var(--bg-elevated); color: var(--signal); border: 1px solid var(--line-subtle); cursor: pointer; padding: 4px 10px; border-radius: 6px; font-size: 0.65rem;" onclick="location.href='../404.html'">#ERR-502 Gripper</span>
+                    <span class="badge" style="background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--line-subtle); cursor: pointer; padding: 4px 10px; border-radius: 6px; font-size: 0.65rem;" onclick="location.href='../404.html'">#LiDAR Calibration</span>
+                    <span class="badge" style="background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--line-subtle); cursor: pointer; padding: 4px 10px; border-radius: 6px; font-size: 0.65rem;" onclick="location.href='../404.html'">#Modbus TCP</span>
+                    <span class="badge" style="background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--line-subtle); cursor: pointer; padding: 4px 10px; border-radius: 6px; font-size: 0.65rem;" onclick="location.href='../404.html'">#EtherCAT Bus</span>
+                    <span class="badge" style="background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--line-subtle); cursor: pointer; padding: 4px 10px; border-radius: 6px; font-size: 0.65rem;" onclick="location.href='../404.html'">#ISO 10218 E-Stop</span>
                 </div>
 
 
@@ -2864,15 +3028,15 @@
                         </div>
 
                         <h3>
-                            Commissioning
+                            Commissioning &amp; Setup
                         </h3>
 
                         <p>
-                            Unboxing, mounting, wiring and first-run checklist for every Stackly unit.
+                            Unboxing, physical mounting, power distribution, DH parameter loading, and first-run alignment checklist.
                         </p>
 
                         <a href="../404.html">
-                            View articles <i class="fa-solid fa-arrow-right"></i>
+                            14 Articles · View guides <i class="fa-solid fa-arrow-right"></i>
                         </a>
 
                     </article>
@@ -2882,20 +3046,20 @@
 
                         <div class="knowledge-icon">
                             <span class="material-symbols-outlined">
-                                package_2
+                                warning
                             </span>
                         </div>
 
                         <h3>
-                            Warranty &amp; Parts
+                            Fault Codes &amp; Diagnostics
                         </h3>
 
                         <p>
-                            Coverage, RMA process, replacement parts and consumable spares.
+                            Complete index of kinematic, axis encoder, overcurrent, and thermal alarm codes with recovery steps.
                         </p>
 
                         <a href="../404.html">
-                            View articles <i class="fa-solid fa-arrow-right"></i>
+                            32 Articles · View codes <i class="fa-solid fa-arrow-right"></i>
                         </a>
 
                     </article>
@@ -2914,11 +3078,11 @@
                         </h3>
 
                         <p>
-                            E-stop wiring, guarding, ISO 10218 / ISO 9283 compliance notes.
+                            Safety PLC integration, dual-channel E-stop wiring, light curtain zone boundaries, and ISO 10218 certification.
                         </p>
 
                         <a href="../404.html">
-                            View articles <i class="fa-solid fa-arrow-right"></i>
+                            9 Articles · View compliance <i class="fa-solid fa-arrow-right"></i>
                         </a>
 
                     </article>
@@ -2933,15 +3097,15 @@
                         </div>
 
                         <h3>
-                            System Integration
+                            PLC &amp; Fieldbus Integration
                         </h3>
 
                         <p>
-                            PLC, MES and SCADA hookups — Modbus, EtherCAT, OPC-UA references.
+                            EtherNet/IP, PROFINET, Modbus TCP and OPC-UA communication drivers for Siemens, Allen-Bradley &amp; Omron.
                         </p>
 
                         <a href="../404.html">
-                            View articles <i class="fa-solid fa-arrow-right"></i>
+                            18 Articles · View references <i class="fa-solid fa-arrow-right"></i>
                         </a>
 
                     </article>
@@ -2956,15 +3120,15 @@
                         </div>
 
                         <h3>
-                            Autonomy
+                            Vision &amp; AI Navigation
                         </h3>
 
                         <p>
-                            Configure auto-recovery, smart dispatch and AI diagnostics routines.
+                            3D Stereo vision camera calibration, random bin picking point-cloud tuning, and AMR SLAM mapping runbooks.
                         </p>
 
                         <a href="../404.html">
-                            View articles <i class="fa-solid fa-arrow-right"></i>
+                            11 Articles · View manuals <i class="fa-solid fa-arrow-right"></i>
                         </a>
 
                     </article>
@@ -2974,23 +3138,70 @@
 
                         <div class="knowledge-icon">
                             <span class="material-symbols-outlined">
-                                support_agent
+                                package_2
                             </span>
                         </div>
 
                         <h3>
-                            Contact Support
+                            Spare Parts &amp; Maintenance
                         </h3>
 
                         <p>
-                            Can't find the fault code? Open a thread with engineering.
+                            Preventative maintenance intervals, harmonic drive lubrication schedule, and 72-hour SLA parts ordering.
                         </p>
 
                         <a href="../404.html">
-                            Contact us <i class="fa-solid fa-arrow-right"></i>
+                            22 Articles · View spares <i class="fa-solid fa-arrow-right"></i>
                         </a>
 
                     </article>
+
+                </div>
+
+                <!-- QUICK FAULT LOOKUP TABLE -->
+                <div class="card table-card" style="margin-top: 24px;">
+
+                    <div class="table-header">
+                        <h3>
+                            Frequent Fault Codes &amp; Quick Fixes
+                        </h3>
+                        <a href="../404.html" class="view-all">
+                            Full Fault Directory <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Title / Description</th>
+                                    <th>Affected System</th>
+                                    <th>Action Required</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong style="color: var(--status-alert);">ERR-502</strong></td>
+                                    <td>End Effector Gripper Timeout</td>
+                                    <td>Robotic Arm / End Effector</td>
+                                    <td>Re-home Axis 5/6 and verify 24V solenoid air pressure valve.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--status-standby);">ERR-314</strong></td>
+                                    <td>AMR LiDAR Occlusion Warning</td>
+                                    <td>Autonomous Mobile Robot</td>
+                                    <td>Inspect front lens assembly for dust/spatter &amp; re-run sensor zeroing.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color: var(--status-info);">ERR-109</strong></td>
+                                    <td>Vision Calibration Shift</td>
+                                    <td>3D Stereo Camera Node</td>
+                                    <td>Run target grid auto-indexing via console camera utility.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
 
@@ -3010,7 +3221,7 @@
                     </h2>
 
                     <p>
-                        Manage your identity, contact details and site assignment.
+                        Manage your identity, shift clearance levels, certified equipment permissions, and security credentials.
                     </p>
 
                 </div>
@@ -3018,92 +3229,178 @@
 
                 <div class="profile-grid">
 
-                    <div class="card profile-card">
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
 
-                        <div class="profile-large-avatar" id="profileAvatar">
-                            SU
+                        <div class="card profile-card">
+
+                            <div class="profile-large-avatar" id="profileAvatar">
+                                US
+                            </div>
+
+                            <h3 id="profileName">
+                                User
+                            </h3>
+
+                            <p id="profileEmail">
+                                user@stackly.example
+                            </p>
+
+                            <span class="profile-role" style="margin-bottom: 16px;">
+                                Senior Fleet Operator
+                            </span>
+
+                            <div style="border-top: 1px solid var(--line-hairline); padding-top: 16px; text-align: left; font-size: 0.72rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="color: var(--text-muted);">Operator ID:</span>
+                                    <span style="color: var(--text-primary); font-weight: 600;">#OP-9942</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="color: var(--text-muted);">Shift Clearances:</span>
+                                    <span style="color: var(--status-online); font-weight: 600;">Level 3 (Full Master)</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: var(--text-muted);">Assigned Zone:</span>
+                                    <span style="color: var(--text-primary); font-weight: 600;">Chicago Plant 02 (Line 3 &amp; Bay B)</span>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <h3 id="profileName">
-                            Sujith
-                        </h3>
-
-                        <p id="profileEmail">
-                            sujith@example.com
-                        </p>
-
-                        <span class="profile-role">
-                            Fleet Operator
-                        </span>
+                        <!-- CERTIFICATIONS CARD -->
+                        <div class="card" style="padding: 20px;">
+                            <h4 style="font-size: 0.8rem; margin-bottom: 12px; color: var(--text-primary);">
+                                Certified Equipment
+                            </h4>
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; align-items: center; gap: 8px; font-size: 0.7rem; color: var(--text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; color: var(--signal);">verified</span>
+                                    6-DOF Articulated Arms (R-Series)
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; font-size: 0.7rem; color: var(--text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; color: var(--signal);">verified</span>
+                                    AMR Fleet Dispatch &amp; SLAM Mapping
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; font-size: 0.7rem; color: var(--text-secondary);">
+                                    <span class="material-symbols-outlined" style="font-size: 16px; color: var(--signal);">verified</span>
+                                    ISO 10218 E-Stop Safety Reset
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
 
-                    <div class="card form-card">
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
 
-                        <h3>
-                            Personal information
-                        </h3>
+                        <div class="card form-card">
 
-                        <form id="profileForm">
+                            <h3>
+                                Personal &amp; Station Information
+                            </h3>
+
+                            <form id="profileForm">
+
+                                <div class="form-grid">
+
+                                    <div class="form-group">
+
+                                        <label for="profileFirstName">
+                                            First name
+                                        </label>
+
+                                        <input type="text" id="profileFirstName" value="Sujith">
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="profileLastName">
+                                            Last name
+                                        </label>
+
+                                        <input type="text" id="profileLastName" value="Kumar">
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="profileEmailInput">
+                                            Email Address
+                                        </label>
+
+                                        <input type="email" id="profileEmailInput" value="sujith@example.com">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="profilePhone">
+                                            Dispatch Contact Phone
+                                        </label>
+
+                                        <input type="text" id="profilePhone" value="+1 (312) 840-2938">
+
+                                    </div>
+
+                                    <div class="form-group full">
+
+                                        <label for="profileCompany">
+                                            Primary Assigned Facility
+                                        </label>
+
+                                        <input type="text" id="profileCompany" value="Stackly Assembly Plant 02 — Cicero, IL">
+
+                                    </div>
+
+                                    <div class="form-group full">
+
+                                        <label for="profileSpecialty">
+                                            Primary Technical Specialization
+                                        </label>
+
+                                        <select id="profileSpecialty" style="width: 100%; border: 1px solid var(--line-subtle); background: var(--bg-elevated); color: var(--text-primary); border-radius: 8px; padding: 10px 12px; font-size: 0.74rem;">
+                                            <option selected>Kinematic Trajectory &amp; Servo Calibration</option>
+                                            <option>Autonomous Mobile Robot Fleet Routing</option>
+                                            <option>3D Vision System &amp; AI Inspection</option>
+                                            <option>PLC &amp; Fieldbus Communication</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button class="primary-btn" type="submit">
+                                        Save changes
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <!-- SECURITY & CLEARANCE CARD -->
+                        <div class="card form-card">
+                            <h3>
+                                Security &amp; Access Clearance
+                            </h3>
 
                             <div class="form-grid">
-
                                 <div class="form-group">
-
-                                    <label for="profileFirstName">
-                                        First name
-                                    </label>
-
-                                    <input type="text" id="profileFirstName" value="Sujith">
-
+                                    <label>Current Security Key</label>
+                                    <input type="password" value="••••••••••••" readonly style="opacity: 0.7;">
                                 </div>
-
-
                                 <div class="form-group">
-
-                                    <label for="profileLastName">
-                                        Last name
-                                    </label>
-
-                                    <input type="text" id="profileLastName" value="Kumar">
-
+                                    <label>2FA Authentication</label>
+                                    <input type="text" value="Hardware YubiKey (Active)" readonly style="color: var(--status-online); font-weight: 600;">
                                 </div>
-
-
-                                <div class="form-group full">
-
-                                    <label for="profileEmailInput">
-                                        Email
-                                    </label>
-
-                                    <input type="email" id="profileEmailInput" value="sujith@example.com">
-
-                                </div>
-
-
-                                <div class="form-group full">
-
-                                    <label for="profileCompany">
-                                        Site / Facility
-                                    </label>
-
-                                    <input type="text" id="profileCompany" placeholder="e.g. Stackly Plant 02">
-
-                                </div>
-
                             </div>
-
-
-                            <div class="form-actions">
-
-                                <button class="primary-btn" type="submit">
-                                    Save changes
-                                </button>
-
-                            </div>
-
-                        </form>
+                        </div>
 
                     </div>
 
@@ -3121,11 +3418,11 @@
                 <div class="section-heading">
 
                     <h2>
-                        Preferences
+                        Preferences &amp; Console Configuration
                     </h2>
 
                     <p>
-                        Configure alerts and console behavior for your shift.
+                        Configure real-time telemetry threshold alerts, audio chimes, shift handover export settings, and console view behaviors.
                     </p>
 
                 </div>
@@ -3136,11 +3433,11 @@
                     <div class="card settings-card">
 
                         <h3>
-                            Notifications
+                            Notifications &amp; Alerts
                         </h3>
 
                         <p>
-                            Choose how the console keeps you informed.
+                            Choose how and when the operator console alerts you during active shifts.
                         </p>
 
 
@@ -3149,11 +3446,11 @@
                             <div class="setting-info">
 
                                 <strong>
-                                    Alert notifications
+                                    High-severity fault notifications
                                 </strong>
 
                                 <span>
-                                    Notify me when a unit throws a fault.
+                                    Immediate pop-up banner when any unit latches an E-stop or thermal fault.
                                 </span>
 
                             </div>
@@ -3168,11 +3465,11 @@
                             <div class="setting-info">
 
                                 <strong>
-                                    Work order updates
+                                    Work order status updates
                                 </strong>
 
                                 <span>
-                                    Notify me when a work order changes.
+                                    Notify me when an open work order changes status or receives engineering notes.
                                 </span>
 
                             </div>
@@ -3187,11 +3484,29 @@
                             <div class="setting-info">
 
                                 <strong>
-                                    Product updates
+                                    Preventative maintenance reminders
                                 </strong>
 
                                 <span>
-                                    Firmware releases and product news.
+                                    Alert 48 hours before scheduled harmonic drive lubrication or vision re-alignment.
+                                </span>
+
+                            </div>
+
+                            <button class="toggle active" aria-label="Toggle maintenance reminders"></button>
+
+                        </div>
+
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Product &amp; firmware releases
+                                </strong>
+
+                                <span>
+                                    Receive release notes for Stackly OS &amp; AI edge vision updates.
                                 </span>
 
                             </div>
@@ -3206,11 +3521,11 @@
                     <div class="card settings-card">
 
                         <h3>
-                            Console
+                            Console Display &amp; Audio
                         </h3>
 
                         <p>
-                            Customize how the control room behaves.
+                            Customize real-time HUD rendering, audio chimes, and telemetry polling frequency.
                         </p>
 
 
@@ -3219,11 +3534,11 @@
                             <div class="setting-info">
 
                                 <strong>
-                                    Compact dashboard
+                                    Compact dashboard layout
                                 </strong>
 
                                 <span>
-                                    Display more information in less space.
+                                    Display dense telemetry metrics and mini-charts in less screen space.
                                 </span>
 
                             </div>
@@ -3238,11 +3553,11 @@
                             <div class="setting-info">
 
                                 <strong>
-                                    Alert sounds
+                                    High-decibel alert sounds
                                 </strong>
 
                                 <span>
-                                    Play a sound when a fault is raised.
+                                    Play an audible chime when an axis fault or occlusion warning is raised.
                                 </span>
 
                             </div>
@@ -3257,11 +3572,11 @@
                             <div class="setting-info">
 
                                 <strong>
-                                    Auto refresh
+                                    Auto-refresh background telemetry
                                 </strong>
 
                                 <span>
-                                    Poll live telemetry in the background.
+                                    Poll live unit telemetry every 500ms for zero-latency status graphs.
                                 </span>
 
                             </div>
@@ -3270,6 +3585,58 @@
 
                         </div>
 
+                        <div class="setting-row">
+
+                            <div class="setting-info">
+
+                                <strong>
+                                    Dark HUD contrast mode
+                                </strong>
+
+                                <span>
+                                    Increase text and status badge contrast for low-light control rooms.
+                                </span>
+
+                            </div>
+
+                            <button class="toggle active" aria-label="Toggle high contrast"></button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- TELEMETRY & SHIFT LOGGING CARD -->
+                    <div class="card settings-card" style="grid-column: 1 / -1;">
+                        <h3>
+                            Telemetry Thresholds &amp; Shift Reporting
+                        </h3>
+                        <p>
+                            Configure warning limits and automated shift handover report generation.
+                        </p>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>
+                                    Automatic Shift Log Export
+                                </strong>
+                                <span>
+                                    Generate a PDF summary of work orders and unit uptime at the end of every 8-hour shift.
+                                </span>
+                            </div>
+                            <button class="toggle active" aria-label="Toggle shift log export"></button>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>
+                                    Motor Temperature Threshold Warning
+                                </strong>
+                                <span>
+                                    Trigger warning alert if any joint motor exceeds 65°C continuous operation.
+                                </span>
+                            </div>
+                            <button class="toggle active" aria-label="Toggle temp warning"></button>
+                        </div>
                     </div>
 
                 </div>
@@ -3289,25 +3656,46 @@
 
         document.addEventListener("DOMContentLoaded", function () {
 
-            /* ==========================================================
-               1. OPERATOR DATA
-               ========================================================== */
-
-            const storedUsername =
-                localStorage.getItem("stackly_operator_name");
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramEmail = urlParams.get("email");
 
             const storedEmail =
-                localStorage.getItem("stackly_operator_email");
+                paramEmail ||
+                localStorage.getItem("stackly_operator_email") ||
+                localStorage.getItem("stackly_user_email");
+
+            const storedUsername =
+                localStorage.getItem("stackly_operator_name") ||
+                localStorage.getItem("stackly_user_name");
 
             const storedRole =
-                localStorage.getItem("stackly_operator_role");
+                localStorage.getItem("stackly_operator_role") ||
+                localStorage.getItem("stackly_user_role");
 
+            function extractName(email, fallback) {
+                if (email && email.includes("@")) {
+                    const part = email.split("@")[0].trim().replace(/[._-]/g, " ");
+                    if (part) {
+                        return part
+                            .split(" ")
+                            .filter(Boolean)
+                            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                            .join(" ");
+                    }
+                }
+                return fallback;
+            }
 
-            let username =
-                storedUsername || "Sujith";
+            let email = storedEmail || "user@stackly.example";
+            let username = storedUsername || extractName(storedEmail, "User");
 
-            let email =
-                storedEmail || "sujith@example.com";
+            // Store back for persistence
+            if (storedEmail) {
+                try {
+                    localStorage.setItem("stackly_operator_email", storedEmail);
+                    localStorage.setItem("stackly_operator_name", username);
+                } catch (e) {}
+            }
 
 
             /*
@@ -3360,6 +3748,13 @@
                 sidebarUsername.textContent = username;
             }
 
+            const sidebarEmail =
+                document.getElementById("sidebarEmail");
+
+            if (sidebarEmail) {
+                sidebarEmail.textContent = email;
+            }
+
 
             const sidebarAvatar =
                 document.getElementById("sidebarAvatar");
@@ -3398,6 +3793,13 @@
 
             if (profileEmailInput) {
                 profileEmailInput.value = email;
+            }
+
+            const profileFirstName =
+                document.getElementById("profileFirstName");
+
+            if (profileFirstName) {
+                profileFirstName.value = username;
             }
 
 
@@ -4345,6 +4747,8 @@
 
     </script>
 
+    <!-- Lenis Smooth Scroll Script -->
+    <script src="../lenis-init.js"></script>
 </body>
 
 </html>

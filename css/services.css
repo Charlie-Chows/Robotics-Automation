@@ -68,7 +68,7 @@
   font-family: var(--font-nav);
   font-size: 15px;
   font-weight: 400;
-  color: #000000;
+  color: #ffffff;
   margin-bottom: 36px;
   position: relative;
   z-index: 10;
@@ -644,6 +644,13 @@
   background-color: #262626;
   color: #FFFFFF;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.35s ease, background-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.end-card-gray .end-card-title,
+.end-card-gray .end-card-desc,
+.end-card-gray .end-card-icon {
+  transition: color 0.35s ease;
 }
 
 .end-card-gray .end-card-title {
@@ -655,7 +662,15 @@
 }
 
 .end-card-gray:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  background-color: var(--primary-yellow);
+  color: #000000;
+  box-shadow: 0 15px 40px rgba(219, 254, 1, 0.35);
+}
+
+.end-card-gray:hover .end-card-title,
+.end-card-gray:hover .end-card-desc,
+.end-card-gray:hover .end-card-icon {
+  color: #000000;
 }
 
 /* Neon Yellow Card Theme */
@@ -663,6 +678,13 @@
   background-color: var(--primary-yellow);
   color: #000000;
   box-shadow: 0 10px 30px rgba(219, 254, 1, 0.25);
+  transition: transform 0.35s ease, background-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.end-card-yellow .end-card-title,
+.end-card-yellow .end-card-desc,
+.end-card-yellow .end-card-icon {
+  transition: color 0.35s ease;
 }
 
 .end-card-yellow .end-card-title {
@@ -670,7 +692,18 @@
 }
 
 .end-card-yellow:hover {
-  box-shadow: 0 15px 40px rgba(219, 254, 1, 0.45);
+  background-color: #161616;
+  color: #FFFFFF;
+  box-shadow: 0 15px 40px rgba(219, 254, 1, 0.25);
+}
+
+.end-card-yellow:hover .end-card-title,
+.end-card-yellow:hover .end-card-icon {
+  color: var(--primary-yellow);
+}
+
+.end-card-yellow:hover .end-card-desc {
+  color: #E0E0E0;
 }
 
 /* Responsive Styles */

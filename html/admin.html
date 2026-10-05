@@ -6,6 +6,9 @@
 
   <title>Fleet Command — Stackly Robotics</title>
 
+  <!-- Global Styles & Thin Scrollbar -->
+  <link rel="stylesheet" href="../global.css">
+
   <style>
     /* ============================================================
        RESET
@@ -36,6 +39,7 @@
 
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      padding-top: 0 !important;
     }
 
     button,
@@ -1924,17 +1928,17 @@
     <div class="sidebar-user">
 
       <div class="user-avatar" id="adminAvatar">
-        SK
+        AD
       </div>
 
       <div class="user-details">
 
         <strong id="adminName">
-          Sujith Kumar
+          Admin
         </strong>
 
-        <span>
-          Fleet Manager
+        <span id="adminEmail" style="font-size: 11px; opacity: 0.7; display: block; word-break: break-all;">
+          admin@stackly.example
         </span>
 
       </div>
@@ -2074,11 +2078,13 @@
 
       <div class="page-title-area">
 
-        <h1>
-          <span id="pageGreeting">
-            Control Room
-          </span>
+        <h1 style="font-size: 1.75rem; margin-bottom: 4px;">
+          Hello, <span id="adminGreeting">Admin</span>
         </h1>
+
+        <h2 style="font-size: 1.1rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 0;" id="pageGreeting">
+          Control Room
+        </h2>
 
         <p id="pageDescription">
           Real-time status across every deployed work cell.
@@ -2576,11 +2582,11 @@
         <div>
 
           <h2>
-            Fleet
+            Fleet Management &amp; Unit Registry
           </h2>
 
           <p>
-            Every deployed unit, live health and last-known state.
+            Real-time status, firmware build, kinematic health, and operational load across all 248 deployed work cells.
           </p>
 
         </div>
@@ -2588,7 +2594,7 @@
         <div class="heading-actions">
 
           <button onclick="window.location.href='../404.html'" class="btn">
-            Export
+            Export CSV
           </button>
 
           <button onclick="window.location.href='../404.html'" class="btn btn-dark">
@@ -2605,7 +2611,7 @@
         <div class="stat-card">
 
           <div class="stat-label">
-            Total Units
+            Total Deployed Units
           </div>
 
           <div class="stat-value">
@@ -2613,7 +2619,7 @@
           </div>
 
           <div class="stat-change">
-            ↑ 12 this month
+            ↑ 12 commissioned this month
           </div>
 
         </div>
@@ -2622,15 +2628,15 @@
         <div class="stat-card">
 
           <div class="stat-label">
-            Commissioned
+            Operational (Online)
           </div>
 
-          <div class="stat-value">
-            18
+          <div class="stat-value" style="color: var(--status-online);">
+            223
           </div>
 
           <div class="stat-change">
-            ↑ 24% vs last month
+            89.9% active on line
           </div>
 
         </div>
@@ -2639,15 +2645,15 @@
         <div class="stat-card">
 
           <div class="stat-label">
-            Needs Service
+            Needs Maintenance
           </div>
 
-          <div class="stat-value">
-            7
+          <div class="stat-value" style="color: var(--status-alert);">
+            07
           </div>
 
           <div class="stat-change negative">
-            ↑ 2 since Monday
+            2 scheduled for inspection
           </div>
 
         </div>
@@ -2659,12 +2665,12 @@
             Avg. Fleet Health
           </div>
 
-          <div class="stat-value">
-            92.4
+          <div class="stat-value" style="color: var(--signal);">
+            94.8%
           </div>
 
           <div class="stat-change">
-            ↑ 1.6 pts
+            ↑ 1.6 pts across all zones
           </div>
 
         </div>
@@ -2674,15 +2680,26 @@
 
       <div class="card">
 
-        <div class="card-header">
+        <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
 
-          <h3>
-            Unit Directory
-          </h3>
+          <div>
+            <h3 style="margin-bottom: 2px;">
+              Unit Directory &amp; Live Telemetry
+            </h3>
+            <span style="color: var(--text-muted); font-size: 0.72rem;">
+              Showing 6 of 248 units · Auto-refreshes every 500ms
+            </span>
+          </div>
 
-          <span>
-            248 units
-          </span>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="search" placeholder="Filter by unit ID, location, or class..." style="background: var(--bg-elevated); border: 1px solid var(--line-subtle); color: var(--text-primary); border-radius: 6px; padding: 6px 12px; font-size: 0.75rem; width: 220px;">
+            <select style="background: var(--bg-elevated); border: 1px solid var(--line-subtle); color: var(--text-primary); border-radius: 6px; padding: 6px 10px; font-size: 0.75rem;">
+              <option>All Unit Classes</option>
+              <option>Articulated Arms (R-Series)</option>
+              <option>Mobile Carriers (AMR)</option>
+              <option>Vision Inspection (VC)</option>
+            </select>
+          </div>
 
         </div>
 
@@ -2695,10 +2712,11 @@
 
               <tr>
 
-                <th>Unit</th>
-                <th>Site</th>
-                <th>Tasks</th>
-                <th>Health</th>
+                <th>Unit &amp; Model</th>
+                <th>Assigned Facility / Zone</th>
+                <th>Class &amp; Firmware</th>
+                <th>Total Cycles</th>
+                <th>Kinematic Health</th>
                 <th>Status</th>
 
               </tr>
@@ -2721,11 +2739,11 @@
                     <div class="person-name">
 
                       <strong>
-                        R-007 · Articulated Arm
+                        R-007 · Articulated 6-DOF
                       </strong>
 
                       <span>
-                        Arcturus Motors · Plant 02
+                        Serial: #STK-99402-A7
                       </span>
 
                     </div>
@@ -2735,11 +2753,15 @@
                 </td>
 
                 <td>
-                  Line A
+                  Arcturus Motors · Plant 02 (Line A)
                 </td>
 
                 <td>
-                  1,842
+                  Articulated Arm · v4.12.0
+                </td>
+
+                <td>
+                  148,290
                 </td>
 
                 <td>
@@ -2781,11 +2803,11 @@
                     <div class="person-name">
 
                       <strong>
-                        AMR-04 · Mobile Carrier
+                        AMR-04 · Mobile Transport
                       </strong>
 
                       <span>
-                        Vantage Systems · Line 4
+                        Serial: #STK-88210-M4
                       </span>
 
                     </div>
@@ -2795,11 +2817,15 @@
                 </td>
 
                 <td>
-                  Line 4
+                  Vantage Logistics · Bay 3 Transfer
                 </td>
 
                 <td>
-                  942
+                  Mobile AMR · v3.8.4
+                </td>
+
+                <td>
+                  94,210
                 </td>
 
                 <td>
@@ -2841,11 +2867,11 @@
                     <div class="person-name">
 
                       <strong>
-                        VC-12 · Vision Cell
+                        VC-12 · 3D Stereo Vision
                       </strong>
 
                       <span>
-                        Northline Fab · Bay 1
+                        Serial: #STK-77109-V2
                       </span>
 
                     </div>
@@ -2855,11 +2881,15 @@
                 </td>
 
                 <td>
-                  Bay 1
+                  Northline Fab · Quality Cell 1
                 </td>
 
                 <td>
-                  618
+                  Vision Node · v5.1.2
+                </td>
+
+                <td>
+                  618,400
                 </td>
 
                 <td>
@@ -2871,7 +2901,7 @@
                     <div class="health-bar">
                       <div
                         class="health-fill"
-                        style="width:44%"
+                        style="width:44%; background: #f59e0b;"
                       ></div>
                     </div>
 
@@ -2882,6 +2912,195 @@
                 <td>
                   <span class="badge badge-orange">
                     Degraded
+                  </span>
+                </td>
+
+              </tr>
+
+              <tr>
+
+                <td>
+
+                  <div class="person">
+
+                    <div class="avatar">
+                      R2
+                    </div>
+
+                    <div class="person-name">
+
+                      <strong>
+                        R-002 · Heavy Palletizer
+                      </strong>
+
+                      <span>
+                        Serial: #STK-99104-R2
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  Cicero Stamping · Line 1 Palletizing
+                </td>
+
+                <td>
+                  Articulated Arm · v4.12.0
+                </td>
+
+                <td>
+                  312,850
+                </td>
+
+                <td>
+
+                  <div class="health-score">
+
+                    98%
+
+                    <div class="health-bar">
+                      <div
+                        class="health-fill"
+                        style="width:98%"
+                      ></div>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge badge-green">
+                    Optimal
+                  </span>
+                </td>
+
+              </tr>
+
+              <tr>
+
+                <td>
+
+                  <div class="person">
+
+                    <div class="avatar">
+                      A1
+                    </div>
+
+                    <div class="person-name">
+
+                      <strong>
+                        AMR-01 · Heavy Hauler
+                      </strong>
+
+                      <span>
+                        Serial: #STK-88001-A1
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  Stackly Assembly · Main Corridor
+                </td>
+
+                <td>
+                  Mobile AMR · v3.8.4
+                </td>
+
+                <td>
+                  210,440
+                </td>
+
+                <td>
+
+                  <div class="health-score">
+
+                    92%
+
+                    <div class="health-bar">
+                      <div
+                        class="health-fill"
+                        style="width:92%"
+                      ></div>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge badge-green">
+                    Optimal
+                  </span>
+                </td>
+
+              </tr>
+
+              <tr>
+
+                <td>
+
+                  <div class="person">
+
+                    <div class="avatar" style="background: var(--status-alert-bg); color: var(--status-alert);">
+                      R9
+                    </div>
+
+                    <div class="person-name">
+
+                      <strong>
+                        R-009 · Arc Welding Cell
+                      </strong>
+
+                      <span>
+                        Serial: #STK-99550-W9
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  Global Tube &amp; Steel · Cell 4
+                </td>
+
+                <td>
+                  Articulated Arm · v4.11.2
+                </td>
+
+                <td>
+                  88,900
+                </td>
+
+                <td>
+
+                  <div class="health-score">
+
+                    32%
+
+                    <div class="health-bar">
+                      <div
+                        class="health-fill"
+                        style="width:32%; background: #ef4444;"
+                      ></div>
+                    </div>
+
+                  </div>
+
+                </td>
+
+                <td>
+                  <span class="badge" style="background: var(--status-alert-bg); color: var(--status-alert);">
+                    Fault Latched
                   </span>
                 </td>
 
@@ -4339,230 +4558,127 @@
 
       <div class="grid-2">
 
-
         <div class="card">
-
           <div class="card-header">
-
-            <h3>
-              Facility
-            </h3>
-
+            <h3>Facility & Telemetry Configuration</h3>
           </div>
-
-
           <div class="card-body">
-
             <div class="settings-list">
-
-
               <div class="setting-row">
-
                 <div class="setting-info">
-
-                  <strong>
-                    Facility Name
-                  </strong>
-
-                  <span>
-                    Shown across the control room.
-                  </span>
-
+                  <strong>Primary Facility Name</strong>
+                  <span>Global designation displayed across control rooms.</span>
                 </div>
-
-                <input
-                  class="setting-select"
-                  value="Stackly Plant 02"
-                >
-
+                <input class="setting-select" value="Stackly Tech Park - Plant 02">
               </div>
 
-
               <div class="setting-row">
-
                 <div class="setting-info">
-
-                  <strong>
-                    Default Language
-                  </strong>
-
-                  <span>
-                    Language used by operators.
-                  </span>
-
+                  <strong>Telemetry Retention</strong>
+                  <span>High-frequency log persistence window.</span>
                 </div>
-
                 <select class="setting-select">
-
-                  <option>
-                    English
-                  </option>
-
-                  <option>
-                    Telugu
-                  </option>
-
-                  <option>
-                    Hindi
-                  </option>
-
+                  <option>30 Days (Standard)</option>
+                  <option selected>90 Days (Compliance)</option>
+                  <option>180 Days (Extended)</option>
                 </select>
-
               </div>
-
 
               <div class="setting-row">
-
                 <div class="setting-info">
-
-                  <strong>
-                    AI Diagnostics
-                  </strong>
-
-                  <span>
-                    Allow predictive fault detection.
-                  </span>
-
+                  <strong>Default Control Language</strong>
+                  <span>Interface & voice prompt localization.</span>
                 </div>
-
-                <button
-                  class="toggle active"
-                  onclick="toggleAutomation(this)"
-                ></button>
-
+                <select class="setting-select">
+                  <option selected>English (US)</option>
+                  <option>Telugu</option>
+                  <option>Hindi</option>
+                  <option>German (DE)</option>
+                </select>
               </div>
-
 
               <div class="setting-row">
-
                 <div class="setting-info">
-
-                  <strong>
-                    Alert Notifications
-                  </strong>
-
-                  <span>
-                    Notify operators on critical faults.
-                  </span>
-
+                  <strong>AI Diagnostics Engine</strong>
+                  <span>Real-time predictive vibration & thermal anomaly detection.</span>
                 </div>
-
-                <button
-                  class="toggle active"
-                  onclick="toggleAutomation(this)"
-                ></button>
-
+                <button class="toggle active" onclick="toggleAutomation(this)"></button>
               </div>
-
-
             </div>
-
           </div>
-
         </div>
 
-
         <div class="card">
-
           <div class="card-header">
-
-            <h3>
-              System Integrity
-            </h3>
-
+            <h3>Security & Access Control</h3>
           </div>
-
-
           <div class="card-body">
-
             <div class="settings-list">
-
-
               <div class="setting-row">
-
                 <div class="setting-info">
-
-                  <strong>
-                    Two-factor Authentication
-                  </strong>
-
-                  <span>
-                    Protect manager accounts.
-                  </span>
-
+                  <strong>Enforce Hardware 2FA</strong>
+                  <span>Mandatory for Level 3 Master Operators and Site Admins.</span>
                 </div>
-
-                <button
-                  class="toggle active"
-                  onclick="toggleAutomation(this)"
-                ></button>
-
+                <button class="toggle active" onclick="toggleAutomation(this)"></button>
               </div>
 
-
               <div class="setting-row">
-
                 <div class="setting-info">
-
-                  <strong>
-                    Session Timeout
-                  </strong>
-
-                  <span>
-                    Sign out idle operators automatically.
-                  </span>
-
+                  <strong>Idle Session Auto-Lock</strong>
+                  <span>Disconnect control session after inactivity.</span>
                 </div>
-
                 <select class="setting-select">
-
-                  <option>
-                    30 minutes
-                  </option>
-
-                  <option>
-                    1 hour
-                  </option>
-
-                  <option>
-                    4 hours
-                  </option>
-
+                  <option>15 minutes</option>
+                  <option selected>30 minutes</option>
+                  <option>1 hour</option>
                 </select>
-
               </div>
-
 
               <div class="setting-row">
-
                 <div class="setting-info">
-
-                  <strong>
-                    Login Alerts
-                  </strong>
-
-                  <span>
-                    Notify managers of new logins.
-                  </span>
-
+                  <strong>Safety Interlock Override</strong>
+                  <span>Require dual-key sign-off for manual joint overrides.</span>
                 </div>
-
-                <button
-                  class="toggle active"
-                  onclick="toggleAutomation(this)"
-                ></button>
-
+                <button class="toggle active" onclick="toggleAutomation(this)"></button>
               </div>
 
-
+              <div class="setting-row">
+                <div class="setting-info">
+                  <strong>Audit Log Streaming</strong>
+                  <span>Stream operational events to enterprise SIEM.</span>
+                </div>
+                <button class="toggle active" onclick="toggleAutomation(this)"></button>
+              </div>
             </div>
-
           </div>
-
         </div>
 
       </div>
 
+      <div class="card" style="margin-top: 1.5rem;">
+        <div class="card-header">
+          <h3>Integrations & API Gateway</h3>
+          <span class="badge badge-green">Gateway Online</span>
+        </div>
+        <div class="card-body">
+          <div class="settings-list">
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>ROS2 Bridge Endpoint</strong>
+                <span>Direct DDS domain relay (`ros_domain_id: 42`).</span>
+              </div>
+              <input class="setting-select" value="wss://telemetry.stackly.internal/ros2/v1" readonly style="opacity:0.85;">
+            </div>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Modbus/TCP PLC Interlock</strong>
+                <span>Main assembly line synchronization gateway.</span>
+              </div>
+              <span class="badge badge-blue">Connected (192.168.1.100:502)</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
 
@@ -4584,7 +4700,7 @@
   let userEmail =
     urlParams.get("email");
 
-  let formattedName = "Sujith";
+  let formattedName = "Admin";
 
 
   if (userEmail) {
@@ -5076,11 +5192,36 @@
      DYNAMIC OPERATOR PROFILE
   ============================================================ */
   document.addEventListener("DOMContentLoaded", function () {
-    const storedUsername = localStorage.getItem("stackly_operator_name");
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramEmail = urlParams.get("email");
 
-    let username = storedUsername || "Sujith Kumar";
+    const storedEmail =
+      paramEmail ||
+      localStorage.getItem("stackly_operator_email") ||
+      localStorage.getItem("stackly_user_email");
 
-    // Capitalize first letters for display
+    const storedUsername =
+      localStorage.getItem("stackly_operator_name") ||
+      localStorage.getItem("stackly_user_name");
+
+    function extractName(email, fallback) {
+      if (email && email.includes("@")) {
+        const part = email.split("@")[0].trim().replace(/[._-]/g, " ");
+        if (part) {
+          return part
+            .split(" ")
+            .filter(Boolean)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(" ");
+        }
+      }
+      return fallback;
+    }
+
+    let email = storedEmail || "admin@stackly.example";
+    let username = storedUsername || extractName(storedEmail, "Admin");
+
+    // Ensure capital display
     username = username
       .split(" ")
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -5095,12 +5236,18 @@
 
     const avatarEl = document.getElementById("adminAvatar");
     const nameEl = document.getElementById("adminName");
+    const emailEl = document.getElementById("adminEmail");
+    const greetingEl = document.getElementById("adminGreeting");
 
     if (avatarEl) avatarEl.textContent = initials;
     if (nameEl) nameEl.textContent = username;
+    if (emailEl) emailEl.textContent = email;
+    if (greetingEl) greetingEl.textContent = username;
   });
 
 </script>
 
+  <!-- Lenis Smooth Scroll Script -->
+  <script src="../lenis-init.js"></script>
 </body>
 </html>

@@ -1,17 +1,11 @@
-/* ============================================================
-   LOGIN.CSS — Sign-in page (Robotics & Automation)
-   Scoped to body.auth-page
-   ============================================================ */
+
 
 body.auth-page {
-    /* ---- Theme bridge: map local tokens onto the Stackly
-            Robotics palette (--primary-yellow / --white / --bg-black).
-            The rest of the file below stays structurally identical. ---- */
-    --maroon: var(--primary-yellow);              /* accent (was deep red) */
-    --cream: #0A0A0A;                             /* surface (was cream) */
-    --ink: var(--white);                          /* primary text */
+    --maroon: var(--primary-yellow);              
+    --cream: #0A0A0A;                             
+    --ink: var(--white);                          
     --ink-soft: rgba(255, 255, 255, 0.72);
-    --harvest: var(--primary-yellow);             /* secondary accent */
+    --harvest: var(--primary-yellow);             
     --line: rgba(255, 255, 255, 0.14);
     --line-strong: rgba(255, 255, 255, 0.28);
     --field-bg: #101010;

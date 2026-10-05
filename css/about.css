@@ -306,7 +306,7 @@
     text-align: center;
     font-size: 1.05rem;
     line-height: 1.6;
-    top: 0; /* Reset desktop top: -100px shift that caused overlap with hero card */
+    top: 0; 
     margin-top: 0;
     padding-bottom: 0;
   }
