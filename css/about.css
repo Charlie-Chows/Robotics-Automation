@@ -252,12 +252,11 @@
     word-break: break-word;
     text-align: center;
     width: 100%;
+    text-shadow: none;
   }
 
   .text-where-others {
     font-family: var(--font-body);
-    font-size: clamp(1.6rem, 5vw, 3.2rem);
-    font-weight: 900;
     color: #DBFE01;
     position: relative;
     top: 0;
@@ -271,6 +270,7 @@
     word-spacing: 0.15em;
     margin-top: 10px;
     width: 100%;
+    text-shadow: none;
   }
 
   .about-hero-img-wrapper {
@@ -331,12 +331,13 @@
     font-size: clamp(1.8rem, 7.5vw, 2.5rem);
     -webkit-text-stroke: 1px #FFFFFF;
     line-height: 1.15;
+    text-shadow: none;
   }
 
   .text-where-others {
     font-family: var(--font-body);
     font-size: clamp(1.3rem, 5.2vw, 2.1rem);
-    font-weight: 900;
+    font-weight: 300;
     color: #DBFE01;
     position: relative;
     top: 0;
@@ -350,7 +351,7 @@
     word-spacing: 0.15em;
     margin-top: 10px;
     width: 100%;
-    text-shadow: 0px 0px 15px rgba(219, 254, 1, 0.5);
+    text-shadow: none;
   }
 
   .about-hero-img-wrapper {
@@ -398,11 +399,14 @@
   .text-built-operate {
     font-size: 24px;
     -webkit-text-stroke: 1px #FFFFFF;
+    text-shadow: none;
   }
 
   .text-where-others {
-    font-size: 18px;
+    font-size: 24px;
+    font-weight: 700;
     letter-spacing: 0.04em;
+    text-shadow: none;
   }
 
   .about-hero-img-wrapper {
