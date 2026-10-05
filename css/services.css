@@ -389,6 +389,7 @@
   letter-spacing: 0.8px;
   text-transform: uppercase;
   margin-bottom: 8px;
+  margin: 0px 70px;
 }
 
 .callout-desc {
@@ -397,6 +398,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
+  margin: 0px 70px;
 }
 
 .callout-line {
